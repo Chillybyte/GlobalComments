@@ -1,24 +1,16 @@
-faf
+heste
 
 
 
+plads
 
 
 
-kloden
+nuddel
 
 
+stanger
 
-
-drejer
-
-
-
-med
-
-
-
-lakrids
 
 
 
