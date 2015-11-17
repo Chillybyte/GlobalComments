@@ -45,21 +45,21 @@ var userSchema = new Schema({
     },
 
     is_admin: {
-        type: boolean,
+        type: Boolean,
         required: false,
         unique: false,
         index: true
     },
 
     updated_at: {
-    	type: Date,
+        type: Date,
         required: true,
         unique: false,
         index: true
     },
 
     created_at: {
-    	type: Date,
+        type: Date,
         required: true,
         unique: false,
         index: true
