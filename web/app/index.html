@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="APP">
+    <head>
+        <meta charset="utf-8">
+        <title>GlobalComments</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="/"> <!-- MUCHOS IMPORTANTE for routing -->
+        <link rel="stylesheet" type="text/css" href="css/main.min.css">
+        <script type="text/javascript" src="js/main.min.js"></script>
+    </head>
+    <body ng-controller="applicationController">
+
+        <!-- Everything related to topbar goes in here: app/components/comp-topbar/template.html -->
+        <comp-topbar></comp-topbar>
+        <!-- Everything related to error, success and info messages goes in here -->
+        <comp-notifications></comp-notifications>
+
+        <!-- All navigational goes in here -->
+        <div ui-view class="container main-container"></div>
+        <!-- All global modals goes here -->
+        <comp-modals></comp-modals>
+
+        <!-- Everything related to footer goes in here: app/components/comp-footer/template.html -->
+        <comp-footer></comp-footer>
+
+    </body>
+</html>
