@@ -1,6 +1,6 @@
 var passport = require("passport");
 
-module.exports = function(_request, _response) {
+module.exports = function(_request, _response, _next) {
     passport.authenticate("local-signup", function(err, user, info) {
         if (!err) {
             _request.logIn(user, function(err) {
@@ -18,7 +18,7 @@ module.exports = function(_request, _response) {
                         ._ERROR("En ukendt fejl skete")
                         ._STATUS(500)
                         ._SEND();
-                } 
+                }
             });
         } else {
             console.trace(err);
@@ -27,6 +27,6 @@ module.exports = function(_request, _response) {
                 ._ERROR("En ukendt fejl skete")
                 ._STATUS(500)
                 ._SEND();
-            }
-    });
+        }
+    })(_request, _response, _next);
 };

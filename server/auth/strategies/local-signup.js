@@ -24,6 +24,7 @@ module.exports = function() {
                         }
                     });
                 } else {
+                    console.trace(err);
                     done(err);
                 }
             });

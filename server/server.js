@@ -21,7 +21,6 @@ mongoose.connect(
 var db = mongoose.connection;
 db.once("open", function() {
 
-    app.use(require('./router.js'));
     app.use(cookieParser('secret'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
@@ -39,6 +38,8 @@ db.once("open", function() {
 
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(require('./router.js'));
 
     var server = app.listen(3000, function() {
         var host = server.address().address;
