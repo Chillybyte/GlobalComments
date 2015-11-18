@@ -11,9 +11,11 @@ module.exports = function() {
         },
         function(req, email, password, done) {
             DB_USERS.findOne({
-                    email: email.toLowerCase()
-                })
-                .then(function(user) {
+                email: email.toLowerCase()
+            }, function(err, user) {
+                if (err) {
+                    done(err);
+                } else {
                     if (user) {
                         if (user.compare_password(password)) {
                             done(null, user);
@@ -23,11 +25,9 @@ module.exports = function() {
                     } else {
                         done("Username or password is incorrect");
                     }
-                })
-                .catch(function(err) {
-                    done("Unknown error");
-                    console.trace(err);
-                });
+                }
+            });
+
         }));
 
 }
