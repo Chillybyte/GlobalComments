@@ -41,7 +41,6 @@ var userSchema = new Schema({
         required: true,
         unique: false,
         index: false
-
     },
 
     is_admin: {

@@ -1,16 +1,17 @@
-var DB_USERS = require(process.env.APP_DB_USERS),
+var SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
 
     passport = require("passport"),
     LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function() {
+    
     passport.use('local-login', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true
         },
         function(req, email, password, done) {
-            DB_USERS.findOne({
+            SCHEMA_USER.findOne({
                 email: email.toLowerCase()
             }, function(err, user) {
                 if (err) {

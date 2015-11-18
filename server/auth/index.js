@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"),
-    DB_USERS = require(process.env.APP_DB_USERS),
+    SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     passport = require("passport");
 
 passport.serializeUser(function(user, done) {
@@ -11,7 +11,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    DB_USERS.findOne({
+    SCHEMA_USER.findOne({
         _id: id
     }, function(err, body) {
         done(err, body);
