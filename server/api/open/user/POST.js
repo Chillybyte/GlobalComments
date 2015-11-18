@@ -1,6 +1,7 @@
 var passport = require("passport");
 
 module.exports = function(_request, _response, _next) {
+    console.log(_request.body);
     passport.authenticate("local-signup", function(err, user, info) {
         if (!err) {
             _request.logIn(user, function(err) {

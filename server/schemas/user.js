@@ -32,7 +32,8 @@ var userSchema = new Schema({
             unique: true,
             index: true,
             set: function(email) {
-                if (mailPattern.test(email)) return email;
+                if (mailPattern.test(email))
+                    return email;
                 return "";
             }
         },
@@ -55,23 +56,24 @@ var userSchema = new Schema({
             type: Date,
             required: true,
             unique: false,
-            index: true
+            index: true,
+            default: Date.now
         },
 
         created_at: {
             type: Date,
             required: true,
             unique: false,
-            index: true
+            index: true,
+            default: Date.now
         }
+    }, {
+        strict: true //Only data relevant to this schema is saved
     })
     .pre("save", function(next) {
         var _now = new Date();
         if (this.isNew) {
             this.created_at = _now;
-
-            //Generating a verification code
-            this.verification_code = new mongoose.Types.ObjectId + uuid.v1() + uuid.v4();
         }
         //On every update, this variable is update to current date
         this.updated_at = _now;
@@ -82,11 +84,10 @@ var userSchema = new Schema({
         transform: function(doc, ret, options) {
             //Values that should not be sent to client
             delete ret.password; //Sensitive information that could land in the wrong hands
-            delete ret.verification_code; //Information that could land in the wrong hands
-            delete ret.google; //Sensitive information that could land int the wrong hands
-            delete ret.facebook; //Sensitive information that could land int the wrong hands
         }
     });
+
+
 
 /**
  * Method to verify and set password at the same time.
