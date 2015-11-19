@@ -1,5 +1,5 @@
 var APP = angular.module("APP");
-APP.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
+APP.service("_http", ["$http", "$q", function($http, $q) {
 
     this.request = function(url, method, data) {
         var _this = this;
