@@ -1,5 +1,5 @@
 var APP = angular.module("APP");
-APP.service("_http", ["$http", "$q", function($http, $q, _notifications) {
+APP.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
 
     this.request = function(url, method, data) {
         var _this = this;
@@ -47,5 +47,5 @@ APP.service("_http", ["$http", "$q", function($http, $q, _notifications) {
     this.patch = function(url, data) {
         return this.request(url, "PATCH", data);
     };
-    
+
 }]);
