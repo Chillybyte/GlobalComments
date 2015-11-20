@@ -5,7 +5,8 @@ APP.directive('compTopbar', [function() {
         replace: true,
         restrict: 'E',
         templateUrl: 'components/comp-topbar/template.html',
-        controller: ['$scope', '_http', '_notifications', function($scope, _http, _notifications) {
+        controller: ['$scope', '_user', '_notifications', function($scope, _user, _notifications) {
+            $scope.user = _user.user;
             $scope.username = '';
             $scope.first_name = '';
             $scope.last_name = '';
@@ -14,6 +15,7 @@ APP.directive('compTopbar', [function() {
             $scope.repeat_password = '';
 
             $scope.sign_up = function() {
+                console.log($scope.username);
                 if (!$scope.username) {
                     _notifications.ERROR("Username is empty")
                 } else if (!$scope.email) {
@@ -23,7 +25,7 @@ APP.directive('compTopbar', [function() {
                 } else if (!$scope.repeat_password) {
                     _notifications.ERROR("Password repeated is empty")
                 } else {
-                    _http.post("/api/open/session", {
+                    _user.create_user({
                         username: $scope.username,
                         first_name: $scope.first_name,
                         last_name: $scope.last_name,
