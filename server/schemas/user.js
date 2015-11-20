@@ -72,9 +72,6 @@ var userSchema = new Schema({
     })
     .pre("save", function(next) {
         var _now = new Date();
-        if (this.isNew) {
-            this.created_at = _now;
-        }
         //On every update, this variable is update to current date
         this.updated_at = _now;
         next();
@@ -84,6 +81,8 @@ var userSchema = new Schema({
         transform: function(doc, ret, options) {
             //Values that should not be sent to client
             delete ret.password; //Sensitive information that could land in the wrong hands
+            delete ret._id;
+            delete ret.__v;
         }
     });
 

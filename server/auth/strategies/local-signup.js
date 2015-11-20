@@ -11,7 +11,7 @@ module.exports = function() {
         },
         function(_request, email, password, done) {
             var user = new SCHEMA_USER(_request.body);
-            user.verify_password(_request.body.password, _request.body.confirm_password, function(err) {
+            user.verify_password(_request.body.password, _request.body.repeat_password, function(err) {
                 if (!err) {
                     user.save(function(err, result) {
                         if (!err) {
