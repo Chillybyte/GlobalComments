@@ -17,7 +17,7 @@ module.exports = function() {
                         if (!err) {
                             done(null, result);
                         } else if (err.code === 11000 || err.code === 11001) { //Unique index already exists - In this case, the e-mail
-                            done("E-mail already exists");
+                            done("'" + email + "'" + " already exists");
                         } else {
                             console.trace(err);
                             done(err);

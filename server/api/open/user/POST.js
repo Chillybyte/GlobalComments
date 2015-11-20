@@ -10,13 +10,13 @@ module.exports = function(_request, _response, _next) {
                     _response
                         ._R
                         ._DATA("user", user.toJSON())
-                        ._SUCCESS("WEE, din bruger blev oprettet!")
+                        ._SUCCESS("Your profile was created!")
                         ._SEND();
                 } else {
                     console.trace(err);
                     _response
                         ._R
-                        ._ERROR("En ukendt fejl skete")
+                        ._ERROR("An unknown error occurred")
                         ._STATUS(500)
                         ._SEND();
                 }
@@ -25,7 +25,7 @@ module.exports = function(_request, _response, _next) {
             console.trace(err);
             _response
                 ._R
-                ._ERROR("En ukendt fejl skete")
+                ._ERROR(err)
                 ._STATUS(500)
                 ._SEND();
         }
