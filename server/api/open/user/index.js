@@ -2,7 +2,7 @@ var express = require("express"),
     router  = express.Router();
     
     router.route("/")
-//        .get("./GET.js")                //Retreive  information
+        .get(require("./GET.js"))                //Retreive  information
         .post(require("./POST.js"))              //Create    information
   //      .put("./PUT.js")                //Replace   document
     //    .patch("./PATCH.js")            //Update    document

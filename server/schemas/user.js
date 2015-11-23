@@ -42,7 +42,12 @@ var userSchema = new Schema({
             type: String,
             required: true,
             unique: false,
-            index: false
+            index: false,
+            set: function(password) {
+                var value_hash = new sha3.SHA3Hash();
+                value_hash.update(password);
+                return value_hash.digest("hex");
+            }
         },
 
         updated_at: {
