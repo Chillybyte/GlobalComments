@@ -22,9 +22,8 @@ APP.service('_user', ['_http', function(_http) {
         var _this = this;
         _http.post('/api/open/user/', data)
             .then(function(result) {
-                _this.user = result.data.user;
-                console.log(_this.user);
-            })
+                angular.copy(result.data.user, _this.user);
+            });
     };
 
 }]);
