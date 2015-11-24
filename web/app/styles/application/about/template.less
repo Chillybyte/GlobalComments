@@ -1,34 +1,44 @@
 #aboutMain {
-	text-align: center;
-	margin: auto;
-	padding: auto;
-	width: 700px;
-	height: 500px;
-}
-#aboutText{
-	float:left;
-	height:440px;
-	width:350px;
-	padding: 10px 30px;
-	border: 2px solid #a1a1a1;
-	border-radius: 15px;
+    text-align: center;
+    margin: auto;
+    padding: auto;
+    width: 700px;
+    height: 500px;
 }
 
-#aboutKontakt{
-	float: right;
-	height:100px;
-	width:300px;
-	padding: 10px 30px;
-	border: 2px solid #a1a1a1;
-	border-radius: 15px;
+#aboutText {
+    float: left;
+    height: 440px;
+    width: 350px;
+    padding: 10px 30px;
+    border: 2px solid #a1a1a1;
+    border-radius: 15px;
 }
 
-#aboutGitLog{
-	float: right;
-	height:300px;
-	width:300px;
-	padding: 10px 30px;
-	margin-top: 40px;
-	border: 2px solid #a1a1a1;
-	border-radius: 15px;
+#aboutKontakt {
+    float: right;
+    height: 100px;
+    width: 300px;
+    padding: 10px 30px;
+    border: 2px solid #a1a1a1;
+    border-radius: 15px;
+}
+
+#aboutGitLog {
+    float: right;
+    height: 300px;
+    width: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 30px;
+    margin-top: 40px;
+    border: 2px solid #a1a1a1;
+    border-radius: 15px;
+    text-align: left;
+    .git-log {
+    	word-break: break-all;
+    	border-bottom: solid 1px gray;
+    	margin-bottom: 5px;
+    	padding-bottom: 5px;
+    }
 }

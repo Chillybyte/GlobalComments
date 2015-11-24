@@ -17,11 +17,15 @@
     </div>
     <!-- Text box which shows our git commits to be dynamic -->
     <div id="aboutGitLog">
-        <h3>Git Log</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+        <div class="git-log" ng-repeat="log in git_log track by log.sha">
+            <a href="{{log.html_url}}" target="_blank">
+                <div>
+                    {{log.commit.message}}
+                </div>
+                <div>
+                    {{log.commit.committer.date}}
+                </div>
+            </a>
+        </div>
     </div>
 </div>
