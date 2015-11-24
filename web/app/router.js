@@ -24,6 +24,25 @@ APP.config(["$locationProvider", "$stateProvider", "$urlRouterProvider", functio
             }
         });
 
+    $stateProvider
+        .state("about", {
+            url: "/about/",
+            controller: "indexController",
+            templateUrl: "application/about/template.html",
+            params: {
+                contact: null
+            }
+        });
+
+    $stateProvider
+        .state("tryme", {
+            url: "/tryme/",
+            controller: "indexController",
+            templateUrl: "application/tryme/template.html",
+            params: {
+                contact: null
+            }
+        });
 
 
     $urlRouterProvider
