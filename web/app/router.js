@@ -27,7 +27,7 @@ APP.config(["$locationProvider", "$stateProvider", "$urlRouterProvider", functio
     $stateProvider
         .state("about", {
             url: "/about/",
-            controller: "indexController",
+            controller: "aboutController",
             templateUrl: "application/about/template.html",
             params: {
                 contact: null
@@ -37,7 +37,7 @@ APP.config(["$locationProvider", "$stateProvider", "$urlRouterProvider", functio
     $stateProvider
         .state("tryme", {
             url: "/tryme/",
-            controller: "indexController",
+            controller: "trymeController",
             templateUrl: "application/tryme/template.html",
             params: {
                 contact: null
