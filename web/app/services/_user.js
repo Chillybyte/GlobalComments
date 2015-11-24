@@ -26,6 +26,10 @@ APP.service('_user', ['_http', function(_http) {
             });
     };
 
+    this.sign_out = function() {
+        return _http.get("/api/sign_out");
+    };
+
     this.authenticate = function() {
         var _this = this;
         return _http.get("/api/open/user", null, {

@@ -63,6 +63,17 @@ APP.directive('compTopbar', [function() {
                         });
                 }
             };
+
+            $scope.sign_out = function() {
+                _user.sign_out()
+                    .then(function() {
+                        _notifications.ERROR("You were successfully signed out");
+                        window.location = "";
+                    })
+                    .catch(function() {
+                        _notifications.ERROR("Failed to sign you out");
+                    });
+            };
         }]
     };
 
