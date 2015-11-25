@@ -25,17 +25,30 @@ module.exports = function(_request, _response) {
                 if (!result)
                     _response
                     ._R
-                    ._ERROR("Failed to make a comment, please try again late")
+                    ._ERROR("Failed to make a comment, please try again later")
                     ._SEND();
                 else {
-                    console.log(result);
+                    var l = result.users.length;
+                    var found = false;
+                    for (var i = 0; i < l; i++) {
+                    	console.log(result.users[i] + " === " + _request.user._id + (result.users[i].toString() === _request.user._id.toString()));
+                        if (result.users[i].toString() === _request.user._id.toString()) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                        result.users.push(_request.user._id);
                     result.messages.push(message);
+                    console.log(result);
                     result.save()
                         .then(function(result) {
                             _response
                                 ._R
                                 ._DATA("message", message)
                                 ._SEND();
+                            //This is where callbacks to connected servers (Facebook, Google etc) are called when new messages are 
+                            //deployed on our server
                         })
                         .catch(function(err) {
                             console.trace(err);
