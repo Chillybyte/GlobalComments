@@ -5,7 +5,9 @@ APP.directive("gcNavbar", [function() {
         restrict: "E",
         templateUrl: "components/gc-frame/gc-navbar/template.html",
         controller: ["$scope", function($scope) {
-
+            $('#hamburger').click(function() {
+                $('#comp-container').toggle("slide");
+            });
         }]
-    };  
+    };
 }]);
