@@ -1,28 +1,30 @@
 {
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "gruntfile.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "angular": "~1.4.7",
-        "angular-resource": "~1.4.7",
-        "angular-ui-router": "~0.2.15",
-        "bootstrap": "~3.3.5",
-        "font-awesome": "~4.4.0",
-        "jquery": "^2.1.4"
-    },
-    "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-clean": "^0.7.0",
-        "grunt-contrib-copy": "^0.8.2",
-        "grunt-contrib-jshint": "^0.11.3",
-        "grunt-contrib-less": "^1.1.0",
-        "grunt-contrib-uglify": "^0.10.1",
-        "grunt-contrib-watch": "^0.6.1"
-    }
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-ui-router": "~0.2.15",
+    "bluebird": "^3.0.5",
+    "bootstrap": "~3.3.5",
+    "es6-promise": "^3.0.2",
+    "font-awesome": "~4.4.0",
+    "jquery": "^2.1.4"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-less": "^1.1.0",
+    "grunt-contrib-uglify": "^0.10.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
 }
