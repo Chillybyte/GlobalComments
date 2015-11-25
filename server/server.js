@@ -6,9 +6,16 @@ var express = require('express'),
     passport = require('passport'),
     mongoose = require('mongoose');
 
+
 require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
 require('./settings.js');
 require('./auth/index.js');
+
+/**
+ *  Supplement to missing promises in mongoose 4.2.6
+ */
+mongoose.Promise = require('bluebird');
+require('es6-promise').polyfill();
 
 var mongoose = require("mongoose");
 mongoose.connect(
