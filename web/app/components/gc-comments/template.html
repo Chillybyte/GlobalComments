@@ -1,0 +1,25 @@
+<div class="gc-comments">
+    <div class="gc-comments-comment">
+        <div ng-if="comments.messages.length === 0">
+        	Be the first to comment this element!
+        </div>
+        <div ng-repeat="message in comments.messages track by message._id">
+        	{{message.content}}
+        </div>
+    </div>
+    <form ng-submit="new_comment()" class="gc-comments-signed form-group" ng-if="_user.id">
+        <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="comment.message"></textarea>
+        <button class="btn btn-success gc-comments-signed-send">S
+        e
+        n
+        d
+        </button>
+    </form>
+    <div class="gc-comments-unsigned" ng-if="!_user.id">
+        <p class="gc-comments-unsigned-message">To comment you must be signed in</p>
+        <div class="gc-comments-unsigned-wrapper">
+            <button class="btn btn-success gc-comments-unsigned-wrapper-sign" data-toggle="modal" data-target="#modal-sign_in">Sign in</button>
+            <button class="btn btn-primary gc-comments-unsigned-wrapper-create" data-toggle="modal" data-target="#modal-sign-up">Create user</button>
+        </div>
+    </div>
+</div>
