@@ -1,0 +1,35 @@
+<div class="modal fade" id="modal-sign-up" tabindex="-1" role="dialog">
+    <form ng-submit="sign_up()" class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Sign up</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modal-sign-up-email" class="control-label">E-mail</label>
+                    <input type="text" id="modal-sign-up-email" class="form-control" ng-model="new_user.email">
+                </div>
+                <div class="form-group">
+                    <label for="modal-sign-up-first-name" class="control-label">First name</label>
+                    <input type="text" id="modal-sign-up-first-name" class="form-control" ng-model="new_user.first_name">
+                </div>
+                <div class="form-group">
+                    <label for="modal-sign-up-last-name" class="control-label">Last name</label>
+                    <input type="text" id="modal-sign-up-last-name" class="form-control" ng-model="new_user.last_name">
+                </div>
+                <div class="form-group">
+                    <label for="modal-sign-up-password" class="control-label">Password</label>
+                    <input type="password" id="modal-sign-up-password" class="form-control" ng-model="new_user.password">
+                </div>
+                <div class="form-group">
+                    <label for="modal-sign-up-repeat-password" class="control-label">Repeat password</label>
+                    <input type="password" id="modal-sign-up-repeat-password" class="form-control" ng-model="new_user.repeat_password">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign up" class="btn btn-primary btn-block">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
