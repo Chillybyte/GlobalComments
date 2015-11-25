@@ -1,0 +1,31 @@
+.gc-comments {
+    width: 300px;
+    margin: auto;
+    &-comment {}
+    &-signed {
+        .flex();
+        &-text {
+            .flex-grow(1);
+            resize: none;
+        }
+        &-send {
+            white-space: pre-line;
+            line-height: 13px;
+            width: 40px;
+            margin-left: 20px;
+            height: 115px;
+        }
+    }
+    &-unsigned {
+        &-message {}
+        &-wrapper {
+            .flex();
+            &-sign {
+                .flex-grow(1);
+            }
+            &-create {
+                .flex-grow(1);
+            }
+        }
+    }
+}
