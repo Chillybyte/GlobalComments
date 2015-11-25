@@ -4,7 +4,16 @@ var mongoose = require("mongoose"),
 
 var threadCommentSchema = new Schema({
 
-        is_thread_comment: true,
+        is_thread_comment: {
+            type: Boolean,
+            required: true,
+            unique: false,
+            index: false,
+            default: true,
+            set: function() {
+                return true;
+            }
+        },
 
         reference: { //URL to actual content commented on
             type: String,
