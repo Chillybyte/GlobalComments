@@ -5,5 +5,5 @@ module.exports = function(_request, _response, _next) {
     _response
         ._R
         ._STATUS(401)
-        ._send();
+        ._SEND();
 }
