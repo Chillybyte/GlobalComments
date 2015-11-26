@@ -1,6 +1,20 @@
 <div class="gc-friends">
     <div class="left" ng-if="show_left">
         <i class="fa fa-times" ng-click="set_left(false)"></i>
+        <div class="form-group">
+            <label for="gc-friends-search-username">Username</label>
+            <input autocomplete="off" ng-keyup="find_friends(username_search)" type="text" class="form-control" ng-model="username_search" id="gc-friends-search-username">
+        </div>
+        <div class="gc-friends-search">
+            <div class="gc-friends-search-user" ng-repeat="user in search_friends_result track by user.id">
+                <img class="gc-friends-search-user-picture" src="">
+                <div class="gc-friends-search-user-collection">
+                    <label class="gc-friends-search-user-collection-username">{{user.username}}</label>
+                    <label class="gc-friends-search-user-collection-name">{{user.first_name}} {{user.lastname}}</label>
+                    <label class="gc-friends-search-user-collection-email">{{user.email}}</label>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="right">
         <button class="btn btn-primary" ng-click="set_left(true)">Find friends</button>

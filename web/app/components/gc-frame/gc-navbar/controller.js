@@ -9,7 +9,6 @@ APP.directive("gcNavbar", [function() {
             console.log($scope.nav_dialogs);
 
             $scope.toggle_navbar = function(dialog) {
-                //TODO: Toggle if it should be tiny quadrat or rectangular
                 $(".nav-container-options")
                     .stop()
                     .slideToggle("slide");

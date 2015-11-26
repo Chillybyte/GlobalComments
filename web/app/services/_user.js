@@ -5,6 +5,8 @@ APP.service('_user', ['_http', function(_http) {
         id: false
     };
 
+    this.search_friends_result = [];
+
     this.is_email_valid = function(email) {
         var mailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return mailPattern.test(email);
@@ -38,6 +40,21 @@ APP.service('_user', ['_http', function(_http) {
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
             });
+    };
+
+
+    this.find_friends = function(query) {
+        var _this = this;
+        _http.get("/api/closed/friends/" + query, null, {
+                silent: true
+            })
+            .then(function(result) {
+                angular.copy(result.data.users, _this.search_friends_result);
+                console.log(result.data.users);
+            })
+            .catch(function() {
+                angular.copy([], _this.search_friends_result);
+            })
     };
 
 }]);
