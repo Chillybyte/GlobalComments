@@ -21,20 +21,40 @@ APP.directive("gcNavbar", [function() {
                             if ($scope.nav_dialogs.hasOwnProperty(key))
                                 $scope.nav_dialogs[key] = false;
                         }
-
                     });
             };
 
-            $scope.toggle_nav_dialog = function(dialog) {
-                var current = !$scope.nav_dialogs[dialog]
-                    //Shutting down all dialogs in gc-frame
+            $scope.show_left_pane = false;
+
+            $scope.the_toggler = function(state, section) {
+                switch (section) {
+                    case 'profile':
+                        handler(state, section);
+                        break;
+                    case 'friends':
+                        handler(state, section);
+                        break;
+                    case 'raw':
+                        handler(state, section);
+                        break;
+                    case 'chat':
+                        handler(state, section);
+                        break;
+                    case 'comments'
+                    handler(state, section);
+                    break
+                }
+
                 for (var key in $scope.nav_dialogs) {
                     if ($scope.nav_dialogs.hasOwnProperty(key))
                         $scope.nav_dialogs[key] = false;
                 }
-                $scope.nav_dialogs[dialog] = current;
-                console.log($scope.nav_dialogs);
-            };
+            }
+
+            function handler(state, section) {
+                var current = !$scope.nav_dialogs[section];
+                $scope.show_left_pane = state;
+            }
         }]
     };
 }]);
