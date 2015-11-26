@@ -27,6 +27,7 @@ APP.directive("gcNavbar", [function() {
             $scope.show_left_pane = false;
 
             $scope.the_toggler = function(state, section) {
+                console.log(state + '   ' + section);
                 switch (section) {
                     case 'profile':
                         handler(state, section);
@@ -40,9 +41,9 @@ APP.directive("gcNavbar", [function() {
                     case 'chat':
                         handler(state, section);
                         break;
-                    case 'comments'
-                    handler(state, section);
-                    break
+                    case 'comments':
+                        handler(state, section);
+                        break;
                 }
 
                 for (var key in $scope.nav_dialogs) {
@@ -54,7 +55,7 @@ APP.directive("gcNavbar", [function() {
             function handler(state, section) {
                 var current = !$scope.nav_dialogs[section];
                 $scope.show_left_pane = state;
-            }
+            };
         }]
     };
 }]);
