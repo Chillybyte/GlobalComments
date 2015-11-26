@@ -2,7 +2,7 @@ var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 
-var friend_request = new Schema({
+var friendListSchema = new Schema({
 
     user: { //The owner of the friend list
         type: Schema.Types.ObjectId,
@@ -40,3 +40,5 @@ var friend_request = new Schema({
     this.updated_at = _now;
     next();
 });
+
+module.exports = mongoose.model("friend_list", friendListSchema);

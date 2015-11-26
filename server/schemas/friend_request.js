@@ -2,7 +2,7 @@ var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 
-var friend_request = new Schema({
+var friendRequestSchema = new Schema({
 
     user: { //Person who requested a user to be friends
         type: Schema.Types.ObjectId,
@@ -56,3 +56,5 @@ var friend_request = new Schema({
     this.updated_at = _now;
     next();
 });
+
+module.exports = mongoose.model("friend_request", friendRequestSchema);
