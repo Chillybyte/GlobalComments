@@ -1,6 +1,6 @@
-<div class="gc-profile" ng-if="user.id">
+<div class="gc-profile">
 	<div class="gc-profile-area gc-profile-view">
-		<button><i class="fa fa-times"></i></button>
+<!--		<button><i class="fa fa-times"></i></button>-->
 		
 		<section class="gc-profile-picture">
 			<img src="../../../../public/DansePingvin.gif" alt="{{user.username}} on GlobalComments">
@@ -14,7 +14,7 @@
 			</ul>
 		</section>
 		
-		<button ng-click="showHideEditProfile()"><i class="fa fa-edit"></i><span>Edit profile</span></button>
+		<button class="btn" ng-click="showHideEditProfile()"><i class="fa fa-edit"></i><span>Edit profile</span></button>
 	</div>
 	
 	<div class="gc-profile-area gc-profile-edit">
