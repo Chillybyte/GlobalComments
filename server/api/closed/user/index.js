@@ -2,6 +2,6 @@ var express = require("express"),
     router = express.Router();
 
 router.route("/:user_id")
-    .post(require("./PUT.js"));
+    .put(require("./PUT.js"));
 
 module.exports = router;
