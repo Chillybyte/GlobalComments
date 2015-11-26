@@ -1,8 +1,5 @@
 <div class="gc-frame">
-    <div class="nav-container">
-        <gc-navbar></gc-navbar>
-    </div>
-    <div id="comp-container">
-    	<!-- INSERT YOUR THROBBING COMPONENTS HERE -->
-    </div>
+    <gc-navbar nav_dialogs=nav_dialogs></gc-navbar>
+    <!-- INSERT YOUR THROBBING COMPONENTS HERE -->
+    <gc-friends ng-if="nav_dialogs.friends" id="comp-container"></gc-friends>
 </div>
