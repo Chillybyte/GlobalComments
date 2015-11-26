@@ -1,5 +1,6 @@
 var passport = require("passport"),
-    SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT);
+    SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
+    SCHEMA_FRIEND_LIST = require(process.env.APP_SCHEMA_FRIEND_LIST);
 
 module.exports = function(_request, _response, _next) {
     if (_request.isAuthenticated()) {
@@ -16,11 +17,20 @@ module.exports = function(_request, _response, _next) {
                 _response
                     ._R
                     ._DATA("comments", result);
+                return SCHEMA_FRIEND_LIST.find({
+                    user: _request.USER._id
+                })
+            })
+            .then(function(result){
+                console.log(result);
+                _response
+                    ._R
+                    ._DATA("friend_list", result);
             })
             .catch(function(err) {
                 _response
                     ._R
-                    ._ERROR("Failed to collect comments")
+                    ._ERROR("Failed to collect comments and/or friend list")
                     ._DATA("comments", []);
                 console.trace(err);
             })
