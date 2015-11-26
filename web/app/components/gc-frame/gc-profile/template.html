@@ -1,0 +1,45 @@
+<div class="gc-profile" ng-if="user.id">
+	<div class="gc-profile-area gc-profile-view">
+		<button><i class="fa fa-times"></i></button>
+		
+		<section class="gc-profile-picture">
+			<img src="../../../../public/DansePingvin.gif" alt="{{user.username}} on GlobalComments">
+		</section>
+		
+		<section class="gc-profile-details">
+			<h2>{{user.username}}</h2>
+			<ul>
+				<li><i class="fa fa-user"></i>{{user.first_name}} {{user.last_name}}</li>
+				<li><i class="fa fa-at"></i>{{user.email}}</li>
+			</ul>
+		</section>
+		
+		<button ng-click="showHideEditProfile()"><i class="fa fa-edit"></i><span>Edit profile</span></button>
+	</div>
+	
+	<div class="gc-profile-area gc-profile-edit">
+		<button ng-click="showHideEditProfile()"><i class="fa fa-times"></i></button>
+		
+		<form class="form" ng-submit="edit_profile()">
+			<section class="gc-profile-picture-edit">
+				<p>Change profile picture</p>
+				<input type="file" class="form-control">
+			</section>
+			
+			<section class="gc-profile-details-edit">
+				<div class="form-group">
+					<input class="form-control" value="{{user.first_name}}" type="text"ng-model="user.first_name" placeholder="First name" title="First name">
+				</div>
+				<div class="form-group">
+					<input class="form-control" value="{{user.last_name}}" type="text" ng-model="user.last_name" placeholder="Last name" title="Last name">
+				</div>
+				<div class="form-group">
+					<input class="form-control" value="{{user.username}}" type="text" ng-model="user.username" placeholder="Username" title="Username">
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-block">Save changes</button>
+				</div>
+			</section>
+		</form>
+	</div>
+</div>
