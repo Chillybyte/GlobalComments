@@ -1,7 +1,7 @@
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 module.exports = function(_request, _response) {
     console.log(_request.params);
-    var search = new RegExp(_request.params.query, "i")
+    var search = new RegExp(_request.params.query.replace(" ", "|"), "i")
     SCHEMA_USER.find({
             $or: [{
                 username: search
