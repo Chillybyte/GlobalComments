@@ -5,6 +5,7 @@ APP.directive("gcNavbar", [function() {
         restrict: "E",
         templateUrl: "components/gc-frame/gc-navbar/template.html",
         controller: ["$scope", function($scope) {
+        	$('#comp-container').hide();
             $('#hamburger').click(function() {
                 $('#comp-container').toggle("slide");
             });
