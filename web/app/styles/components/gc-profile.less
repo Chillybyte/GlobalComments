@@ -1,0 +1,90 @@
+.gc-profile {
+	// To be removed
+	float: right;
+	overflow: hidden;
+	background: #eee;
+	text-align: left;
+	height: 360px;
+	
+	section {
+		clear: both;
+		margin: 0 0 20px 0;
+	}
+	
+	button {
+		border: 0;
+		background: #ccc;
+		padding: 8px 10px;
+		float: right;
+		
+		&:focus {
+			outline: 0;
+		}
+
+		&:hover {
+			background: #aaa;
+		}
+
+		> span {
+			margin: 0 0 0 10px;
+		}
+	}
+	
+	.gc-profile-area {
+		float: right;
+		width: 250px;
+		height: 100%;
+		padding: 0 10px 10px 10px;
+		overflow: auto;
+		
+		&:not(:first-child) {
+			border-right: 1px solid #aaa;
+		}
+	}
+	
+	.gc-profile-view {
+		
+		.gc-profile-picture {
+			clear: both;
+			text-align: center;
+			
+			> img {
+				width: auto;
+				max-width: 100%;
+				height: 150px;
+			}
+		}
+		
+		.gc-profile-details {
+			
+			
+			> h2 {
+				width: 100%;
+				text-align: center;
+				margin: 10px 0 20px 0;
+				font-size: 20px;
+			}
+			
+			> ul {
+				list-style: none;
+				padding: 0;
+				
+				> li > i {
+					margin: 0 10px;
+				}
+			}
+		}
+	}
+	
+	.gc-profile-edit {
+		display: none;
+		
+		.gc-profile-picture-edit {
+			
+			
+			input {
+				width: 100%;
+			}
+		}
+	}
+}
