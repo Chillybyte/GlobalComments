@@ -4,12 +4,11 @@ APP.directive("gcNavbar", [function() {
         replace: true,
         restrict: "E",
         nav_dialogs: "=",
+        show_left_pane: "=",
         templateUrl: "components/gc-frame/gc-navbar/template.html",
         controller: ["$scope", function($scope) {
             console.log($scope.nav_dialogs);
-
             $scope.toggle_navbar = function(dialog) {
-                //TODO: Toggle if it should be tiny quadrat or rectangular
                 $(".nav-container-options")
                     .stop()
                     .slideToggle("slide");
@@ -21,20 +20,21 @@ APP.directive("gcNavbar", [function() {
                             if ($scope.nav_dialogs.hasOwnProperty(key))
                                 $scope.nav_dialogs[key] = false;
                         }
-
                     });
             };
 
-            $scope.toggle_nav_dialog = function(dialog) {
-                var current = !$scope.nav_dialogs[dialog]
-                    //Shutting down all dialogs in gc-frame
+
+            $scope.the_toggler = function(dialog) {
+                var state = !$scope.nav_dialogs[dialog];
+
                 for (var key in $scope.nav_dialogs) {
                     if ($scope.nav_dialogs.hasOwnProperty(key))
                         $scope.nav_dialogs[key] = false;
                 }
-                $scope.nav_dialogs[dialog] = current;
-                console.log($scope.nav_dialogs);
-            };
+
+                $scope.nav_dialogs[dialog] = state;
+            }
+
         }]
     };
 }]);

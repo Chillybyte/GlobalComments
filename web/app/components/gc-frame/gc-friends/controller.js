@@ -8,7 +8,11 @@ APP.directive("gcFriends", [function() {
         restrict: "E",
         templateUrl: "components/gc-frame/gc-friends/template.html",
         controller: ["$scope", "_user", function($scope, _user) {
-            $scope.show_left = true;
+            $scope.show_left_pane = false;
+
+            $scope.set_left = function(value) {
+                $scope.show_left_pane = value;
+            };
         }]
     };
 }]);
