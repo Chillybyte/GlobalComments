@@ -1,16 +1,26 @@
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
-    SCHEMA_FRIEND_LIST = require(process.env.APP_SCHEMA_FRIEND_LIST);
+    SCHEMA_FRIEND_LIST = require(process.env.APP_SCHEMA_FRIEND_LIST),
+    SCHEMA_FRIEND_REQUEST = require(process.env.APP_SCHEMA_FRIEND_REQUEST);
 
 module.exports = function(_request, _response, _next) {
-    if (_request.isAuthenticated()) {
-        var user = _request.user.toJSON();
+
+    /**
+     *  Collects all essential user information such as
+     *  Comments relevant to the user
+     *  List of friends
+     *
+     * @user:   User that was authenticated by passport
+     *          It's expected to be user.toJSON() when this function receives user
+     *
+     */
+    var collect_user_details = function(user) {
         _response
             ._R
             ._DATA("user", user)
             ._SUCCESS("Welcome back " + user.username + "!")
         SCHEMA_THREAD_COMMENT.find({
-                users: _request.user._id
+                users: user.id
             }, "reference is_thread_comment")
             .then(function(result) {
                 console.log(result);
@@ -18,14 +28,26 @@ module.exports = function(_request, _response, _next) {
                     ._R
                     ._DATA("comments", result);
                 return SCHEMA_FRIEND_LIST.find({
-                    user: _request.USER._id
+                    user: user.id
                 })
             })
-            .then(function(result){
+            .then(function(result) {
                 console.log(result);
                 _response
                     ._R
                     ._DATA("friend_list", result);
+                return SCHEMA_FRIEND_REQUEST.find({
+                    $or: [{
+                        user: user.id
+                    }, {
+                        user_requested: user.id
+                    }]
+                })
+            })
+            .then(function(result) {
+                _response
+                    ._R
+                    ._DATA("friend_requests", result)
             })
             .catch(function(err) {
                 _response
@@ -39,7 +61,10 @@ module.exports = function(_request, _response, _next) {
                     ._R
                     ._SEND();
             });
-        return;
+
+    };
+    if (_request.isAuthenticated()) {
+        return collect_user_details(_request.user.toJSON());
     }
     _request.body = _request.query; //Makes sure that passport can read credentials
 
@@ -50,32 +75,7 @@ module.exports = function(_request, _response, _next) {
                     if (_request.body.remember_me == "true") {
                         _request.session.cookie.maxAge = 21 * 24 * 60 * 60 * 1000;
                     }
-                    _response
-                        ._R
-                        ._DATA("user", user.toJSON())
-                        ._SUCCESS("Welcome back " + user.username + "!")
-
-                    SCHEMA_THREAD_COMMENT.find({
-                            users: _request.user._id
-                        }, "reference is_thread_comment")
-                        .then(function(result) {
-                            console.log(result);
-                            _response
-                                ._R
-                                ._DATA("comments", result);
-                        })
-                        .catch(function(err) {
-                            _response
-                                ._R
-                                ._ERROR("Failed to collect comments")
-                                ._DATA("comments", []);
-                            console.trace(err);
-                        })
-                        .finally(function() {
-                            _response
-                                ._R
-                                ._SEND();
-                        });
+                    collect_user_details(user.toJSON());
                 } else {
                     _response
                         ._R
