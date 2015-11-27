@@ -1,18 +1,65 @@
 .gc-friends {
+    text-align: left;
+    height: 100%;
+    overflow: hidden;
     .flex();
-    .left {
-        position: relative;
-        width: 200px;
-        .fa-times {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 10px;
+    &-left {
+        .flex();
+        .flex-direction(column);
+        width: 250px;
+        .search-form {
+            .flex();
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            .search-input {}
+            .close {
+                font-size: 20px;
+                padding: 7px;
+                color: black;
+                opacity: 1;
+            }
+        }
+        .friends-found {
+            overflow-x: hidden;
+            overflow-y: auto;
+            &-user {
+                padding-right: 5px;
+                padding-left: 5px;
+                .flex();
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-add {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
         }
     }
-    .right {
-        width: 200px;
+    &-right {
+        width: 250px;
     }
 }
