@@ -104,5 +104,13 @@ APP.service('_user', ['_http', function(_http) {
             });
         return user;
     };
+	
+	this.update_user = function(data, user_id) {
+		var _this = this;
+		return _http.put("/api/closed/user/" + user_id, data)
+		.then(function(result) {
+			angular.copy(result.data.user, _this.user);
+		});
+	}
 
 }]);

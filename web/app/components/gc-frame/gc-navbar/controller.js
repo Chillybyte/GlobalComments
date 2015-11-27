@@ -25,6 +25,8 @@ APP.directive("gcNavbar", [function() {
 
 
             $scope.the_toggler = function(dialog) {
+                console.log(dialog);
+                console.log($scope.nav_dialogs);
                 var state = !$scope.nav_dialogs[dialog];
 
                 for (var key in $scope.nav_dialogs) {
