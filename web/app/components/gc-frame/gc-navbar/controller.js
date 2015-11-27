@@ -4,12 +4,11 @@ APP.directive("gcNavbar", [function() {
         replace: true,
         restrict: "E",
         nav_dialogs: "=",
+        show_left_pane: "=",
         templateUrl: "components/gc-frame/gc-navbar/template.html",
         controller: ["$scope", function($scope) {
             console.log($scope.nav_dialogs);
-
             $scope.toggle_navbar = function(dialog) {
-                //TODO: Toggle if it should be tiny quadrat or rectangular
                 $(".nav-container-options")
                     .stop()
                     .slideToggle("slide");
@@ -24,38 +23,18 @@ APP.directive("gcNavbar", [function() {
                     });
             };
 
-            $scope.show_left_pane = false;
 
-            $scope.the_toggler = function(state, section) {
-                console.log(state + '   ' + section);
-                switch (section) {
-                    case 'profile':
-                        handler(state, section);
-                        break;
-                    case 'friends':
-                        handler(state, section);
-                        break;
-                    case 'raw':
-                        handler(state, section);
-                        break;
-                    case 'chat':
-                        handler(state, section);
-                        break;
-                    case 'comments':
-                        handler(state, section);
-                        break;
-                }
+            $scope.the_toggler = function(dialog) {
+                var state = !$scope.nav_dialogs[dialog];
 
                 for (var key in $scope.nav_dialogs) {
                     if ($scope.nav_dialogs.hasOwnProperty(key))
                         $scope.nav_dialogs[key] = false;
                 }
+
+                $scope.nav_dialogs[dialog] = state;
             }
 
-            function handler(state, section) {
-                var current = !$scope.nav_dialogs[section];
-                $scope.show_left_pane = state;
-            };
         }]
     };
 }]);
