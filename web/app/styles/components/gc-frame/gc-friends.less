@@ -1,48 +1,65 @@
 .gc-friends {
+    text-align: left;
+    height: 100%;
+    overflow: hidden;
     .flex();
-    height: 340px;
-    .left {
+    &-left {
         .flex();
         .flex-direction(column);
-        position: relative;
-        width: 200px;
-        .fa-times {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 10px;
+        width: 250px;
+        .search-form {
+            .flex();
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            .search-input {}
+            .close {
+                font-size: 20px;
+                padding: 7px;
+                color: black;
+                opacity: 1;
+            }
         }
-        .gc-friends-search {
-            .flex-grow(1);
-            overflow-y: auto;
+        .friends-found {
             overflow-x: hidden;
+            overflow-y: auto;
             &-user {
+                padding-right: 5px;
+                padding-left: 5px;
                 .flex();
-                padding: 3px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
                 &-picture {
-                    min-width: 20px;
-                    max-width: 20px;
-                    width: 20px;
-                    height: 20px;
-                    background-color: gray;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
                 }
                 &-collection {
-                    label {
-                        display: block;
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-                    .flex-grow(1);
-                    &-username {}
-                    &-name {}
-                    &-email {}
+                }
+                &-add {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                }
+                &:last-child {
+                    border-bottom: none;
                 }
             }
         }
     }
-    .right {
-        width: 200px;
+    &-right {
+        width: 250px;
     }
 }

@@ -4,6 +4,13 @@ var mongoose = require("mongoose"),
 
 var friendRequestSchema = new Schema({
 
+    user_user_requested: { //Combination of user and user_requested - Needs to be unique since we do not want duplicates
+        type: String,
+        required: true,
+        unique: true,
+        index: false
+    },
+
     user: { //Person who requested a user to be friends
         type: Schema.Types.ObjectId,
         required: true,
@@ -19,7 +26,7 @@ var friendRequestSchema = new Schema({
     },
 
     answer: { //Yes i want to be friends = true, no i dont want to be friend false.
-        type: boolean,
+        type: Boolean,
         required: true,
         unique: false,
         index: false,
@@ -27,7 +34,7 @@ var friendRequestSchema = new Schema({
     },
 
     answered: { //Have the requested user answered yes or no, or is it still unanswered
-        type: boolean,
+        type: Boolean,
         required: true,
         unique: false,
         index: false,
