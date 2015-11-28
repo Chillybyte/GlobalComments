@@ -1,7 +1,6 @@
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
-
 var friendSchema = new Schema({
 
     requester: { //ID of user who is requesting the friendship
@@ -19,6 +18,13 @@ var friendSchema = new Schema({
     },
 
     requesterrequestee: { //Qualifies as unique identified to avoid duplicates in the database
+        type: Schema.Types.ObjectID,
+        requried: true,
+        unique: true,
+        index: true
+    },
+
+    requesteerequester: { //Qualifies as unique identified to avoid duplicates in the database
         type: Schema.Types.ObjectID,
         requried: true,
         unique: true,
