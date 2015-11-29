@@ -1,13 +1,20 @@
 <div class="gc-comments-list">
-    <div class="left" ng-if="show_left_pane">
-        <ul>
-            <li>left</li>
-            <li>left</li>
-            <li>left</li>
-            <li>left</li>
-        </ul>
+    <div ng-if="show_left_pane" class="gc-comments-list-left">
+        <div ng-repeat="comment in comments">
+            {{comments.comments}}
+        </div>
+    <br><br>
+    <form ng-submit="new_comment()" class="gc-comments-signed form-group">
+        <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="comment.message"></textarea>
+        <button class="btn btn-success gc-comments-signed-send">S
+        e
+        n
+        d</button>
+    </form>
     </div>
-    <div class="right">
-        en right pane
+    <div class="gc-comments-list-right">
+        <div ng-repeat="data in data track by $index" ng-init="sectionIndex = $index"class="space_butt">
+            <button class="btn btn-default comment_button" ng-click="set_left_pane(true, sectionIndex)">{{ data.reference }}</button>
+        </div>
     </div>
 </div>
