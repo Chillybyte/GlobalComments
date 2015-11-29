@@ -11,7 +11,7 @@ APP.service('_user', ['_http', function(_http) {
     this.friend_request_in = []; //Friend requests made from other users to this user
     this.friends = []; //Actual friends
 
-    this.comments = []; //All comments that this user is involved with
+    this.thread_comments = []; //All comments that this user is involved with
 
     this.search_friends_result = []; //Users found for a current search
 
@@ -28,8 +28,7 @@ APP.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_out, _this.friend_request_out);
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
-                angular.copy(result.data.friend_requests, _this.friends);
-                angular.copy(result.data.thread, _this.comments);
+                angular.copy(result.data.thread_comments, _this.thread_comments);
             });
     };
 
@@ -55,9 +54,7 @@ APP.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_out, _this.friend_request_out);
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
-                console.log(result.data.friends);
-                angular.copy(result.data.friend_requests, _this.friends);
-                angular.copy(result.data.thread, _this.comments);
+                angular.copy(result.data.thread_comments, _this.thread_comments);
             });
     };
 
@@ -80,9 +77,6 @@ APP.service('_user', ['_http', function(_http) {
                             _this.users[result.data.users[i].id] = result.data.users[i]
                         }
                     }
-                    console.log("|||||||||||||||");
-                    console.log(result.data.users);
-                    console.log("|||||||||||||||");
                     angular.copy(result.data.users, _this.search_friends_result);
                 }
                 console.log(_this.users);
@@ -97,15 +91,9 @@ APP.service('_user', ['_http', function(_http) {
         _http.post("/api/closed/friends/" + user_id)
             .then(function(result) {
                 if (result.data.friend_request_out) {
-                    console.log(">>>friend_request_out");
-                    console.log(result.data.friend_request_out);
-                    console.log("<<<friend_request_out");
                     _this.friend_request_out.push(result.data.friend_request_out);
                 }
                 if (result.data.friend) {
-                    console.log(">>>friend");
-                    console.log(result.data.friend);
-                    console.log("<<<friend");
                     var i, l = 0;
                     l = _this.friend_request_out.length;
                     for (i = 0; i < l; i++) {
