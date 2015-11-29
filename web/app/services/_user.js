@@ -28,6 +28,8 @@ APP.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_out, _this.friend_request_out);
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
+                angular.copy(result.data.friend_requests, _this.friends);
+                angular.copy(result.data.thread, _this.comments);
             });
     };
 
@@ -54,6 +56,8 @@ APP.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
                 console.log(result.data.friends);
+                angular.copy(result.data.friend_requests, _this.friends);
+                angular.copy(result.data.thread, _this.comments);
             });
     };
 
@@ -169,6 +173,7 @@ APP.service('_user', ['_http', function(_http) {
                 silent: true
             })
             .then(function(result) {
+                console.log(result.data);
                 angular.copy(result.data.user, user);
             });
         return user;

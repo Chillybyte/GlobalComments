@@ -1,18 +1,23 @@
 .gc-comments-list {
     .flex();
-    .left {
-        position: relative;
-        width: 200px;
-        .fa-times {
-            position: absolute;
-            top: 0px;
-            right: 0px;
-            cursor: pointer;
-            font-size: 20px;
-            padding: 10px;
-        }
+    &-left {
+        .flex();
+        .flex-direction(column);
+        width: 290px;
     }
-    .right {
+    &-right {
+        float: right;
         width: 200px;
     }
 }
+
+.comment_button{
+    width: 95%;
+    background-color: #F2F2F2;
+}
+
+.space_butt{
+    padding-top: 2%;
+}
+
+
