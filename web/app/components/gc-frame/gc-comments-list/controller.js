@@ -16,24 +16,27 @@ APP.directive("gcCommentsList", [function() {
                 return test;
             };
 
-            $scope.current_thread = undefined; //current thread selected in list of threads
-            $scope.new_message = ""; //Message to send to selected thread (current thread)
+
+            $scope.current = {
+                thread: undefined,
+                message: undefined
+            };
             /**
              * Comments in a thread by sending reference and the message that needs to be
              * attached to the reference
              * 
              * @reference: String <URL>
-             * @new_message: String
+             * @message: String
              */
-            $scope.new_comment = function(reference, new_message) {
-                _comments.new_comment(reference, new_message)
+            $scope.new_comment = function(reference, message) {
+                _comments.new_comment(reference, message)
                     .then(function() {
-                        $scope.new_message = "";
+                        $scope.current.message = "";
                     });
             };
 
             $scope.set_left_pane = function(value, thread) {
-                $scope.current_thread = thread;
+                $scope.current.thread = thread;
                 $scope.show_left_pane = value;
             };
 

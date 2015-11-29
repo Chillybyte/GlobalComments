@@ -1,11 +1,11 @@
 <div class="gc-comments-list">
     <div ng-if="show_left_pane" class="gc-comments-list-left">
-        <div ng-repeat="message in get_comments(current_thread.uri).messages track by message._id">
+        <div ng-repeat="message in get_comments(current.thread.uri).messages track by message._id">
             {{message.content}}
         </div>
         <br><br>
-        <form ng-submit="new_comment(current_thread.uri, new_message)" class="gc-comments-signed form-group">
-            <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="new_message"></textarea>
+        <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
+            <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="current.message"></textarea>
             <button class="btn btn-success gc-comments-signed-send">S
             e
             n
