@@ -1,7 +1,7 @@
 var SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT);
 module.exports = function(_request, _response) {
     var reference = new Buffer(_request.params.reference).toString("base64");
-
+    console.log(_request.params.reference);
     var get_thread = function() {
         SCHEMA_THREAD_COMMENT.findOne({
                 reference: reference
@@ -10,6 +10,7 @@ module.exports = function(_request, _response) {
                 if (!result) {
                     var thread = new SCHEMA_THREAD_COMMENT({
                         reference: reference,
+                        uri: _request.params.reference,
                         users: [],
                         messages: []
                     });

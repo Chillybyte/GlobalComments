@@ -21,12 +21,12 @@ module.exports = function(_request, _response, _next) {
 
         SCHEMA_THREAD_COMMENT.find({
                 users: user.id
-            }, "reference is_thread_comment")
+            }, "uri reference is_thread_comment")
             .then(function(result) {
                 //console.log(result);
                 _response
                     ._R
-                    ._DATA("comments", result);
+                    ._DATA("thread_comments", result);
 
                 //Finding friend requests made by user
                 return SCHEMA_FRIEND.find({
@@ -112,7 +112,7 @@ module.exports = function(_request, _response, _next) {
                 _response
                     ._R
                     ._ERROR("Failed to collect comments and/or friend list")
-                    ._DATA("comments", []);
+                    ._DATA("thread_comments", []);
                 console.trace(err);
             })
             .finally(function() {

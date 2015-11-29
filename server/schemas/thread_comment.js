@@ -22,6 +22,13 @@ var threadCommentSchema = new Schema({
             index: true
         },
 
+        uri: { //Actual reference that is not encoded
+            type: String,
+            required: true,
+            unique: false,
+            index: false
+        },
+
         users: [{ //Persons who are involved in this thread
             type: Schema.Types.ObjectId,
             required: true,
