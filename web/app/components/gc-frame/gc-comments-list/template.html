@@ -1,20 +1,22 @@
 <div class="gc-comments-list">
     <div ng-if="show_left_pane" class="gc-comments-list-left">
-        <div ng-repeat="comment in comments">
-            {{comments.comments}}
+        <div ng-repeat="message in get_comments(current_thread.uri).messages track by message._id">
+            {{message.content}}
         </div>
-    <br><br>
-    <form ng-submit="new_comment()" class="gc-comments-signed form-group">
-        <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="comment.message"></textarea>
-        <button class="btn btn-success gc-comments-signed-send">S
-        e
-        n
-        d</button>
-    </form>
+        <br><br>
+        <form ng-submit="new_comment(current_thread.uri, new_message)" class="gc-comments-signed form-group">
+            <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="new_message"></textarea>
+            <button class="btn btn-success gc-comments-signed-send">S
+            e
+            n
+            d</button>
+        </form>
     </div>
     <div class="gc-comments-list-right">
-        <div ng-repeat="data in data track by $index" ng-init="sectionIndex = $index"class="space_butt">
-            <button class="btn btn-default comment_button" ng-click="set_left_pane(true, sectionIndex)">{{ data.reference }}</button>
+        <div ng-click="set_left_pane(true, thread)" ng-repeat="thread in thread_comments track by thread._id" class="space_butt">
+            <div ng-repeat="message in get_comments(thread.uri).messages track by message._id">
+                {{message.content}}
+            </div>
         </div>
     </div>
 </div>

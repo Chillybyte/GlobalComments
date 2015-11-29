@@ -6,31 +6,34 @@ APP.directive("gcCommentsList", [function() {
         show_left_pane: "=",
         templateUrl: "components/gc-frame/gc-comments-list/template.html",
         controller: ["$scope", "_user", "_comments", function($scope, _user, _comments) {
+            $scope.thread_comments = _user.thread_comments;
 
-            //$scope.commentThreadDetails = true;
-            //$scope.show_left_pane = false;
+            $scope.get_comments = function(reference) {
+                var test = _comments.comments(reference)
+                console.log("|||||||||||||||||");
+                console.log(test);
+                console.log("|||||||||||||||||");
+                return test;
+            };
 
+            $scope.current_thread = undefined; //current thread selected in list of threads
+            $scope.new_message = ""; //Message to send to selected thread (current thread)
+            /**
+             * Comments in a thread by sending reference and the message that needs to be
+             * attached to the reference
+             * 
+             * @reference: String <URL>
+             * @new_message: String
+             */
+            $scope.new_comment = function(reference, new_message) {
+                _comments.new_comment(reference, new_message)
+                    .then(function() {
+                        $scope.new_message = "";
+                    });
+            };
 
-            // $scope.comment = _user.comments;
-            // var user_tests = ["en kommentartråd", "en anden kommentartråd", "en mere kommentartråd"];
-            var user_tests = [{
-                    reference: "en kommentartråd",
-                    comments: "Indhold fra den første kommentar spor"
-                }, {
-                    reference: "en anden kommentartråd",
-                    comments: "Indhold fra den anden kommentar spor"
-                }, {
-                    reference: "en mere kommentartråd",
-                    comments: "Indhold fra et kommentar spor mere"
-                }
-
-            ];
-
-            $scope.data = user_tests;
-            $scope.set_left_pane = function(value, sectionIndex) {
-                console.log(sectionIndex);
-                console.log($scope.show_left_pane);
-                $scope.comments = user_tests[sectionIndex];
+            $scope.set_left_pane = function(value, thread) {
+                $scope.current_thread = thread;
                 $scope.show_left_pane = value;
             };
 
