@@ -3,6 +3,7 @@ var express = require("express"),
 
 router.route("/:query")
     .get(require("./GET.js"))
-    .post(require("./POST.js"));
+    .post(require("./POST.js"))
+    .delete(require("./DELETE.js"));
 
 module.exports = router;

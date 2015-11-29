@@ -24,9 +24,9 @@
             overflow-x: hidden;
             overflow-y: auto;
             &-user {
+                .flex();
                 padding-right: 5px;
                 padding-left: 5px;
-                .flex();
                 border-bottom: solid 1px gray;
                 margin-bottom: 10px;
                 padding-bottom: 5px;
@@ -58,8 +58,145 @@
                 }
             }
         }
+        &-friend-request-out, &-friend-request-in, &-friend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            .profile-picture {}
+            .row {
+                .col-sm {
+                    &-4, &-8 {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
     }
     &-right {
+        .flex();
+        .flex-direction(column);
         width: 250px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        &-search {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            display: table;
+            width: 100%;
+        }
+        .friend-request-out {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        .friend-request-in {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        .friends {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
     }
 }

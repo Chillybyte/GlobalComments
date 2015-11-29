@@ -13,6 +13,8 @@ module.exports = function(_request, _response) {
             }]
         }, "first_name last_name username email updated_at created_at")
         .then(function(result) {
+            if (!result)
+                result = [];
             _response
                 ._R
                 ._DATA("users", result)
@@ -23,6 +25,7 @@ module.exports = function(_request, _response) {
             _response
                 ._R
                 ._ERROR("Unknown error")
+                ._DATA("users", [])
                 ._SEND();
         });
 };

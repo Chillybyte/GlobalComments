@@ -1,34 +1,118 @@
 <div class="gc-friends">
     <div class="gc-friends-left" ng-if="show_left_pane">
-        <div class="search-form form-group">
-            <input autocomplete="off" placeholder="Type to search" ng-keyup="find_friends(username_search)" type="text" class="form-control search-input" ng-model="username_search" id="gc-friends-search-username">
-            <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
-        </div>
-        <div class="friends-found">
-            <div class="friends-found-user" ng-repeat="user in search_friends_result track by user.id">
-                <img class="friends-found-user-picture" src="public/DansePingvin.gif">
-                <div class="friends-found-user-collection">
-                    <div class="friends-found-user-collection-username">{{user.username}}</div>
-                    <div class="friends-found-user-collection-name">{{user.first_name}} {{user.lastname}}</div>
-                    <div class="friends-found-user-collection-email">{{user.email}}</div>
-                </div>
-                <button class="friends-found-user-add btn btn-primary" ng-click="add_friend(user.id)"><i class="fa fa-user-plus"></i></button>
+        <div ng-if="left_state === 'search_friends'">
+            <div class="search-form form-group">
+                <input autocomplete="off" placeholder="Type to search" ng-keyup="find_friends(username_search)" type="text" class="form-control search-input" ng-model="username_search" id="gc-friends-search-username">
+                <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
             </div>
+            <div class="friends-found">
+                <div class="friends-found-user" ng-repeat="user in search_friends_result track by user.id">
+                    <img class="friends-found-user-picture" src="public/DansePingvin.gif">
+                    <div class="friends-found-user-collection">
+                        <div class="friends-found-user-collection-username">{{user.username}}</div>
+                        <div class="friends-found-user-collection-name">{{user.first_name}} {{user.lastname}}</div>
+                        <div class="friends-found-user-collection-email">{{user.email}}</div>
+                    </div>
+                    <button class="friends-found-user-add btn btn-primary" ng-click="add_friend(user.id)"><i class="fa fa-user-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="gc-friends-left-friend-request-out" ng-if="left_state === 'friend_request_out'">
+            <img class="profile-picture" src="public/DansePingvin.gif">
+            <div class="row">
+                <div class="col-sm-4">Username</div>
+                <div class="col-sm-8">{{get_friend(selected.requester.friend).username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">E-mail</div>
+                <div class="col-sm-8">{{get_friend(selected.requester.friend).email}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">Name</div>
+                <div class="col-sm-8">{{get_friend(selected.requester.friend).first_name}} {{get_friend(selected.requester.friend).last_name}}</div>
+            </div>
+            <button class="btn btn-warning btn-block" ng-click="remove_friend_request(selected._id)">Remove friend request</button>
+        </div>
+        <div class="gc-friends-left-friend-request-in" ng-if="left_state === 'friend_request_in'">
+            <img class="profile-picture" src="public/DansePingvin.gif">
+            <div class="row">
+                <div class="col-sm-4">Username</div>
+                <div class="col-sm-8">{{get_friend(selected.requestee.friend).username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">E-mail</div>
+                <div class="col-sm-8">{{get_friend(selected.requestee.friend).email}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">Name</div>
+                <div class="col-sm-8">{{get_friend(selected.requestee.friend).first_name}} {{get_friend(selected.requestee.friend).last_name}}</div>
+            </div>
+            <button class="btn btn-success btn-block" ng-click="add_friend(selected.requestee.friend)">Accept friend request</button>
+            <button class="btn btn-warning btn-block" ng-click="remove_friend_request(selected._id)">Reject friend request</button>
+        </div>
+        <div class="gc-friends-left-friend" ng-if="left_state === 'friend'">
+            <img class="profile-picture" src="public/DansePingvin.gif">
+            <div class="row">
+                <div class="col-sm-4">Username</div>
+                <div class="col-sm-8">{{get_friend(selected._id).username}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">E-mail</div>
+                <div class="col-sm-8">{{get_friend(selected._id).email}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">Name</div>
+                <div class="col-sm-8">{{get_friend(selected._id).first_name}} {{get_friend(selected._id).last_name}}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">Online</div>
+                <div class="col-sm-8">{{get_friend(selected._id).online ? "Yes" : "Not online"}}</div>
+            </div>
+            <button class="btn btn-warning btn-block" ng-click="remove_friend_request(selected.friend_request_id)">Remove friend</button>
         </div>
     </div>
     <div class="gc-friends-right">
-        <button class="btn btn-primary" ng-click="set_left_pane(true)">Find friends</button>
+        <div class="gc-friends-right-search">
+            <button class="btn btn-primary btn-block" ng-click="open_search_friends()">Find friends</button>
+        </div>
+        <!-- Friend requests made by user to others -->
+        <div class="friend-request-out">
+            <div class="friend-request-out-user" ng-repeat="friend_request in friend_request_out track by friend_request._id">
+                <img class="friend-request-out-user-picture" src="public/DansePingvin.gif">
+                <div class="friend-request-out-user-collection">
+                    <div class="friend-request-out-user-collection-username">{{get_friend(friend_request.requester.friend).username}}</div>
+                    <div class="friend-request-out-user-collection-online-status">
+                        <label>Pending friendship</label>
+                    </div>
+                </div>
+                <button class="friend-request-out-user-info btn btn-primary" ng-click="open_friend_request_out(friend_request)"><i class="fa fa-info"></i></button>
+            </div>
+        </div>
+        <!-- Friend requests made by others to this user -->
+        <div class="friend-request-in">
+            <div class="friend-request-in-user" ng-repeat="friend_request in friend_request_in track by friend_request._id">
+                <img class="friend-request-in-user-picture" src="public/DansePingvin.gif">
+                <div class="friend-request-in-user-collection">
+                    <div class="friend-request-in-user-collection-username">{{get_friend(friend_request.requestee.friend).username}}</div>
+                    <div class="friend-request-in-user-collection-online-status">
+                        <label>Friendship request</label>
+                    </div>
+                </div>
+                <button class="friend-request-in-user-info btn btn-primary" ng-click="open_friend_request_in(friend_request)"><i class="fa fa-info"></i></button>
+            </div>
+        </div>
+        <!-- Actual friends -->
         <div class="friends">
             <div class="friends-user" ng-repeat="friend in friends track by friend._id">
                 <img class="friends-user-picture" src="public/DansePingvin.gif">
                 <div class="friends-user-collection">
-                    <div class="friends-user-collection-username">{{get_friend(friend.id).username}}</div>
+                    <div class="friends-user-collection-username">{{get_friend(friend._id).username}}</div>
                     <div class="friends-user-collection-online-status">
-                        <label ng-if="get_friend(friend.id).online">Online</label>
-                        <label ng-if="!get_friend(friend.id).online">Offline</label>
+                        <label ng-if="get_friend(friend._id).online">Online</label>
+                        <label ng-if="!get_friend(friend._id).online">Offline</label>
                     </div>
-                    <button class="friends-user-remove btn btn-warning" ng-click="remove_friend(user.id)"><i class="fa fa-user-times"></i></button>
                 </div>
+                <button class="friends-user-info btn btn-primary" ng-click="open_friend(friend)"><i class="fa fa-info"></i></button>
             </div>
         </div>
     </div>

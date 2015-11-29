@@ -1,7 +1,6 @@
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
-    SCHEMA_FRIEND_LIST = require(process.env.APP_SCHEMA_FRIEND_LIST),
-    SCHEMA_FRIEND_REQUEST = require(process.env.APP_SCHEMA_FRIEND_REQUEST);
+    SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
 
 module.exports = function(_request, _response, _next) {
 
@@ -18,36 +17,96 @@ module.exports = function(_request, _response, _next) {
         _response
             ._R
             ._DATA("user", user)
-            ._SUCCESS("Welcome back " + user.username + "!")
+            ._SUCCESS("Welcome back " + user.username + "!");
+
         SCHEMA_THREAD_COMMENT.find({
                 users: user.id
             }, "reference is_thread_comment")
             .then(function(result) {
-                console.log(result);
+                //console.log(result);
                 _response
                     ._R
                     ._DATA("comments", result);
-                return SCHEMA_FRIEND_LIST.find({
-                    user: user.id
-                })
+
+                //Finding friend requests made by user
+                return SCHEMA_FRIEND.find({
+                    $and: [{
+                        "requester.user": user.id
+                    }, {
+                        "requester.accepted": false
+                    }, {
+                        "requestee.accepted": true
+                    }, {
+                        "requestee.ignore": false
+                    }]
+                }, "requester created_at updated_at");
             })
             .then(function(result) {
-                console.log(result);
+                //console.log(result);
                 _response
                     ._R
-                    ._DATA("friend_list", result);
-                return SCHEMA_FRIEND_REQUEST.find({
-                    $or: [{
-                        user: user.id
+                    ._DATA("friend_request_out", result);
+
+                //Finding friend request made for user
+                return SCHEMA_FRIEND.find({
+                    $and: [{
+                        "requestee.user": user.id
                     }, {
-                        user_requested: user.id
+                        "requestee.accepted": true
+                    }, {
+                        "requester.accepted": false
+                    }, {
+                        "requester.ignore": false
+                    }]
+                }, "requestee created_at updated_at");
+            })
+            .then(function(result) {
+                _response
+                    ._R
+                    ._DATA("friend_request_in", result);
+
+                //Finding friends for user
+                return SCHEMA_FRIEND.find({
+                    $and: [{
+                        $or: [{
+                            "requestee.user": user.id
+                        }, {
+                            "requester.user": user.id
+                        }]
+                    }, {
+                        "requestee.accepted": true
+                    }, {
+                        "requester.accepted": true
+                    }, {
+                        "requester.ignore": false
+                    }, {
+                        "requestee.ignore": false
                     }]
                 })
             })
             .then(function(result) {
+                var l = result.length;
+                var friends = [];
+                for (var i = 0; i < l; i++) {
+                    if (result[i].requester.user.toString() === _request.user._id) {
+                        friends.push({
+                            friend_request_id: result[i]._id,
+                            _id: result[i].requester.user,
+                            created_at: result[i].created_at,
+                            updated_at: result[i].updated_at
+                        });
+                    } else {
+                        friends.push({
+                            friend_request_id: result[i]._id,
+                            _id: result[i].requestee.user,
+                            created_at: result[i].created_at,
+                            updated_at: result[i].updated_at
+                        });
+                    }
+                }
                 _response
                     ._R
-                    ._DATA("friend_requests", result)
+                    ._DATA("friends", friends);
             })
             .catch(function(err) {
                 _response
