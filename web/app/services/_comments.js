@@ -5,9 +5,11 @@ APP.service("_comments", ["_http", function(_http) {
 
     this.comments = function(reference) {
         var _this = this;
-        if (!_this.threads[reference]) {
+        if (_this.threads[reference])
+            return _this.threads[reference];
+        else
             _this.threads[reference] = [];
-        }
+
         _http.get("/api/open/threads/" + reference)
             .then(function(result) {
                 angular.copy(result.data.thread, _this.threads[reference]);
