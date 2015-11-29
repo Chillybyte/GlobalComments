@@ -56,4 +56,4 @@ var threadCommentSchema = new Schema({
     });
 
 
-module.exports = mongoose.model("threadComment", threadCommentSchema);
+module.exports = mongoose.model("thread_comment", threadCommentSchema);
