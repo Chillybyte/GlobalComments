@@ -26,6 +26,7 @@ APP.service('_user', ['_http', function(_http) {
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
                 angular.copy(result.data.friend_requests, _this.friends);
+                angular.copy(result.data.thread, _this.comments);
             });
     };
 
@@ -49,6 +50,7 @@ APP.service('_user', ['_http', function(_http) {
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
                 angular.copy(result.data.friend_requests, _this.friends);
+                angular.copy(result.data.thread, _this.comments);
             });
     };
 
