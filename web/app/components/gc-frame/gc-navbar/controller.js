@@ -8,14 +8,55 @@ APP.directive("gcNavbar", [function() {
         templateUrl: "components/gc-frame/gc-navbar/template.html",
         controller: ["$scope", function($scope) {
             console.log($scope.nav_dialogs);
+            $scope.slide_open = true;
+
+
             $scope.toggle_navbar = function(dialog) {
-                $(".nav-container-options")
+                $scope.slide_open = !$scope.slide_open;
+                if ($scope.slide_open)
+                    open_navbar();
+                else
+                    close_navbar();
+            };
+
+            //Private function
+            var open_navbar = function() {
+                var speed = 250;
+
+                for (var key in $scope.nav_dialogs) {
+                    if ($scope.nav_dialogs.hasOwnProperty(key))
+                        $scope.nav_dialogs[key] = false;
+                }
+                $(".gc-frame")
                     .stop()
-                    .slideToggle("slide");
-                $('#comp-container')
+                    .animate({
+                        height: 350
+                    }, speed);
+                $(".gc-frame .nav-container-options")
                     .stop()
-                    .toggle("slide", function() {
-                        //Shutting down all dialogs in gc-frame
+                    .animate({
+                        height: 300
+                    }, speed, function() {});
+            };
+
+            //Private function
+            var close_navbar = function() {
+                var speed = 250;
+                $(".gc-frame")
+                    .stop()
+                    .animate({
+                        height: 50
+                    }, speed);
+                $(".gc-frame .nav-container-options")
+                    .stop()
+                    .animate({
+                        height: 0
+                    }, speed);
+                $("#comp-container")
+                    .stop()
+                    .animate({
+                        width: 0
+                    }, speed, function() {
                         for (var key in $scope.nav_dialogs) {
                             if ($scope.nav_dialogs.hasOwnProperty(key))
                                 $scope.nav_dialogs[key] = false;
@@ -25,16 +66,19 @@ APP.directive("gcNavbar", [function() {
 
 
             $scope.the_toggler = function(dialog) {
-                console.log(dialog);
-                console.log($scope.nav_dialogs);
                 var state = !$scope.nav_dialogs[dialog];
-
+                var all_closed = true;
                 for (var key in $scope.nav_dialogs) {
-                    if ($scope.nav_dialogs.hasOwnProperty(key))
+                    if ($scope.nav_dialogs.hasOwnProperty(key)) {
+                        if ($scope.nav_dialogs[key])
+                            all_closed = false;
                         $scope.nav_dialogs[key] = false;
+                    }
                 }
-
+                if (all_closed)
+                    state = true;
                 $scope.nav_dialogs[dialog] = state;
+                console.log(dialog + ": " + state);
             }
 
         }]
