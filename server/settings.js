@@ -5,8 +5,7 @@ process.env.APP_CLIENT_FOLDER                   = path.join(__dirname, "../web/d
 process.env.APP_SCHEMA_USER                     = path.join(__dirname, "./schemas/user.js");
 process.env.APP_SCHEMA_THREAD_COMMENT 			= path.join(__dirname, "./schemas/thread_comment.js");
 process.env.APP_SCHEMA_MESSAGE 					= path.join(__dirname, "./schemas/message.js");
-process.env.APP_SCHEMA_FRIEND_LIST 				= path.join(__dirname, "./schemas/friend_list.js");
-process.env.APP_SCHEMA_FRIEND_REQUEST 			= path.join(__dirname, "./schemas/friend_request.js");
+process.env.APP_SCHEMA_FRIEND 					= path.join(__dirname, "./schemas/friend.js");
 process.env.APP_SCHEMA_THREADS_AND_CHAT 		= path.join(__dirname, "./schemas/thread_chat.js");
 
 

@@ -1,6 +1,8 @@
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 module.exports = function(_request, _response) {
-    SCHEMA_USER.findOne(_request.params.user_id)
+    SCHEMA_USER.findOne({
+            _id: _request.params.user_id
+        })
         .then(function(user) {
             if (user) {
                 _response

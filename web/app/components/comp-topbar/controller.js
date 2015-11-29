@@ -18,8 +18,8 @@ APP.directive('compTopbar', [function() {
             };
 
             $scope.credentials = {
-                email: "",
-                password: "",
+                email: "hansi.boesgaard@gmail.com",
+                password: "123123",
                 remember_me: true
             };
 
