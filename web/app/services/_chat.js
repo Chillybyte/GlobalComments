@@ -1,16 +1,16 @@
 var APP = angular.module("APP");
-APP.service("_comments", ["_http", function(_http) {
+APP.service("_chat", ["_http", function(_http) {
 
     this.threads = {};
 
-    this.get_comments = function(reference) {
+    this.comments = function(reference) {
         var _this = this;
         if (_this.threads[reference])
             return _this.threads[reference];
         else
             _this.threads[reference] = [];
 
-        _http.get("/api/open/thread_comment/" + reference)
+        _http.get("/api/open/thread_chat/" + reference)
             .then(function(result) {
                 angular.copy(result.data.thread, _this.threads[reference]);
             });
@@ -19,7 +19,7 @@ APP.service("_comments", ["_http", function(_http) {
 
     this.new_comment = function(reference, message) {
         var _this = this;
-        return _http.post("/api/closed/thread_comment/" + reference, {
+        return _http.post("/api/closed/thread_chat/" + reference, {
                 message: message
             })
             .then(function(result) {

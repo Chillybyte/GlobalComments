@@ -18,7 +18,7 @@ APP.directive("gcComments", [function() {
                 message: ""
             };
 
-            $scope.comments = _comments.comments($scope.reference);
+            $scope.comments = _comments.get_comments($scope.reference);
 
 
             $scope.new_comment = function() {
