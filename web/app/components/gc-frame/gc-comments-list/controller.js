@@ -9,13 +9,11 @@ APP.directive("gcCommentsList", [function() {
             $scope.thread_comments = _user.thread_comments;
 
             $scope.get_comments = function(reference) {
-                var test = _comments.comments(reference)
-                console.log("|||||||||||||||||");
-                console.log(test);
-                console.log("|||||||||||||||||");
-                return test;
+                var ruff = _comments.comments(reference)
+                return ruff;
             };
 
+            $scope.refs = _user.thread_comments;
 
             $scope.current = {
                 thread: undefined,
