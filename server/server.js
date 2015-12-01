@@ -6,7 +6,8 @@ var express = require('express'),
     passport = require('passport'),
     mongoose = require('mongoose'),
     http = require('http'),
-    socket = require('./socket.js');
+    socket = require('./socket.js'),
+    mongoStore = require('connect-mongo')(session);
 
 
 
@@ -44,13 +45,24 @@ db.once("open", function() {
         cookie: {
             secure: false,
             expires: false,
-        }
+        },
+        store: new mongoStore({
+            db: db,
+            url: process.env.APP_MONGOOSE_DRIVER +
+                //    process.env.APP_MONGOOSE_USER + ":" +
+                //    process.env.APP_MONGOOSE_PASSWORD + "@" +
+                process.env.APP_MONGOOSE_HOST + ":" +
+                process.env.APP_MONGOOSE_PORT +
+                process.env.APP_MONGOOSE_DB,
+            ttl: 14 * 24 * 60 * 60
+        })
     }));
 
     app.use(passport.initialize());
     app.use(passport.session());
 
     app.use(require('./router.js'));
+
     var server = http.createServer(app);
     socket(server);
 
