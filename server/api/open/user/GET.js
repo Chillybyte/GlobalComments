@@ -88,17 +88,17 @@ module.exports = function(_request, _response, _next) {
                 var l = result.length;
                 var friends = [];
                 for (var i = 0; i < l; i++) {
-                    if (result[i].requester.user.toString() === _request.user._id) {
+                    if (result[i].requester.user.toString() === _request.user._id.toString()) {
                         friends.push({
                             friend_request_id: result[i]._id,
-                            _id: result[i].requester.user,
+                            _id: result[i].requestee.user,
                             created_at: result[i].created_at,
                             updated_at: result[i].updated_at
                         });
                     } else {
                         friends.push({
                             friend_request_id: result[i]._id,
-                            _id: result[i].requestee.user,
+                            _id: result[i].requester.user,
                             created_at: result[i].created_at,
                             updated_at: result[i].updated_at
                         });
