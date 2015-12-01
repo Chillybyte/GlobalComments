@@ -10,11 +10,15 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(session);
 
 
-
 require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
 require('./settings.js');
 require('./auth/index.js');
 require('./socket.js');
+
+var mongo_url = process.env.APP_MONGOOSE_DRIVER +
+    process.env.APP_MONGOOSE_HOST + ":" +
+    process.env.APP_MONGOOSE_PORT +
+    process.env.APP_MONGOOSE_DB;
 
 /**
  *  Supplement to missing promises in mongoose 4.2.6
@@ -23,15 +27,14 @@ mongoose.Promise = require('bluebird');
 require('es6-promise').polyfill();
 
 var mongoose = require("mongoose");
-mongoose.connect(
-    process.env.APP_MONGOOSE_DRIVER +
-    //    process.env.APP_MONGOOSE_USER + ":" +
-    //    process.env.APP_MONGOOSE_PASSWORD + "@" +
-    process.env.APP_MONGOOSE_HOST + ":" +
-    process.env.APP_MONGOOSE_PORT +
-    process.env.APP_MONGOOSE_DB);
+mongoose.connect(mongo_url);
 var db = mongoose.connection;
 db.once("open", function() {
+
+    var sessionStore = new mongoStore({
+        url: mongo_url,
+        ttl: 14 * 24 * 60 * 60
+    });
 
     app.use(cookieParser('secret'));
     app.use(bodyParser.json());
@@ -41,21 +44,13 @@ db.once("open", function() {
     app.use(session({
         resave: false,
         saveUninitialized: false,
+        key: 'express.sid',
         secret: process.env.APP_SERVER_SECRET,
         cookie: {
             secure: false,
             expires: false,
         },
-        store: new mongoStore({
-            db: db,
-            url: process.env.APP_MONGOOSE_DRIVER +
-                //    process.env.APP_MONGOOSE_USER + ":" +
-                //    process.env.APP_MONGOOSE_PASSWORD + "@" +
-                process.env.APP_MONGOOSE_HOST + ":" +
-                process.env.APP_MONGOOSE_PORT +
-                process.env.APP_MONGOOSE_DB,
-            ttl: 14 * 24 * 60 * 60
-        })
+        store: sessionStore
     }));
 
     app.use(passport.initialize());
@@ -64,7 +59,8 @@ db.once("open", function() {
     app.use(require('./router.js'));
 
     var server = http.createServer(app);
-    socket(server);
+    socket(server, sessionStore, cookieParser);
+
 
     server.listen(3000, function() {
         var host = server.address().address;
