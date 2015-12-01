@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.directive("gcFriends", [function() {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.directive("gcFriends", [function() {
     return {
         replace: true,
         restrict: "E",

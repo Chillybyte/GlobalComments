@@ -1,5 +1,5 @@
-var APP = angular.module('APP');
-APP.service('_user', ['_http', function(_http) {
+var GLOBAL_COMMENTS = angular.module('GLOBAL_COMMENTS');
+GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
     var current_search = 0; //Keeps track of what search is currently active to prevent callbacks from overlapping each other
 
     this.user = {

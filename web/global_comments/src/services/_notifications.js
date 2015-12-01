@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.service("_notifications", [function() {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.service("_notifications", [function() {
     var _id_count = 0;
 
     var add_notification = function(message, type, id) {

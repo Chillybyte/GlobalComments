@@ -1,0 +1,1 @@
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS", ["gc-templates"]);

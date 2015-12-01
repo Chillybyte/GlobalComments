@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
 
     /**
      * @url     - Path to backend API

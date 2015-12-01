@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.directive("gcNavbar", [function() {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.directive("gcNavbar", [function() {
     return {
         replace: true,
         restrict: "E",

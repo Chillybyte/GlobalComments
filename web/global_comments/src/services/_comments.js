@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.service("_comments", ["_http", function(_http) {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.service("_comments", ["_http", function(_http) {
 
     this.threads = {};
 

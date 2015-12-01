@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.directive("gcComments", [function() {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.directive("gcComments", [function() {
     return {
         replace: true,
         scope: {
