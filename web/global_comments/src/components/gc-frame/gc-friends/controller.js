@@ -5,7 +5,8 @@ GLOBAL_COMMENTS.directive("gcFriends", [function() {
         restrict: "E",
         show_left_pane: "=",
         templateUrl: "components/gc-frame/gc-friends/template.html",
-        controller: ["$scope", "_user", function($scope, _user) {
+        controller: ["$scope", "_user", "_chat", function($scope, _user, _chat) {
+            $scope.user = _user.user;
             $scope.search_friends_result = _user.search_friends_result;
             $scope.friend_request_out = _user.friend_request_out;
             $scope.friend_request_in = _user.friend_request_in;
@@ -13,6 +14,11 @@ GLOBAL_COMMENTS.directive("gcFriends", [function() {
             $scope.friends = _user.friends;
 
             $scope.selected = undefined;
+
+            $scope.person_chat = {
+                friend: undefined,
+                message: ""
+            };
 
             $scope.open_friend_request_in = function(requestee) {
                 $scope.selected = requestee;
@@ -59,6 +65,24 @@ GLOBAL_COMMENTS.directive("gcFriends", [function() {
             };
             $scope.get_friend = function(user_id) {
                 return _user.get_friend(user_id);
+            };
+
+            /**
+             * Select a friend to chat with
+             */
+            $scope.select_friend = function(user_id) {
+                $scope.person_chat.friend = user_id;
+                $scope.set_left_pane(true, "chat_friend")
+            };
+
+            $scope.get_messages = function(user_ids) {
+                return _chat.get_messages(user_ids);
+            };
+            $scope.new_message = function(user_ids, message) {
+                _chat.new_message(user_ids, message)
+                    .then(function() {
+                        $scope.person_chat.message = "";
+                    });
             };
         }]
     };

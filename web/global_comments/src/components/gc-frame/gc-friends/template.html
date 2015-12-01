@@ -70,6 +70,47 @@
             </div>
             <button class="btn btn-warning btn-block" ng-click="remove_friend_request(selected.friend_request_id)">Remove friend</button>
         </div>
+        <div class="gc-friends-left-chat" ng-if="left_state === 'chat_friend'">
+            <div class="gc-friends-left-chat-messages">
+                <div class="gc-friends-left-chat-messages-info" ng-if="!get_messages([person_chat.friend]).messages">
+                    Loading messages...
+                </div>
+                <div class="gc-friends-left-chat-messages-info" ng-if="get_messages([person_chat.friend]).messages.length === 0">
+                    Ingen beskeder
+                </div>
+                <div class="gc-friends-left-chat-messages-message clearfix" ng-repeat="message in get_messages([person_chat.friend]).messages track by message._id">
+                    <div class="gc-friends-left-chat-messages-message-inner out" ng-if="message.user === user.id">
+                        <div class="gc-friends-left-chat-messages-message-inner-user">
+                            {{user.username}}
+                        </div>
+                        <div class="gc-friends-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                        <div class="gc-friends-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="gc-friends-left-chat-messages-message-inner in" ng-if="message.user != user.id">
+                        <div class="gc-friends-left-chat-messages-message-inner-user">
+                            {{get_friend(message.user).username}}
+                        </div>
+                        <div class="gc-friends-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                        <div class="gc-friends-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form ng-submit="new_message([person_chat.friend], person_chat.message)" class="form-group gc-friends-left-chat-newmessage" ng-if="get_messages([person_chat.friend]).messages">
+                <textarea class="form-control gc-friends-left-chat-newmessage-text" rows="3" placeholder="Write your message here" ng-model="person_chat.message"></textarea>
+                <button class="btn btn-success gc-friends-left-chat-newmessage-button">S
+                e
+                n
+                d</button>
+            </form>
+        </div>
     </div>
     <div class="gc-friends-right">
         <div class="gc-friends-right-search">
@@ -103,9 +144,9 @@
         </div>
         <!-- Actual friends -->
         <div class="friends">
-            <div class="friends-user" ng-repeat="friend in friends track by friend._id">
+            <div class="friends-user" ng-repeat="friend in friends track by friend._id" ng-style="friend._id === person_chat.friend && {'background-color':'#D0D0D0'}">
                 <img class="friends-user-picture" src="public/DansePingvin.gif">
-                <div class="friends-user-collection">
+                <div ng-click="select_friend(friend._id)" class="friends-user-collection">
                     <div class="friends-user-collection-username">{{get_friend(friend._id).username}}</div>
                     <div class="friends-user-collection-online-status">
                         <label ng-if="get_friend(friend._id).online">Online</label>

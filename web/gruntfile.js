@@ -2,6 +2,22 @@
     "use strict";
 }());
 module.exports = function(grunt) {
+var libraries = [
+    "node_modules/angular/angular.js",
+    "node_modules/angular-ui-router/release/angular-ui-router.js",
+    "node_modules/angular-resource/angular-resource.js",
+    "node_modules/socket.io-client/socket.io.js",
+    "node_modules/angular-socket-io/socket.js",
+    "global_comments/dist/min/gc-templates.min.js",
+    "node_modules/jquery/dist/jquery.js",
+    "node_modules/bootstrap/dist/js/bootstrap.js",
+    "node_modules/js-base64/base64.js",
+    "app/app.js",
+    "app/router.js",
+    "app/application/**/*.js",
+    "app/components/**/*.js",
+    "app/services/**/*.js"
+];
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
@@ -89,21 +105,7 @@ module.exports = function(grunt) {
                     compress: false,
                     beautify: true
                 },
-                src: [
-                    "node_modules/angular/angular.js",
-                    "node_modules/angular-ui-router/release/angular-ui-router.js",
-                    "node_modules/angular-resource/angular-resource.js",
-                    "node_modules/socket.io-client/socket.io.js",
-                    "node_modules/angular-socket-io/socket.js",
-                    "global_comments/dist/min/gc-templates.min.js",
-                    "node_modules/jquery/dist/jquery.js",
-                    "node_modules/bootstrap/dist/js/bootstrap.js",
-                    "app/app.js",
-                    "app/router.js",
-                    "app/application/**/*.js",
-                    "app/components/**/*.js",
-                    "app/services/**/*.js"
-                ],
+                src: libraries,
                 dest: "dist/js/main.min.js"
             },
             production: {
@@ -111,17 +113,7 @@ module.exports = function(grunt) {
                     mangle: true,
                     compress: true
                 },
-                src: [
-                    "node_modules/angular/angular.js",
-                    "node_modules/angular-ui-router/release/angular-ui-router.js",
-                    "node_modules/angular-resource/angular-resource.js",
-                    "global_comments/dist/min/gc-templates.min.js",
-                    "node_modules/socket.io-client/socket.io.js",
-                    "node_modules/angular-socket-io/socket.js",
-                    "node_modules/jquery/dist/jquery.js",
-                    "node_modules/bootstrap/dist/js/bootstrap.js",
-                    "app/**/*.js"
-                ],
+                src: libraries,
                 dest: "dist/js/main.min.js"
             },
             components: {

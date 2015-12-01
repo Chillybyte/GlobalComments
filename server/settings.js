@@ -6,7 +6,7 @@ process.env.APP_SCHEMA_USER                     = path.join(__dirname, "./schema
 process.env.APP_SCHEMA_THREAD_COMMENT 			= path.join(__dirname, "./schemas/thread_comment.js");
 process.env.APP_SCHEMA_MESSAGE 					= path.join(__dirname, "./schemas/message.js");
 process.env.APP_SCHEMA_FRIEND 					= path.join(__dirname, "./schemas/friend.js");
-process.env.APP_SCHEMA_THREADS_AND_CHAT 		= path.join(__dirname, "./schemas/thread_chat.js");
+process.env.APP_SCHEMA_THREAD_CHAT 				= path.join(__dirname, "./schemas/thread_chat.js");
 
 
 //LIB EXPRESS

@@ -1,7 +1,8 @@
 var express = require("express"),
     router = express.Router();
 
-router.route("/:reference")
-    .post(require("./POST.js"));
+router.route("/:thread_id")
+    .post(require("./POST.js"))
+    .get(require("./GET.js"));
 
 module.exports = router;
