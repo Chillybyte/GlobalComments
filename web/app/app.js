@@ -1,1 +1,1 @@
-var APP = angular.module("APP", ["ui.router", "ngResource"]);
+var APP = angular.module("APP", ["ui.router", "ngResource", "btford.socket-io"]);

@@ -7,8 +7,8 @@ APP.service("_comments", ["_http", function(_http) {
         var _this = this;
         if (_this.threads[reference])
             return _this.threads[reference];
-        else
-            _this.threads[reference] = [];
+        
+        _this.threads[reference] = [];
 
         _http.get("/api/open/threads/" + reference)
             .then(function(result) {

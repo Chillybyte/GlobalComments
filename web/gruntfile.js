@@ -33,6 +33,8 @@ module.exports = function(grunt) {
                     "node_modules/angular/angular.js",
                     "node_modules/angular-ui-router/release/angular-ui-router.js",
                     "node_modules/angular-resource/angular-resource.js",
+                    "node_modules/socket.io-client/socket.io.js",
+                    "node_modules/angular-socket-io/socket.js",
                     "node_modules/jquery/dist/jquery.js",
                     "node_modules/bootstrap/dist/js/bootstrap.js",
                     "app/**/*.js"
@@ -48,6 +50,8 @@ module.exports = function(grunt) {
                     "node_modules/angular/angular.js",
                     "node_modules/angular-ui-router/release/angular-ui-router.js",
                     "node_modules/angular-resource/angular-resource.js",
+                    "node_modules/socket.io-client/socket.io.js",
+                    "node_modules/angular-socket-io/socket.js",
                     "node_modules/jquery/dist/jquery.js",
                     "node_modules/bootstrap/dist/js/bootstrap.js",
                     "app/**/*.js"
