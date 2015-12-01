@@ -1,5 +1,6 @@
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
+    SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
 
 module.exports = function(_request, _response, _next) {
@@ -27,6 +28,16 @@ module.exports = function(_request, _response, _next) {
                 _response
                     ._R
                     ._DATA("thread_comments", result);
+
+                return SCHEMA_THREAD_CHAT.find({
+                    users: user.id
+                }, "updated_at created_at users thread_id is_thread_chat");
+            })
+            .then(function(result) {
+                console.log(result);
+                _response
+                    ._R
+                    ._DATA("thread_chats", result);
 
                 //Finding friend requests made by user
                 return SCHEMA_FRIEND.find({

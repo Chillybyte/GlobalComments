@@ -7,6 +7,55 @@
     }
     &-right {
         width: 250px;
+        text-align: left;
+        padding: 2px;
+        &-thread {
+            padding: 5px;
+            border-bottom: solid 1px gray;
+            margin-bottom: 10px;
+
+            &-users {
+                &-user {
+                    float: left;
+                    background-color: #96A8E8;
+                    margin: 2px;
+                    border-radius: 4px;
+                    padding: 2px 5px 2px 5px;
+                }
+            }
+            &-messages {
+                &-message {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    &-inner {
+                        width: 70%;
+                        &.in, &.out {
+                            border-radius: 5px;
+                            padding: 3px;
+                            word-break: break-all;
+                        }
+                        &.in {
+                            float: let;
+                            background-color: #5bc0de;
+                            left: 0px;
+                        }
+                        &.out {
+                            float: right;
+                            background-color: #337ab7;
+                            right: 0px;
+                        }
+                        &-user {}
+                        &-content {}
+                        &-date {
+                            text-align: right;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

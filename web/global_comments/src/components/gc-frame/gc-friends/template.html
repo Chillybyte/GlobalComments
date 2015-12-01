@@ -72,13 +72,13 @@
         </div>
         <div class="gc-friends-left-chat" ng-if="left_state === 'chat_friend'">
             <div class="gc-friends-left-chat-messages">
-                <div class="gc-friends-left-chat-messages-info" ng-if="!get_messages([person_chat.friend]).messages">
+                <div class="gc-friends-left-chat-messages-info" ng-if="!get_messages([user.id, person_chat.friend]).messages">
                     Loading messages...
                 </div>
-                <div class="gc-friends-left-chat-messages-info" ng-if="get_messages([person_chat.friend]).messages.length === 0">
+                <div class="gc-friends-left-chat-messages-info" ng-if="get_messages([user.id, person_chat.friend]).messages.length === 0">
                     Ingen beskeder
                 </div>
-                <div class="gc-friends-left-chat-messages-message clearfix" ng-repeat="message in get_messages([person_chat.friend]).messages track by message._id">
+                <div class="gc-friends-left-chat-messages-message clearfix" ng-repeat="message in get_messages([user.id, person_chat.friend]).messages track by message._id">
                     <div class="gc-friends-left-chat-messages-message-inner out" ng-if="message.user === user.id">
                         <div class="gc-friends-left-chat-messages-message-inner-user">
                             {{user.username}}
@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <form ng-submit="new_message([person_chat.friend], person_chat.message)" class="form-group gc-friends-left-chat-newmessage" ng-if="get_messages([person_chat.friend]).messages">
+            <form ng-submit="new_message([person_chat.friend], person_chat.message)" class="form-group gc-friends-left-chat-newmessage" ng-if="get_messages([user.id, person_chat.friend]).messages">
                 <textarea class="form-control gc-friends-left-chat-newmessage-text" rows="3" placeholder="Write your message here" ng-model="person_chat.message"></textarea>
                 <button class="btn btn-success gc-friends-left-chat-newmessage-button">S
                 e

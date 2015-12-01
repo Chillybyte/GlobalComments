@@ -11,7 +11,6 @@ GLOBAL_COMMENTS.service("_chat", ["_http", "_user", function(_http, _user) {
         var _this = this;
         if (!_user.user.id)
             return [];
-        user_ids.push(_user.user.id);
         user_ids = user_ids.sort();
         var thread_id = Base64.encode(user_ids.join(""));
 

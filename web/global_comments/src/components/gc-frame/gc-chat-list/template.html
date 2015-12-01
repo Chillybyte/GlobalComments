@@ -1,24 +1,43 @@
 <div class="gc-chat-list">
     <div ng-if="show_left_pane" class="gc-chat-list-left">
-    lol
+        lol
         <!-- <div ng-repeat="message in get_comments(current.thread.uri).messages track by message._id">
-            {{message.content}}
-        </div>
-        <br><br>
-        <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
-            <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="current.message"></textarea>
-            <button class="btn btn-success gc-comments-signed-send">S
-            e
-            n
-            d</button>
+                                                                                                                        {{message.content}}
+                                                                                </div>
+                                                                                <br><br>
+                                                                                <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
+                                                                                                                        <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="current.message"></textarea>
+                                                                                                                        <button class="btn btn-success gc-comments-signed-send">S
+                                                                                                                        e
+                                                                                                                        n
+                                                                                                                        d</button>
         </form> -->
     </div>
     <div class="gc-chat-list-right">
-    lol
-        <!-- <div ng-click="set_left_pane(true, thread)" ng-repeat="thread in thread_comments track by thread._id" class="space_butt">
-            <div ng-repeat="message in get_comments(thread.uri).messages track by message._id">
-                {{message.content}}
+        <div class="gc-chat-list-right-thread" ng-repeat="thread in thread_chats track by thread._id">
+            <div class="gc-chat-list-right-thread-users clearfix">
+                <div class="gc-chat-list-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                    {{get_friend(friend).username}}
+                </div>
             </div>
-        </div> -->
+            <div class="gc-chat-list-right-thread-messages">
+                <div class="gc-chat-list-right-thread-messages-message clearfix" ng-repeat="message in (get_messages(thread.users).messages | limitTo:5:get_messages(thread.users).messages.length -5) track by message._id">
+                    <div class="gc-chat-list-right-thread-messages-message-inner out" ng-if="message.user === user.id">
+                        <div class="gc-chat-list-right-thread-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                    </div>
+                    <div class="gc-chat-list-right-thread-messages-message-inner in" ng-if="message.user != user.id">
+                        <div class="gc-chat-list-right-thread-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gc-chat-list-right-thread-updated">
+            {{thread.updated_at | date : 'dd.MM-yyyy'}}
+        </div>
     </div>
+</div>
 </div>

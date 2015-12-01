@@ -12,6 +12,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
     this.friends = []; //Actual friends
 
     this.thread_comments = []; //All comments that this user is involved with
+    this.thread_chats = [];
 
     this.search_friends_result = []; //Users found for a current search
 
@@ -29,6 +30,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
                 angular.copy(result.data.thread_comments, _this.thread_comments);
+                angular.copy(result.data.thread_chats, _this.thread_chats);
             });
     };
 
@@ -55,6 +57,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
                 angular.copy(result.data.friend_request_in, _this.friend_request_in);
                 angular.copy(result.data.friends, _this.friends);
                 angular.copy(result.data.thread_comments, _this.thread_comments);
+                angular.copy(result.data.thread_chats, _this.thread_chats);
             });
     };
 
