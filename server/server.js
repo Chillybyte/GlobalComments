@@ -4,12 +4,16 @@ var express = require('express'),
     session = require('express-session'),
     cookieParser = require('cookie-parser'),
     passport = require('passport'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    http = require('http'),
+    socket = require('./socket.js');
+
 
 
 require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
 require('./settings.js');
 require('./auth/index.js');
+require('./socket.js');
 
 /**
  *  Supplement to missing promises in mongoose 4.2.6
@@ -47,8 +51,10 @@ db.once("open", function() {
     app.use(passport.session());
 
     app.use(require('./router.js'));
+    var server = http.createServer(app);
+    socket(server);
 
-    var server = app.listen(3000, function() {
+    server.listen(3000, function() {
         var host = server.address().address;
         var port = server.address().port;
 
