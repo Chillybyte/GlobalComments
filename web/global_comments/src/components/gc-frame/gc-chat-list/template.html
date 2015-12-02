@@ -1,5 +1,8 @@
 <div class="gc-chat-list">
     <div ng-if="show_left_pane" class="gc-chat-list-left">
+        <div class="gc-chat-list-left-close">
+            <i class="fa fa-times" ng-click="set_left_pane(false)"></i>
+        </div>
         <div class="gc-chat-list-left-chat" ng-if="show_left_pane">
             <div class="gc-chat-list-left-chat-messages">
                 <div class="gc-chat-list-left-chat-messages-info" ng-if="!get_messages(current.user_ids).messages">
