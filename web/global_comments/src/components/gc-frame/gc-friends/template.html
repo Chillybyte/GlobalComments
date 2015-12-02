@@ -103,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <form ng-submit="new_message([person_chat.friend], person_chat.message)" class="form-group gc-friends-left-chat-newmessage" ng-if="get_messages([user.id, person_chat.friend]).messages">
+            <form ng-submit="new_message([user.id, person_chat.friend], person_chat.message)" class="form-group gc-friends-left-chat-newmessage" ng-if="get_messages([user.id, person_chat.friend]).messages">
                 <textarea class="form-control gc-friends-left-chat-newmessage-text" rows="3" placeholder="Write your message here" ng-model="person_chat.message"></textarea>
                 <button class="btn btn-success gc-friends-left-chat-newmessage-button">S
                 e

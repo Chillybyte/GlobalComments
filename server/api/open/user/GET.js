@@ -34,7 +34,6 @@ module.exports = function(_request, _response, _next) {
                 }, "updated_at created_at users thread_id is_thread_chat");
             })
             .then(function(result) {
-                console.log(result);
                 _response
                     ._R
                     ._DATA("thread_chats", result);

@@ -8,7 +8,11 @@ GLOBAL_COMMENTS.directive("gcChatList", [function() {
         controller: ["$scope", "_user", "_chat", function($scope, _user, _chat) {
             $scope.user = _user.user;
             $scope.thread_chats = _user.thread_chats;
-            console.log($scope.thread_chats);
+
+            $scope.current = {
+                user_ids: undefined,
+                message: ""
+            };
 
             $scope.get_friend = function(user_id) {
                 return _user.get_friend(user_id);
@@ -18,8 +22,15 @@ GLOBAL_COMMENTS.directive("gcChatList", [function() {
                 return _chat.get_messages(user_ids);
             };
 
-            $scope.set_left_pane = function(value, thread) {
-                $scope.current.thread = thread;
+            $scope.new_message = function(user_ids, message) {
+                _chat.new_message(user_ids, message)
+                    .then(function() {
+                        $scope.current.message = "";
+                    });
+            };
+
+            $scope.set_left_pane = function(value, user_ids) {
+                $scope.current.user_ids = user_ids;
                 $scope.show_left_pane = value;
             };
 

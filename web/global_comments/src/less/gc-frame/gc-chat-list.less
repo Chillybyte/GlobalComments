@@ -1,19 +1,80 @@
 .gc-chat-list {
+    text-align: left;
     .flex();
     &-left {
         .flex();
         .flex-direction(column);
         width: 250px;
+        &-chat {
+            position: relative;
+            height: 350px;
+            &-messages {
+                position: absolute;
+                width: 100%;
+                height: 250px;
+                left: 0px;
+                top: 0px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                &-info {}
+                &-message {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    &-inner {
+                        width: 70%;
+                        &.in, &.out {
+                            border-radius: 5px;
+                            padding: 3px;
+                            word-break: break-all;
+                        }
+                        &.in {
+                            float: let;
+                            background-color: #5bc0de;
+                            left: 0px;
+                        }
+                        &.out {
+                            float: right;
+                            background-color: #337ab7;
+                            right: 0px;
+                        }
+                        &-user {}
+                        &-content {}
+                        &-date {
+                            text-align: right;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+            &-newmessage {
+                .flex();
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                bottom: 0px;
+                margin-bottom: 0px;
+                &-text {
+                    resize: none;
+                }
+                &-button {
+                    white-space: pre-line;
+                    line-height: 13px;
+                    width: 40px;
+                }
+            }
+        }
     }
     &-right {
         width: 250px;
-        text-align: left;
+        height: 350px;
+        overflow: auto;
         padding: 2px;
         &-thread {
             padding: 5px;
             border-bottom: solid 1px gray;
             margin-bottom: 10px;
-
             &-users {
                 &-user {
                     float: left;

@@ -19,9 +19,11 @@ module.exports = function(_request, _response) {
                 thread.messages.push(message);
                 thread.save()
                     .then(function(thread) {
+                        console.log(thread);
                         _response
                             ._R
                             ._DATA("message", message)
+                            ._DATA("updated_at", thread.updated_at)
                             ._SUCCESS("Message sent")
                             ._SEND();
                     })
