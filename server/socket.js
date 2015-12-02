@@ -6,7 +6,9 @@ var express = require('express'),
 var exports = module.exports = function(app, sessionStore, cookieParser) {
 
     //Creates the server object for the socket to listen on.
-    var socket = io.listen(app);
+    var socket = io(app);
+
+    console.log(socket);
 
     //When socket is set we will authourize
     socket.use(passportSocketIo.authorize({
@@ -20,14 +22,12 @@ var exports = module.exports = function(app, sessionStore, cookieParser) {
 
     function onAuthorizeSuccess(data, accept) {
         console.log('successful connection to socket.io');
-        console.log(data);
+        console.log('socket user on success');
+        console.log(socket.request.user);
         console.log();
-        console.log(accept);
         // The accept-callback still allows us to decide whether to
         // accept the connection or not.
-        accept(null, true);
-
-
+        // accept(null, true);
         // OR
 
         // If you use socket.io@1.X the callback looks different
@@ -38,14 +38,15 @@ var exports = module.exports = function(app, sessionStore, cookieParser) {
         if (error)
             throw new Error(message);
         console.log('failed connection to socket.io:', message);
-        console.log(data);
-        console.log();
-        console.log(accept);
 
         // We use this callback to log all of our failed connections.
-        accept(null, false);
+        // accept(null, false);
 
         // OR
+        console.log('error: ' + error);
+        console.log('message: ' + message);
+        console.log('socket ' + socket);
+
 
         // If you use socket.io@1.X the callback looks different
         // If you don't want to accept the connection
@@ -55,20 +56,34 @@ var exports = module.exports = function(app, sessionStore, cookieParser) {
         // see: http://socket.io/docs/client-api/#socket > error-object
     }
 
+
+    /*
+        function onAuthorizeFail(data, message, error, accept) {
+            // error indicates whether the fail is due to an error or just a unauthorized client
+            if (error) throw new Error(message);
+            console.log('error: ' + error);
+            console.log('message: ' + message);
+            console.log();
+
+            // send the (not-fatal) error-message to the client and deny the connection
+            return accept(new Error(message));
+        }
+    */
+
     //Creates the socket on the server
     socket.on('connection', function(socket) {
-        console.log('Someone Connected YAY we are not alone');
+        console.log('Someone Connected.......................................');
         console.log();
-        console.log('Her starter socket');
+        console.log('Her starter socket......................................');
         //console.log(socket);
-        console.log();
-        console.log('Her slutter socket');
+
+        console.log('Her slutter socket......................................');
 
         var access = false;
 
         socket.on('authenticate', function(data) {
             access = true;
-           // console.log(data.user);
+            // console.log(data.user);
         });
 
         socket.on('disconnect', function() {

@@ -58,6 +58,7 @@ db.once("open", function() {
 
     app.use(require('./router.js'));
 
+    //Socket creation and initialization
     var server = http.createServer(app);
     socket(server, sessionStore, cookieParser);
 
