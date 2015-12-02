@@ -12,7 +12,8 @@ module.exports = function(_request, _response) {
                         reference: reference,
                         uri: _request.params.reference,
                         users: [],
-                        messages: []
+                        messages: [],
+                        referer: _request.headers.referer
                     });
                     thread.save()
                         .then(function(result) {

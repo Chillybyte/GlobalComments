@@ -22,7 +22,7 @@ module.exports = function(_request, _response, _next) {
 
         SCHEMA_THREAD_COMMENT.find({
                 users: user.id
-            }, "uri reference is_thread_comment")
+            }, "updated_at created_at users uri referer reference is_thread_comment")
             .then(function(result) {
                 //console.log(result);
                 _response
