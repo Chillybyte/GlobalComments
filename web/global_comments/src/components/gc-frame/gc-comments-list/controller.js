@@ -7,7 +7,7 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
         templateUrl: "components/gc-frame/gc-comments-list/template.html",
         controller: ["$scope", "_user", "_comments", function($scope, _user, _comments) {
             $scope.thread_comments = _user.thread_comments;
-
+            console.log($scope.thread_comments);
             $scope.get_comments = function(reference) {
                 return _comments.get_comments(reference)
             };
