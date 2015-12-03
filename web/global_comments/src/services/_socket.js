@@ -1,5 +1,5 @@
-var APP = angular.module("APP");
-APP.service("_socket", ["_comments", "_user", "socketFactory", function(_comments, _user, socketFactory) {
+var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
+GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", function(_comments, _user, socketFactory) {
 
     /**
      * Initializing the socket, but it does not connect
