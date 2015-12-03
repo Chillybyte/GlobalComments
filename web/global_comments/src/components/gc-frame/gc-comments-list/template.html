@@ -3,7 +3,8 @@
         <div class="lister">
         <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
             <div ng-repeat="message in get_comments(current.thread.uri).messages track by message._id" style="padding-top: 5%">
-                <p class="comment_button" style="background-color: #FCFCFC">{{message.content}}</p>
+                <p class="comment_button" style="background-color: #FCFCFC">{{message.content}} <p class="delete-button">x</p>
+                </p>
             </div>
         </div>
         <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
