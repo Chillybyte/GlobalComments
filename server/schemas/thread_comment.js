@@ -15,13 +15,6 @@ var threadCommentSchema = new Schema({
             }
         },
 
-        reference: { //URL to actual content commented on
-            type: String,
-            required: true,
-            unique: true,
-            index: true
-        },
-
         referer: {
             type: String,
             required: true,
