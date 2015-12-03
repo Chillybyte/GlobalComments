@@ -1,24 +1,158 @@
 <div class="gc-comments-list">
-    <div ng-if="show_left_pane" class="gc-comments-list-left">
-        <div class="lister">
-        <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
-            <div ng-repeat="message in get_comments(current.thread.uri).messages track by message._id" style="padding-top: 5%">
-                <p class="comment_button" style="background-color: #FCFCFC">{{message.content}} <p class="delete-button">x</p>
-                </p>
-            </div>
+    <!-- THE LEFT DETAIL PANE -->
+    <!--  <div ng-if="show_left_pane && current.type === 'chat'" class="gc-comments-list-left">
+                        <div class="gc-comments-list-left-close">
+                                    <i class="fa fa-times" ng-click="set_left_pane(false)"></i>
+                        </div>
+                        <div class="gc-comments-list-left-chat">
+                                    <div class="gc-comments-list-left-chat-messages">
+                                                <div class="gc-comments-list-left-chat-messages-info" ng-if="!get_messages(current.user_ids).messages">
+                                                            Loading messages...
+                                                </div>
+                                                <div class="gc-comments-list-left-chat-messages-info" ng-if="get_messages(current.user_ids).messages.length === 0">
+                                                            No messages yet
+                                                </div>
+                                                <div class="gc-comments-list-left-chat-messages-message clearfix" ng-repeat="message in get_messages(current.user_ids).messages track by message._id">
+                                                            <div class="gc-comments-list-left-chat-messages-message-inner out" ng-if="message.user === user.id">
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-user">
+                                                                                    {{user.username}}
+                                                                        </div>
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-content">
+                                                                                    {{message.content}}
+                                                                        </div>
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-date">
+                                                                                    {{message.created_at | date : 'dd.MM-yyyy'}}
+                                                                        </div>
+                                                            </div>
+                                                            <div class="gc-comments-list-left-chat-messages-message-inner in" ng-if="message.user != user.id">
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-user">
+                                                                                    {{get_friend(message.user).username}}
+                                                                        </div>
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-content">
+                                                                                    {{message.content}}
+                                                                        </div>
+                                                                        <div class="gc-comments-list-left-chat-messages-message-inner-date">
+                                                                                    {{message.created_at | date : 'dd.MM-yyyy HH:mm'}}
+                                                                        </div>
+                                                            </div>
+                                                </div>
+                                    </div>
+                                    <form ng-submit="new_message(current.user_ids, current.message)" class="form-group gc-comments-list-left-chat-newmessage" ng-if="get_messages(current.user_ids).messages">
+                                                <textarea class="form-control gc-comments-list-left-chat-newmessage-text" rows="3" placeholder="Write your message here" ng-model="current.message"></textarea>
+                                                <button class="btn btn-success gc-comments-list-left-chat-newmessage-button">S
+                                                e
+                                                n
+                                                d</button>
+                                    </form>
+                        </div>
+    </div> -->
+    <!-- -->
+    <div ng-if="show_left_pane && current.type === 'comments'" class="gc-comments-list-left">
+        <div class="gc-comments-list-left-close">
+            <i class="fa fa-times" ng-click="set_left_pane(false)"></i>
         </div>
-        <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
-            <textarea class="form-control gc-comments-signed-text" rows="3" placeholder="Write your comment here" ng-model="current.message"></textarea>
-            <button class="btn btn-success gc-comments-signed-send">S
-            e
-            n
-            d</button>
-        </form>
+        <div class="gc-comments-list-left-chat">
+            <div class="gc-comments-list-left-chat-messages">
+                <div class="gc-comments-list-left-chat-messages-info" ng-if="!get_comments(current.reference).messages">
+                    Loading comments...
+                </div>
+                <div class="gc-comments-list-left-chat-messages-info" ng-if="get_comments(current.reference).messages.length === 0">
+                    No comments yet
+                </div>
+                <div class="gc-comments-list-left-chat-messages-message clearfix" ng-repeat="message in get_comments(current.reference).messages track by message._id">
+                    <div class="gc-comments-list-left-chat-messages-message-inner out" ng-if="message.user === user.id">
+                        <div class="gc-comments-list-left-chat-messages-message-inner-user">
+                            {{user.username}}
+                        </div>
+                        <div class="gc-comments-list-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                            <div style="float: right;">
+                                <p class="btn">x</p>
+                            </div>
+                        </div>
+                        <div class="gc-comments-list-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="gc-comments-list-left-chat-messages-message-inner in" ng-if="message.user != user.id">
+                        <div class="gc-comments-list-left-chat-messages-message-inner-user">
+                            {{get_friend(message.user).username}}
+                        </div>
+                        <div class="gc-comments-list-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                        <div class="gc-comments-list-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy HH:mm'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form ng-submit="new_comment(current.reference, current.message)" class="form-group gc-comments-list-left-chat-newmessage" ng-if="get_comments(current.reference).messages">
+                <textarea class="form-control gc-comments-list-left-chat-newmessage-text" rows="3" placeholder="Write your comment here" ng-model="current.message"></textarea>
+                <button class="btn btn-success gc-comments-list-left-chat-newmessage-button">S
+                e
+                n
+                d</button>
+            </form>
+        </div>
+        <!-- -->
     </div>
     <div class="gc-comments-list-right">
-        <div ng-click="set_left_pane(true, thread)" ng-repeat="thread in thread_comments track by thread._id" class="space_butt">
-            <div style="padding-top: 5%">
-                <p style="background-color: #FCFCFC" class="comment_button">{{thread.uri}}</p>
+        <div class="gc-comments-list-right-thread" ng-repeat="thread in thread_chat_comments | orderBy: '+updated_at'">
+            <div ng-if="thread.is_thread_chat" ng-click="set_left_pane(true, thread.users, undefined, 'chat')">
+                <div class="gc-comments-list-right-thread-users clearfix">
+                    <div class="gc-comments-list-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                        {{get_friend(friend).username}}
+                    </div>
+                </div>
+                <div class="gc-comments-list-right-thread-messages">
+                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_messages(thread.users).messages | limitTo:5:get_messages(thread.users).messages.length -5) track by message._id">
+                        <div class="gc-comments-list-right-thread-messages-message-inner out" ng-if="message.user === user.id">
+                            <div class="gc-comments-list-right-thread-messages-message-inner-content">
+                                {{message.content}}
+                            </div>
+                        </div>
+                        <div class="gc-comments-list-right-thread-messages-message-inner in" ng-if="message.user != user.id">
+                            <div class="gc-comments-list-right-thread-messages-message-inner-content">
+                                {{message.content}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gc-comments-list-right-thread-updated">
+                    {{thread.updated_at | date : 'dd.MM-yyyy'}}
+                </div>
+            </div>
+            <!-- Comments -->
+            <div ng-if="thread.is_thread_comment" ng-click="set_left_pane(true, undefined, thread.uri, 'comments')">
+                <div class="gc-comments-list-right-thread-uri">
+                    <a href="{{thread.referer}}?comment={{thread.uri}}" target="_blank">See origin</a>
+                </div>
+                <div class="gc-comments-list-right-thread-users clearfix">
+                    <!--                     <div class="gc-comments-list-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                                                                        {{get_friend(friend).username}}
+                    </div> -->
+                </div>
+                <div class="gc-comments-list-right-thread-messages">
+                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_comments(thread.uri).messages | limitTo:5:get_comments(thread.uri).messages.length -5) track by message._id">
+                        <div class="gc-comments-list-right-thread-messages-message-inner out" ng-if="message.user === user.id">
+                            <div class="gc-comments-list-right-thread-messages-message-inner-content">
+                                {{message.content}}
+                                <div style="float: right;">
+                                    <p class="btn">x</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gc-comments-list-right-thread-messages-message-inner in" ng-if="message.user != user.id">
+                            <div class="gc-comments-list-right-thread-messages-message-inner-content">
+                                {{message.content}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gc-comments-list-right-thread-updated">
+                    {{thread.updated_at | date : 'dd.MM-yyyy'}}
+                </div>
             </div>
         </div>
     </div>
