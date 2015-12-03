@@ -3,7 +3,7 @@
         <div class="lister">
         <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
             <div ng-repeat="message in get_comments(current.thread.uri).messages track by message._id" style="padding-top: 5%">
-                <p class="comment_button" style="background-color: #D2D2D2">{{message.content}}</p>
+                <p class="comment_button" style="background-color: #FCFCFC">{{message.content}}</p>
             </div>
         </div>
         <form ng-submit="new_comment(current.thread.uri, current.message)" class="gc-comments-signed form-group">
@@ -16,8 +16,8 @@
     </div>
     <div class="gc-comments-list-right">
         <div ng-click="set_left_pane(true, thread)" ng-repeat="thread in thread_comments track by thread._id" class="space_butt">
-            <div ng-repeat="thread in thread_comments track by thread._id" style="padding-top: 5%">
-                <p style="background-color: #D2D2D2">{{thread.uri}}</p>
+            <div style="padding-top: 5%">
+                <p style="background-color: #FCFCFC" class="comment_button">{{thread.uri}}</p>
             </div>
         </div>
     </div>

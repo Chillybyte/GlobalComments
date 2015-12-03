@@ -7,11 +7,21 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
         templateUrl: "components/gc-frame/gc-comments-list/template.html",
         controller: ["$scope", "_user", "_comments", function($scope, _user, _comments) {
             $scope.thread_comments = _user.thread_comments;
-            console.log($scope.thread_comments);
+
+            $scope.the_url_list = [];
+
             $scope.get_comments = function(reference) {
                 return _comments.get_comments(reference)
             };
 
+            // var listeren = [];
+
+            // for(var i = 0; i < _user.thread_comments.length; i++){
+            //     // listeren.push(_user.thread_comments[i].uri);
+            //     $scope.the_url_list.push(_user.thread_comments[i].uri);
+            // }
+
+            // console.log($scope.the_url_list);
 
             $scope.current = {
                 thread: undefined,
