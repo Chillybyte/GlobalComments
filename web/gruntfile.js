@@ -2,6 +2,22 @@
     "use strict";
 }());
 module.exports = function(grunt) {
+var libraries = [
+    "node_modules/angular/angular.js",
+    "node_modules/angular-ui-router/release/angular-ui-router.js",
+    "node_modules/angular-resource/angular-resource.js",
+    "node_modules/socket.io-client/socket.io.js",
+    "node_modules/angular-socket-io/socket.js",
+    "global_comments/dist/min/gc-templates.min.js",
+    "node_modules/jquery/dist/jquery.js",
+    "node_modules/bootstrap/dist/js/bootstrap.js",
+    "node_modules/js-base64/base64.js",
+    "app/app.js",
+    "app/router.js",
+    "app/application/**/*.js",
+    "app/components/**/*.js",
+    "app/services/**/*.js"
+];
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
@@ -18,9 +34,69 @@ module.exports = function(grunt) {
                     force: true
                 },
                 src: "app/**/*.js"
+            },
+            components: {
+                options: {
+                    force: true
+                },
+                src: "global_comments/src/**/*.js"
             }
         },
-        clean: ["dist/*", "tmp/*"],
+        clean: {
+            main: ["dist/*", "tmp/*"],
+            components: ["global_comments/tmp/", "global_comments/dist"]
+        },
+
+        html2js: {
+            main: {
+                options: {
+                    base: "application",
+                    module: 'gc-templates',
+                    singleModule: true,
+                    useStrict: true,
+                    target: "js",
+                    rename: function(moduleName) {
+                        return moduleName.replace('../app/', '');
+                    },
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true,
+                        removeAttributeQuotes: true,
+                        removeComments: true,
+                        removeEmptyAttributes: true,
+                        removeRedundantAttributes: true,
+                        removeScriptTypeAttributes: true,
+                        removeStyleLinkTypeAttributes: true
+                    }
+                },
+                src: ['app/**/*template.html'],
+                dest: 'tmp/templates.js'
+            },
+            components: {
+                options: {
+                    module: 'gc-templates',
+                    singleModule: true,
+                    useStrict: true,
+                    target: "js",
+                    rename: function(moduleName) {
+                        console.log(moduleName.replace(/^\.\.\/global_comments\/src\//, ""));
+                        return moduleName.replace(/^\.\.\/global_comments\/src\//, "");
+                    },
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true,
+                        removeAttributeQuotes: true,
+                        removeComments: true,
+                        removeEmptyAttributes: true,
+                        removeRedundantAttributes: true,
+                        removeScriptTypeAttributes: true,
+                        removeStyleLinkTypeAttributes: true
+                    }
+                },
+                src: ['global_comments/src/**/*template.html'],
+                dest: 'global_comments/tmp/templates.js'
+            }
+        },
 
         uglify: { //Make it ugly and unreadable - Improves performance a great deal
             development: {
@@ -29,16 +105,7 @@ module.exports = function(grunt) {
                     compress: false,
                     beautify: true
                 },
-                src: [
-                    "node_modules/angular/angular.js",
-                    "node_modules/angular-ui-router/release/angular-ui-router.js",
-                    "node_modules/angular-resource/angular-resource.js",
-                    "node_modules/socket.io-client/socket.io.js",
-                    "node_modules/angular-socket-io/socket.js",
-                    "node_modules/jquery/dist/jquery.js",
-                    "node_modules/bootstrap/dist/js/bootstrap.js",
-                    "app/**/*.js"
-                ],
+                src: libraries,
                 dest: "dist/js/main.min.js"
             },
             production: {
@@ -46,17 +113,22 @@ module.exports = function(grunt) {
                     mangle: true,
                     compress: true
                 },
-                src: [
-                    "node_modules/angular/angular.js",
-                    "node_modules/angular-ui-router/release/angular-ui-router.js",
-                    "node_modules/angular-resource/angular-resource.js",
-                    "node_modules/socket.io-client/socket.io.js",
-                    "node_modules/angular-socket-io/socket.js",
-                    "node_modules/jquery/dist/jquery.js",
-                    "node_modules/bootstrap/dist/js/bootstrap.js",
-                    "app/**/*.js"
-                ],
+                src: libraries,
                 dest: "dist/js/main.min.js"
+            },
+            components: {
+                options: {
+                    mangle: false,
+                    compress: false
+                },
+                src: [
+                    "global_comments/tmp/components/index.js",
+                    "global_comments/tmp/components/gc-comments/**/*.js",
+                    "global_comments/tmp/components/gc-frame/**/*.js",
+                    "global_comments/tmp/services/**/*.js",
+                    "global_comments/tmp/templates.js"
+                ],
+                dest: "global_comments/dist/min/gc-templates.min.js"
             }
         },
         less: { //Make it ugly and unreadable - Improves performance a great deal
@@ -83,6 +155,18 @@ module.exports = function(grunt) {
                     "app/styles/app.less"
                 ],
                 dest: "dist/css/main.min.css"
+            },
+            components: {
+                options: {
+                    compress: true,
+                    ieCompat: true,
+                    strictMath: true,
+                    syncImport: true,
+                },
+                src: [
+                    "global_comments/src/less/global_comments.less"
+                ],
+                dest: "global_comments/dist/min/main.min.css"
             }
         },
         copy: {
@@ -102,6 +186,14 @@ module.exports = function(grunt) {
                     cwd: "./",
                     src: "public/**/*",
                     dest: "dist"
+                }]
+            },
+            components: {
+                files: [{
+                    expand: true,
+                    cwd: "global_comments/src",
+                    src: ["components/**/*.js", "services/**/*.js"],
+                    dest: "global_comments/tmp/"
                 }]
             }
         },
@@ -132,15 +224,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-html2js');
 
     var environment = grunt.option('environment') || 'development'; //How must it build (production || development)
     var watch = grunt.option("watch") || false;
 
 
     if (watch) {
-        grunt.registerTask("default", ["jshint:" + environment, "clean", "uglify:" + environment, "less:" + environment, "copy", "watch:" + environment]);
+        grunt.registerTask("default", ["clean:components", "copy:components", "jshint:components", "html2js:components", "uglify:components", "less:components", "jshint:" + environment, "clean:main", "html2js:main", "uglify:" + environment, "less:" + environment, "copy", "watch:" + environment]);
     } else {
-        grunt.registerTask("default", ["jshint:" + environment, "clean", "uglify:" + environment, "less:" + environment, "copy"]);
+        grunt.registerTask("default", ["clean:components", "copy:components", "jshint:components", "html2js:components", "uglify:components", "less:components", "jshint:" + environment, "clean:main", "html2js:main", "uglify:" + environment, "less:" + environment, "copy"]);
     }
+
+
+    grunt.registerTask("components", ["clean:components", "copy:components", "jshint:components", "html2js:components", "uglify:components", "less:components"]);
 
 };

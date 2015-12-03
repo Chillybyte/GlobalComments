@@ -1,7 +1,7 @@
 var express = require("express"),
     router = express.Router();
 
-router.use("/threads", require("./threads"));
+router.use("/thread_comment", require("./thread_comment"));
 router.use("/user", require("./user"));
 
 module.exports = router;

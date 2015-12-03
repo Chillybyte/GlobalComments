@@ -1,0 +1,262 @@
+.gc-friends {
+    text-align: left;
+    height: 100%;
+    overflow: hidden;
+    .flex();
+    &-left {
+        .flex();
+        .flex-direction(column);
+        width: 250px;
+        .search-form {
+            .flex();
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            .search-input {}
+            .close {
+                font-size: 20px;
+                padding: 7px;
+                color: black;
+                opacity: 1;
+            }
+        }
+        .friends-found {
+            overflow-x: hidden;
+            overflow-y: auto;
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-add {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        &-friend-request-out, &-friend-request-in, &-friend {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            .profile-picture {}
+            .row {
+                .col-sm {
+                    &-4, &-8 {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+        &-chat {
+            position: relative;
+            height: 350px;
+            &-messages {
+                position: absolute;
+                width: 100%;
+                height: 250px;
+                left: 0px;
+                top: 0px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                &-info {}
+                &-message {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    &-inner {
+                        width: 70%;
+                        &.in, &.out {
+                            border-radius: 5px;
+                            padding: 3px;
+                            word-break: break-all;
+                        }
+                        &.in {
+                            float: let;
+                            background-color: #5bc0de;
+                            left: 0px;
+                        }
+                        &.out {
+                            float: right;
+                            background-color: #337ab7;
+                            right: 0px;
+                        }
+                        &-user {}
+                        &-content {}
+                        &-date {
+                            text-align: right;
+                            font-size: 10px;
+                        }
+                    }
+                }
+            }
+            &-newmessage {
+                .flex();
+                position: absolute;
+                width: 100%;
+                left: 0px;
+                bottom: 0px;
+                margin-bottom: 0px;
+                &-text {
+                    resize: none;
+                }
+                &-button {
+                    white-space: pre-line;
+                    line-height: 13px;
+                    width: 40px;
+                }
+            }
+        }
+    }
+    &-right {
+        .flex();
+        .flex-direction(column);
+        width: 250px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        &-search {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 10px;
+            display: table;
+            width: 100%;
+        }
+        .friend-request-out {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        .friend-request-in {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+        .friends {
+            &-user {
+                .flex();
+                padding-right: 5px;
+                padding-left: 5px;
+                border-bottom: solid 1px gray;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                &-picture {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 30px;
+                    height: 30px;
+                }
+                &-collection {
+                    overflow: hidden;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    .flex-grow(1);
+                    &-username, &-name, &-email {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                &-info {
+                    display: inline-block;
+                    vertical-align: middle;
+                    height: 35px;
+                    width: 42px;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}

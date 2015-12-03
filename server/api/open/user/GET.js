@@ -1,5 +1,6 @@
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
+    SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
 
 module.exports = function(_request, _response, _next) {
@@ -21,12 +22,21 @@ module.exports = function(_request, _response, _next) {
 
         SCHEMA_THREAD_COMMENT.find({
                 users: user.id
-            }, "uri reference is_thread_comment")
+            }, "updated_at created_at users uri referer reference is_thread_comment")
             .then(function(result) {
                 //console.log(result);
                 _response
                     ._R
                     ._DATA("thread_comments", result);
+
+                return SCHEMA_THREAD_CHAT.find({
+                    users: user.id
+                }, "updated_at created_at users thread_id is_thread_chat");
+            })
+            .then(function(result) {
+                _response
+                    ._R
+                    ._DATA("thread_chats", result);
 
                 //Finding friend requests made by user
                 return SCHEMA_FRIEND.find({
@@ -88,17 +98,17 @@ module.exports = function(_request, _response, _next) {
                 var l = result.length;
                 var friends = [];
                 for (var i = 0; i < l; i++) {
-                    if (result[i].requester.user.toString() === _request.user._id) {
+                    if (result[i].requester.user.toString() === _request.user._id.toString()) {
                         friends.push({
                             friend_request_id: result[i]._id,
-                            _id: result[i].requester.user,
+                            _id: result[i].requestee.user,
                             created_at: result[i].created_at,
                             updated_at: result[i].updated_at
                         });
                     } else {
                         friends.push({
                             friend_request_id: result[i]._id,
-                            _id: result[i].requestee.user,
+                            _id: result[i].requester.user,
                             created_at: result[i].created_at,
                             updated_at: result[i].updated_at
                         });

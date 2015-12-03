@@ -22,6 +22,13 @@ var threadCommentSchema = new Schema({
             index: true
         },
 
+        referer: {
+            type: String,
+            required: true,
+            unique: false,
+            index: true
+        },
+
         uri: { //Actual reference that is not encoded
             type: String,
             required: true,

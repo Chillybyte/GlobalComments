@@ -1,0 +1,75 @@
+<div class="gc-raw">
+    <div ng-if="show_left_pane" class="gc-raw-left">
+        <div class="gc-raw-left-close">
+            <i class="fa fa-times" ng-click="set_left_pane(false)"></i>
+        </div>
+        <div class="gc-raw-left-chat" ng-if="show_left_pane">
+            <div class="gc-raw-left-chat-messages">
+                <div class="gc-raw-left-chat-messages-info" ng-if="!get_messages(current.user_ids).messages">
+                    Loading messages...
+                </div>
+                <div class="gc-raw-left-chat-messages-info" ng-if="get_messages(current.user_ids).messages.length === 0">
+                    Ingen beskeder
+                </div>
+                <div class="gc-raw-left-chat-messages-message clearfix" ng-repeat="message in get_messages(current.user_ids).messages track by message._id">
+                    <div class="gc-raw-left-chat-messages-message-inner out" ng-if="message.user === user.id">
+                        <div class="gc-raw-left-chat-messages-message-inner-user">
+                            {{user.username}}
+                        </div>
+                        <div class="gc-raw-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                        <div class="gc-raw-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="gc-raw-left-chat-messages-message-inner in" ng-if="message.user != user.id">
+                        <div class="gc-raw-left-chat-messages-message-inner-user">
+                            {{get_friend(message.user).username}}
+                        </div>
+                        <div class="gc-raw-left-chat-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                        <div class="gc-raw-left-chat-messages-message-inner-date">
+                            {{message.created_at | date : 'dd.MM-yyyy HH:mm'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form ng-submit="new_message(current.user_ids, current.message)" class="form-group gc-raw-left-chat-newmessage" ng-if="get_messages(current.user_ids).messages">
+                <textarea class="form-control gc-raw-left-chat-newmessage-text" rows="3" placeholder="Write your message here" ng-model="current.message"></textarea>
+                <button class="btn btn-success gc-raw-left-chat-newmessage-button">S
+                e
+                n
+                d</button>
+            </form>
+        </div>
+    </div>
+    <div class="gc-raw-right">
+        <div class="gc-raw-right-thread" ng-click="set_left_pane(true, thread.users)" ng-repeat="thread in thread_chats | orderBy: '+updated_at'">
+            <div class="gc-raw-right-thread-users clearfix">
+                <div class="gc-raw-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                    {{get_friend(friend).username}}
+                </div>
+            </div>
+            <div class="gc-raw-right-thread-messages">
+                <div class="gc-raw-right-thread-messages-message clearfix" ng-repeat="message in (get_messages(thread.users).messages | limitTo:5:get_messages(thread.users).messages.length -5) track by message._id">
+                    <div class="gc-raw-right-thread-messages-message-inner out" ng-if="message.user === user.id">
+                        <div class="gc-raw-right-thread-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                    </div>
+                    <div class="gc-raw-right-thread-messages-message-inner in" ng-if="message.user != user.id">
+                        <div class="gc-raw-right-thread-messages-message-inner-content">
+                            {{message.content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gc-raw-right-thread-updated">
+                {{thread.updated_at | date : 'dd.MM-yyyy'}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

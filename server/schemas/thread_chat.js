@@ -2,7 +2,7 @@ var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE).schema;
 
-var threadChat = new Schema({
+var threadChatSchema = new Schema({
 
         is_thread_chat: {
             type: Boolean,
@@ -13,6 +13,13 @@ var threadChat = new Schema({
             set: function() {
                 return true;
             }
+        },
+
+        thread_id: {
+            type: String,
+            required: true,
+            unique: true,
+            index: true
         },
 
         users: [{ //Persons who are involved in this thread
@@ -42,6 +49,7 @@ var threadChat = new Schema({
         strict: true //Only data relevant to this schema is saved
     })
     .pre("save", function(next) {
+        console.log(this.users);
         var _now = new Date();
         //On every update, this variable is update to current date
         this.updated_at = _now;
