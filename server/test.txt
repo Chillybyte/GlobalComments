@@ -1,7 +1,0 @@
-socket: [object Object]
-
-Listening at http://:::3000
-error: false
-
-message: No session found
-

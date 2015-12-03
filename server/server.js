@@ -44,7 +44,7 @@ db.once("open", function() {
     app.use(session({
         resave: false,
         saveUninitialized: false,
-        key: 'express.sid',
+        key: process.env.APP_SERVER_KEY,
         secret: process.env.APP_SERVER_SECRET,
         cookie: {
             secure: false,
