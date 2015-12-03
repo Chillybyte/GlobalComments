@@ -1,6 +1,10 @@
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", function(_comments, _user, socketFactory) {
 
+    var application = {
+        $scope: undefined
+    }
+
     /**
      * Initializing the socket, but it does not connect
      * See this.initialize
@@ -25,11 +29,15 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
      */
     this.initialize = function($scope) {
         console.log("init watch");
-        $scope.$watch("user.id", function(newValue, oldValue) {
-            if (newValue) //Start the socket connection
+        application.$scope = $scope;
+        application.$scope.$watch("user.id", function(newValue, oldValue) {
+            if (newValue && application.$scope) { //Start the socket connection
+                console.log("Connecting");
                 socket.connect("//" * window.location.host);
-            else //Shut down the socket connection
+            } else { //Shut down the socket connection
+                console.log("Disconnecting");
                 socket.disconnect();
+            }
         });
     };
 
@@ -41,6 +49,21 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
 
         socket.on("disconnect", function() {
             console.log("Disconnected");
+        });
+
+
+        /**
+         *  Event is called when a friend is signing on
+         */
+        socket.on("friend_online_status", function(data) {
+            console.log(data);
+            var l = _user.friends.length;
+            for (var i = 0; i < l; i++) {
+                if (_user.friends[i]._id === data.friend) {
+                    _user.friends[i].online = data.online;
+                    break;
+                }
+            };
         });
     });
 }]);

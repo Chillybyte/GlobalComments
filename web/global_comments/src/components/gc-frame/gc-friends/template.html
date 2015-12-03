@@ -66,7 +66,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">Online</div>
-                <div class="col-sm-8">{{get_friend(selected._id).online ? "Yes" : "Not online"}}</div>
+                <div class="col-sm-8">{{selected.online ? "Yes" : "Not online"}}</div>
             </div>
             <button class="btn btn-warning btn-block" ng-click="remove_friend_request(selected.friend_request_id)">Remove friend</button>
         </div>
@@ -149,8 +149,8 @@
                 <div ng-click="select_friend(friend._id)" class="friends-user-collection">
                     <div class="friends-user-collection-username">{{get_friend(friend._id).username}}</div>
                     <div class="friends-user-collection-online-status">
-                        <label ng-if="get_friend(friend._id).online">Online</label>
-                        <label ng-if="!get_friend(friend._id).online">Offline</label>
+                        <label ng-if="friend.online">Online</label>
+                        <label ng-if="!friend.online">Offline</label>
                     </div>
                 </div>
                 <button class="friends-user-info btn btn-primary" ng-click="open_friend(friend)"><i class="fa fa-info"></i></button>
