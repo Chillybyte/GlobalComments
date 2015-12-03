@@ -75,6 +75,7 @@ var exports = module.exports = function(app, sessionStore, cookieParser) {
         });
 
         socket.on('disconnect', function() {
+            console.log(_user.username + " disconnected");
             var room = io.sockets.adapter.rooms[_user._id];
             if (!room) {
                 SCHEMA_FRIEND.get_id_list_of_fiends(_user._id)
