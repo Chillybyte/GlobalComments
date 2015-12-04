@@ -5,7 +5,7 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
         restrict: "E",
         show_left_pane: "=",
         templateUrl: "components/gc-frame/gc-comments-list/template.html",
-        controller: ["$scope", "_user", "_chat", "_comments", function($scope, _user, _chat, _comments) {
+        controller: ["$scope", "_user", "_chat", "_comments", "$window", function($scope, _user, _chat, _comments, $windows) {
             $scope.user = _user.user;
 
             $scope.thread_chat_comments = _user.thread_chats.concat(_user.thread_comments);
@@ -15,6 +15,8 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                 message: "",
                 reference: undefined
             };
+
+            // get_comments(current.reference).messages
 
             $scope.get_comments = function(reference) {
                 return _comments.get_comments(reference);
@@ -55,6 +57,15 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                 $scope.current.reference = reference;
                 $scope.current.type = type;
             };
+
+            $scope.delete_comment = function(sectionIndex) {
+                //if ($window.confirm('Are you sure you want to delete your comment ?')) {
+                    _comments.delete_a_comment(sectionIndex)
+                    .then(function(){
+                        console.log('should be deleted');
+                    });
+              //  }
+            }
 
         }]
     };

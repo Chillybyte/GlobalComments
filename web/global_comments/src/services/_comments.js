@@ -25,4 +25,14 @@ GLOBAL_COMMENTS.service("_comments", ["_http", "_user", function(_http, _user) {
             });
     };
 
+    this.delete_a_comment = function(_id_to_delete) {
+        var _this = this;
+        console.log(_id_to_delete + ' inside the angular service');
+        console.log("/api/closed/comment/" + _id_to_delete);
+        return _http.delete("/api/closed/comment/" + _id_to_delete)
+        .then(function() {
+            console.log("SHOULD BE DELETED ")
+        });  
+    };
+
 }]);

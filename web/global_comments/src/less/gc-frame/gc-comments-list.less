@@ -6,6 +6,7 @@
         .flex-direction(column);
         width: 250px;
         &-close {
+            padding-top: 5px;
             text-align: right;
             .fa-times {
                 cursor: pointer;
@@ -86,6 +87,7 @@
         overflow: auto;
         padding: 2px;
         &-thread {
+
             padding: 5px;
             border-bottom: solid 1px gray;
             margin-bottom: 10px;
@@ -98,8 +100,14 @@
                     padding: 2px 5px 2px 5px;
                 }
             }
+            &-uri{
+                float: left; 
+                font-size: 10px;
+            }
+
             &-messages {
                 &-message {
+
                     position: relative;
                     width: 100%;
                     margin-top: 5px;
@@ -110,7 +118,7 @@
                             border-radius: 5px;
                             padding: 3px;
                             text-align: left;
-                            word-break: break-all;
+                            word-break: break-word;
                         }
                         &.in {
                             float: left;
