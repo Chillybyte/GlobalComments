@@ -102,14 +102,11 @@ module.exports.friend_request = function(receiver, friend_request) {
 
 module.exports.friend_reject = function(receiver, request_id) {
     console.log("friend_reject");
-    console.log(receiver);
-    console.log(request_id);
     io.sockets.to(receiver).emit("friend_reject", request_id);
 };
 
 module.exports.friend_accept = function(receiver, friend) {
     console.log("friend_accept");
-    console.log(friend);
     io.sockets.to(receiver).emit("friend_accept", friend);
 };
 
@@ -118,4 +115,12 @@ module.exports.new_comment = function(receivers, comment) {
         io.sockets.to(receiver);
     });
     io.sockets.emit("new_comment", comment);
+};
+
+module.exports.new_chat = function(receivers, message) {
+    console.log("new_chat");
+    receivers.forEach(function(receiver) {
+        io.sockets.to(receiver)
+    });
+    io.sockets.emit("new_chat", message);
 };

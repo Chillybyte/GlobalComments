@@ -1,5 +1,5 @@
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
-GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", function(_comments, _user, socketFactory) {
+GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactory", function(_comments, _chat, _user, socketFactory) {
 
     var application = {
         $scope: undefined
@@ -56,7 +56,6 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
          *  Event is called when a friend is signing on
          */
         socket.on("friend_online_status", function(data) {
-            console.log(data);
             var l = _user.friends.length;
             for (var i = 0; i < l; i++) {
                 if (_user.friends[i]._id === data.friend) {
@@ -119,6 +118,19 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
             var thread = _comments.get_comments(comment.uri);
             if (thread.messages) {
                 thread.messages.push(comment.message);
+            }
+        });
+
+        socket.on("new_chat", function(message) {
+            var chat = _chat.get_messages(message.users);
+            if (chat.messages) {
+                var l = chat.messages.length;
+                for (var i = 0; i < l; i++) {
+                    if (chat.messages[i]._id === message.message._id) {
+                        return;
+                    }
+                }
+                chat.messages.push(message.message);
             }
         });
     });
