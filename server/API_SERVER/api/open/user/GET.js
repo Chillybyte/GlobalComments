@@ -1,7 +1,9 @@
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
     SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
-    SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
+    SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
+    LIB_REQUEST = require(process.env.APP_LIB_REQUEST),
+    SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 
 module.exports = function(_request, _response, _next) {
 
@@ -117,12 +119,57 @@ module.exports = function(_request, _response, _next) {
                 _response
                     ._R
                     ._DATA("friends", friends);
+
+
+                //Setting user to online based on query.api_key
+                if (_request.query.api_key) {
+                    var SERVERS = [];
+                    var SERVER = undefined;
+                    SCHEMA_USER.find({
+                            "api.key": {
+                                $ne: null
+                            }
+                        })
+                        .then(function(result) {
+                            result.forEach(function(server) {
+                                if (server.api.key === _request.query.api_key)
+                                    SERVER = server;
+                                else
+                                    console.log(":)")
+                                SERVERS.push(server);
+                            });
+
+                            var l = user.online.length;
+                            for (var i = 0; i < l; i++) {
+                                if (user.online[i].website === SERVER.api.website)
+                                    return;
+                            }
+                            user.online.push({
+                                website: SERVER.api.website
+                            });
+                            return user.save();
+                        })
+                        .then(function(result) {
+                            SERVERS.forEach(function(server) {
+                                LIB_REQUEST.post(server.api.website + "/global_comments_callback/user_online", {}, {
+                                        friend: user._id,
+                                        online: true
+                                    })
+                                    .catch(function(err) {
+                                        console.log(err);
+                                    });
+                            });
+                        })
+                        .catch(function(err) {
+                            console.trace(err);
+                        });
+                }
+
             })
             .catch(function(err) {
                 _response
                     ._R
-                    ._ERROR("Failed to collect comments and/or friend list")
-                    ._DATA("thread_comments", []);
+                    ._ERROR("Failed to collect one or more items");
                 console.trace(err);
             })
             .finally(function() {
@@ -133,7 +180,7 @@ module.exports = function(_request, _response, _next) {
 
     };
     if (_request.isAuthenticated()) {
-        return collect_user_details(_request.user.toJSON());
+        return collect_user_details(_request.user.toOWNER());
     }
     _request.body = _request.query; //Makes sure that passport can read credentials
 
@@ -144,7 +191,7 @@ module.exports = function(_request, _response, _next) {
                     if (_request.body.remember_me == "true") {
                         _request.session.cookie.maxAge = 21 * 24 * 60 * 60 * 1000;
                     }
-                    collect_user_details(user.toJSON());
+                    collect_user_details(user.toOWNER());
                 } else {
                     _response
                         ._R

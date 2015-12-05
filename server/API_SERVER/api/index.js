@@ -6,9 +6,13 @@ router.use("/closed", require(process.env.APP_LIB_EXPRESS_IS_AUTHENTICATED), req
 
 router.route("/sign_out")
     .get(function(_request, _response) {
+        console.log("Signing you out!");
         _request.logout();
         _response
             ._R
+            ._DATA("test", {
+                "im": "test"
+            })
             ._SEND();
     });
 router.use("*", function(_request, _response) {

@@ -5,6 +5,30 @@ var mongoose = require("mongoose"),
 
 var userSchema = new Schema({
 
+        api: {
+            key: {
+                type: String,
+                required: false,
+                unique: true,
+                index: true
+            },
+            website: {
+                type: String,
+                required: false,
+                unique: true,
+                index: true
+            }
+        },
+
+        online: [{ //Only exists if the user is online
+            website: {
+                type: String,
+                required: true,
+                unique: false,
+                index: false
+            }
+        }],
+
         first_name: {
             type: String,
             required: true,
@@ -79,13 +103,16 @@ var userSchema = new Schema({
         transform: function(doc, ret, options) {
             //Values that should not be sent to client
             delete ret.password; //Sensitive information that could land in the wrong hands
-            delete ret._id;
             delete ret.__v;
+            delete ret.online;
         }
     });
 
 
-
+userSchema.methods.toOWNER = function() {
+    delete this.password;
+    return this;
+};
 /**
  * Method to verify and set password at the same time.
  *

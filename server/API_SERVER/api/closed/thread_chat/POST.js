@@ -2,6 +2,7 @@ var SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE);
 
 module.exports = function(_request, _response) {
+    console.log(_request);
     SCHEMA_THREAD_CHAT.findOne({
             $and: [{
                 thread_id: _request.params.thread_id

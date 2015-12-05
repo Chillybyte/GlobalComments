@@ -8,7 +8,7 @@ GLOBAL_COMMENTS.service("_comments", ["_http", "_user", function(_http, _user) {
 
         _user.thread_comments[reference] = [];
 
-        _http.get("/api/open/thread_comment/" + reference)
+        _http.get("/global_comments/api/open/thread_comment/" + reference)
             .then(function(result) {
                 angular.copy(result.data.thread, _user.thread_comments[reference]);
             });
@@ -17,7 +17,7 @@ GLOBAL_COMMENTS.service("_comments", ["_http", "_user", function(_http, _user) {
 
     this.new_comment = function(reference, message) {
         var _this = this;
-        return _http.post("/api/closed/thread_comment/" + reference, {
+        return _http.post("/global_comments/api/closed/thread_comment/" + reference, {
                 message: message
             })
             .then(function(result) {

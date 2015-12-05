@@ -13,7 +13,7 @@ GLOBAL_COMMENTS.service("_chat", ["_http", "_user", function(_http, _user) {
         else
             _user.thread_chats[thread_id] = [];
 
-        _http.get("/api/closed/thread_chat/" + thread_id, {
+        _http.get("/global_comments/api/closed/thread_chat/" + thread_id, {
                 user_ids: user_ids
             })
             .then(function(result) {
@@ -28,7 +28,7 @@ GLOBAL_COMMENTS.service("_chat", ["_http", "_user", function(_http, _user) {
             return [];
         user_ids = user_ids.sort();
         var thread_id = Base64.encode(user_ids.join(""));
-        return _http.post("/api/closed/thread_chat/" + thread_id, {
+        return _http.post("/global_comments/api/closed/thread_chat/" + thread_id, {
                 message: message,
                 user_id: user_ids
             })

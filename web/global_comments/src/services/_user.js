@@ -23,7 +23,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     this.sign_in = function(data) {
         var _this = this;
-        return _http.get("/api/open/user", data)
+        return _http.get("global_comments/api/open/user", data)
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
                 angular.copy(result.data.friend_request_out, _this.friend_request_out);
@@ -36,19 +36,19 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     this.create_user = function(data) {
         var _this = this;
-        return _http.post('/api/open/user/', data)
+        return _http.post('global_comments/api/open/user/', data)
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
             });
     };
 
     this.sign_out = function() {
-        return _http.get("/api/sign_out");
+        return _http.get("global_comments/api/sign_out");
     };
 
     this.authenticate = function() {
         var _this = this;
-        return _http.get("/api/open/user", null, {
+        return _http.get("global_comments/api/open/user", null, {
                 silent: true
             })
             .then(function(result) {
@@ -67,7 +67,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
         current_search++;
         var cs = current_search;
-        _http.get("/api/closed/friends/" + query, null, {
+        _http.get("global_comments/api/closed/friends/" + query, null, {
                 silent: true
             })
             .then(function(result) {
@@ -91,7 +91,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     this.add_friend = function(user_id) {
         var _this = this;
-        _http.post("/api/closed/friends/" + user_id)
+        _http.post("global_comments/api/closed/friends/" + user_id)
             .then(function(result) {
                 if (result.data.friend_request_out) {
                     _this.friend_request_out.push(result.data.friend_request_out);
@@ -122,7 +122,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     this.remove_friend_request = function(request_id) {
         var _this = this;
-        return _http.delete("/api/closed/friends/" + request_id)
+        return _http.delete("global_comments/api/closed/friends/" + request_id)
             .then(function(result) {
                 //Removing any friend request from in and out, and from friends
                 var i, l = 0;
@@ -160,7 +160,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
             _this.users[user_id] = {};
         var user = _this.users[user_id];
 
-        _http.get("/api/closed/users/" + user_id, undefined, {
+        _http.get("global_comments/api/closed/users/" + user_id, undefined, {
                 silent: true
             })
             .then(function(result) {
@@ -172,10 +172,19 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     this.update_user = function(data, user_id) {
         var _this = this;
-        return _http.put("/api/closed/users/" + user_id, data)
+        return _http.put("global_comments/api/closed/users/" + user_id, data)
             .then(function(result) {
                 angular.copy(result.data.user, _this.user);
             });
-    }
+    };
+
+    this.request_api = function() {
+        var _this = this;
+        return _http.post("global_comments/api/closed/users/api/" + _this.user._id)
+            .then(function(result) {
+                console.log(result);
+                angular.copy(result.data.user, _this.user);
+            });
+    };
 
 }]);
