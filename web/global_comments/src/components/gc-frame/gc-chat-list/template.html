@@ -48,7 +48,7 @@
     <div class="gc-raw-right">
         <div class="gc-raw-right-thread" ng-click="set_left_pane(true, thread.users)" ng-repeat="thread in thread_chats | orderBy: '+updated_at'">
             <div class="gc-raw-right-thread-users clearfix">
-                <div class="gc-raw-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                <div class="gc-raw-right-thread-users-user" ng-repeat="friend in thread.users track by $index">
                     {{get_friend(friend).username}}
                 </div>
             </div>

@@ -57,7 +57,7 @@
         <div class="gc-comments-list-right-thread" ng-repeat="thread in thread_chat_comments | orderBy: '+updated_at'">
             <div ng-if="thread.is_thread_chat" ng-click="set_left_pane(true, thread.users, undefined, 'chat')">
                 <div class="gc-comments-list-right-thread-users clearfix">
-                    <div class="gc-comments-list-right-thread-users-user" ng-repeat="friend in thread.users track by friend">
+                    <div class="gc-comments-list-right-thread-users-user" ng-repeat="friend in thread.users track by $index">
                         {{get_friend(friend).username}}
                     </div>
                 </div>
