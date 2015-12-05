@@ -60,7 +60,7 @@ db.once("open", function() {
 
     //Socket creation and initialization
     var server = http.createServer(app);
-    //socket(server, sessionStore, cookieParser);
+    socket(server, sessionStore, cookieParser);
 
 
     server.listen(3000, function() {
