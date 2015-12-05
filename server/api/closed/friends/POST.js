@@ -2,6 +2,16 @@ var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
     SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     SOCKET = require(process.env.APP_SOCKET);
 module.exports = function(_request, _response) {
+    console.log(_request.params.query);
+    console.log();
+    if (_request.params.query.toString() === _request.user._id.toString()) {
+        return _response
+            ._R
+            ._ERROR("You cannot request youself to be friend")
+            ._STATUS(400)
+            ._SEND();
+
+    }
     var friend_request_out = new SCHEMA_FRIEND({
         requester: {
             user: _request.user._id,
