@@ -3,7 +3,7 @@
         <div ng-if="comments.messages.length === 0">
         	Be the first to comment this element!
         </div>
-        <div ng-repeat="message in comments.messages track by message._id">
+        <div ng-repeat="message in comments.messages track by $index">
         	{{message.content}}
         </div>
     </div>
