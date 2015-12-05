@@ -114,5 +114,13 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
             _user.friends.push(friend);
 
         });
+
+        socket.on("new_comment", function(comment) {
+            console.log();
+            var thread = _comments.get_comments(comment.uri);
+            if (thread.messages) {
+                thread.messages.push(comment.message);
+            }
+        });
     });
 }]);
