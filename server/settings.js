@@ -12,3 +12,6 @@ process.env.APP_SCHEMA_THREAD_CHAT 				= path.join(__dirname, "./schemas/thread_
 //LIB EXPRESS
 process.env.APP_LIB_EXPRESS_RESPONSE            = path.join(__dirname, "./lib/express/response.js");
 process.env.APP_LIB_EXPRESS_IS_AUTHENTICATED    = path.join(__dirname, "./lib/express/is_authenticated.js");
+
+//SOCKET
+process.env.APP_SOCKET 							= path.join(__dirname, "./socket.js");

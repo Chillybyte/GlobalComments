@@ -65,5 +65,54 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_user", "socketFactory", funct
                 }
             };
         });
+
+        socket.on("friend_request", function(data) {
+            _user.friend_request_in.push(data);
+        });
+
+        socket.on("friend_reject", function(request_id) {
+            var l = _user.friend_request_in.length;
+            for (var i = 0; i < l; i++) {
+                if (_user.friend_request_in[i]._id === request_id) {
+                    _user.friend_request_in.splice(i, 1);
+                    break;
+                }
+            }
+            l = _user.friend_request_out.length;
+            for (var i = 0; i < l; i++) {
+                if (_user.friend_request_out[i]._id === request_id) {
+                    _user.friend_request_out.splice(i, 1);
+                    break;
+                }
+            }
+            l = _user.friends.length;
+            for (var i = 0; i < l; i++) {
+                if (_user.friends[i].friend_request_id === request_id) {
+                    _user.friends.splice(i, 1);
+                    break;
+                }
+            }
+
+        });
+
+        socket.on("friend_accept", function(friend) {
+            var i, l = 0;
+            l = _user.friend_request_out.length;
+            for (i = 0; i < l; i++) {
+                if (_user.friend_request_out[i]._id === friend.friend_request_id) {
+                    _user.friend_request_out.splice(i, 1);
+                    break;
+                }
+            };
+            l = _user.friend_request_in.length;
+            for (i = 0; i < l; i++) {
+                if (_user.friend_request_in[i]._id === friend.friend_request_id) {
+                    _user.friend_request_in.splice(i, 1);
+                    break;
+                }
+            };
+            _user.friends.push(friend);
+
+        });
     });
 }]);

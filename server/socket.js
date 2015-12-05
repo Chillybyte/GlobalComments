@@ -1,15 +1,17 @@
 require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
 require('./settings.js');
+
 var express = require('express'),
     http = require('http'),
     IO = require('socket.io'),
     passportSocketIo = require('passport.socketio'),
-    SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
+    SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
+    io = undefined;
 
-var exports = module.exports = function(app, sessionStore, cookieParser) {
+module.exports = function(app, sessionStore, cookieParser) {
 
     //Creates the server object for the socket to listen on.
-    var io = IO(app);
+    io = IO(app);
 
     /**
      *  Authorize users when they connect via sockets
@@ -91,4 +93,22 @@ var exports = module.exports = function(app, sessionStore, cookieParser) {
             }
         });
     });
+};
+
+module.exports.friend_request = function(receiver, friend_request) {
+    console.log("friend_request");
+    io.sockets.to(receiver).emit("friend_request", friend_request);
+};
+
+module.exports.friend_reject = function(receiver, request_id) {
+    console.log("friend_reject");
+    console.log(receiver);
+    console.log(request_id);
+    io.sockets.to(receiver).emit("friend_reject", request_id);
+};
+
+module.exports.friend_accept = function(receiver, friend) {
+    console.log("friend_accept");
+    console.log(friend);
+    io.sockets.to(receiver).emit("friend_accept", friend);
 };

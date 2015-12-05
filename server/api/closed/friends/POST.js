@@ -1,5 +1,6 @@
 var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
-    SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
+    SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
+    SOCKET = require(process.env.APP_SOCKET);
 module.exports = function(_request, _response) {
     var friend_request_out = new SCHEMA_FRIEND({
         requester: {
@@ -20,7 +21,8 @@ module.exports = function(_request, _response) {
             if (user) {
                 friend_request_out.requester.friend = user._id;
                 friend_request_out.requestee.user = user._id;
-                return friend_request_out.save()
+                return friend_request_out
+                    .save()
             } else {
                 _response
                     ._R
@@ -30,15 +32,28 @@ module.exports = function(_request, _response) {
             }
         })
         .then(function(result) {
-            console.log(result);
-            _response
-                ._R
-                ._DATA("friend_request_out", friend_request_out)
-                ._SUCCESS("Friend request sent!")
-                ._SEND();
+            if (result.uniquecombination) { //The promise only has result if user exists in the previous promise
+                var friend_request = {};
+                var receiver = undefined;
+
+                friend_request = {
+                    _id: result._id,
+                    created_at: result.created_at,
+                    updated_at: result.updated_at,
+                    requestee: result.requestee
+                };
+                receiver = result.requestee.user;
+                SOCKET.friend_request(receiver, friend_request);
+                _response
+                    ._R
+                    ._DATA("friend_request_out", friend_request_out)
+                    ._SUCCESS("Friend request sent!")
+                    ._SEND();
+            }
         })
         .catch(function(err) {
             if (err.code === 11000 || err.code === 11001) {
+
                 //Lets look it up and check if this is a duplicate where the other user sent the request!
                 SCHEMA_FRIEND.findOne({
                         uniquecombination: friend_request_out.uniquecombination
@@ -55,6 +70,7 @@ module.exports = function(_request, _response) {
                             !friend_request.requester.accepted && //Friend request was not accepted already
                             !friend_request.requester.ignore) { //The requester does not ignore the user
                             friend_request.requester.accepted = true;
+
                             return friend_request.save();
                         } else {
                             _response
@@ -65,26 +81,44 @@ module.exports = function(_request, _response) {
                     })
                     .then(function(result) {
                         var friend = undefined;
+                        var socket_receiver = undefined;
+                        var socket_friend = undefined;
                         if (result) {
-                            if (result.requester.user.toString() === _request.user._id) {
+
+                            if (result.requester.user.toString() === _request.user._id.toString()) {
                                 friend = {
+                                    friend_request_id: result._id,
+                                    _id: result.requester.friend,
+                                    created_at: result.created_at,
+                                    updated_at: result.updated_at
+                                };
+                                socket_friend = {
                                     friend_request_id: result._id,
                                     _id: result.requester.user,
                                     created_at: result.created_at,
                                     updated_at: result.updated_at
-                                };
+                                }
+                                socket_receiver = result.requester.friend;
                             } else {
                                 friend = {
+                                    friend_request_id: result._id,
+                                    _id: result.requestee.friend,
+                                    created_at: result.created_at,
+                                    updated_at: result.updated_at
+                                };
+                                socket_friend = {
                                     friend_request_id: result._id,
                                     _id: result.requestee.user,
                                     created_at: result.created_at,
                                     updated_at: result.updated_at
                                 };
+                                socket_receiver = result.requester.user;
                             }
                             _response
                                 ._R
                                 ._SUCCESS("Friend added!")
                                 ._DATA("friend", friend);
+                            SOCKET.friend_accept(socket_receiver, socket_friend);
                         }
                     })
                     .catch(function(err) {
