@@ -16,7 +16,6 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                 reference: undefined
             };
 
-            // get_comments(current.reference).messages
 
             $scope.get_comments = function(reference) {
                 return _comments.get_comments(reference);
@@ -58,13 +57,14 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                 $scope.current.type = type;
             };
 
-            $scope.delete_comment = function(sectionIndex) {
-                //if ($window.confirm('Are you sure you want to delete your comment ?')) {
-                    _comments.delete_a_comment(sectionIndex)
-                    .then(function(){
-                        console.log('should be deleted');
-                    });
-              //  }
+            $scope.delete_comment = function(comment_id) {
+                var x = confirm("Are you sure you want to delete your comment?");
+
+                if (x) {
+                    _comments.delete_a_comment(comment_id);
+                } else {
+                    return false;
+                }
             }
 
         }]
