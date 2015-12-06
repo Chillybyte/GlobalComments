@@ -3,8 +3,8 @@ var APP_SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE);
 
 module.exports = function(_request, _response) {
-    console.log(_request.params.delete + '  inside DELETE.js COMMENT ID');
-    console.log(_request.params.user + '  inside DELETE.js USER ID');
+
+	console.log(_request);
 
     SCHEMA_THREAD_COMMENT.findOne({
             'messages._id': _request.params.delete
@@ -22,5 +22,13 @@ module.exports = function(_request, _response) {
            		 ._R
            		 ._SUCCESS("comment deleted")
           		 ._SEND();
-        });
+        })
+        .catch(function(err) {
+        	_response
+                ._R
+                ._ERROR("Failed to delete comment")
+                ._STATUS(500)
+                ._SEND();
+            console.trace(err);
+        })
 };
