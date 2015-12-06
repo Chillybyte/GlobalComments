@@ -14,7 +14,7 @@
                 <div class="gc-comments-list-left-chat-messages-info" ng-if="get_comments(current.reference).messages.length === 0">
                     No comments yet
                 </div>
-                <div class="gc-comments-list-left-chat-messages-message clearfix" ng-repeat="message in get_comments(current.reference).messages track by message._id">
+                <div class="gc-comments-list-left-chat-messages-message clearfix" ng-repeat="message in get_comments(current.reference).messages track by $index">
                     <div class="gc-comments-list-left-chat-messages-message-inner out" ng-if="message.user === user.id">
                         <div class="gc-comments-list-left-chat-messages-message-inner-user">
                            YOU
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="gc-comments-list-right-thread-messages">
-                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_messages(thread.users).messages | limitTo:5:get_messages(thread.users).messages.length -5) track by message._id">
+                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_messages(thread.users).messages | limitTo:5:get_messages(thread.users).messages.length -5) track by $index">
                         <div class="gc-comments-list-right-thread-messages-message-inner out" ng-if="message.user === user.id">
                             <div class="gc-comments-list-right-thread-messages-message-inner-content">
                                 {{message.content}}
@@ -90,7 +90,7 @@
                 <div class="gc-comments-list-right-thread-users clearfix">
                 </div>
                 <div class="gc-comments-list-right-thread-messages">
-                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_comments(thread.uri).messages | limitTo:5:get_comments(thread.uri).messages.length -5) track by message._id">
+                    <div class="gc-comments-list-right-thread-messages-message clearfix" ng-repeat="message in (get_comments(thread.uri).messages | limitTo:5:get_comments(thread.uri).messages.length -5) track by $index">
                         <div class="gc-comments-list-right-thread-messages-message-inner out" ng-if="message.user === user.id">
                             <div class="gc-comments-list-right-thread-messages-message-inner-content">
                                 {{message.content}}

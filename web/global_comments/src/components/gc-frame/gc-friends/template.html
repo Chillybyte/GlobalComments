@@ -6,7 +6,7 @@
                 <i class="fa fa-times close" ng-click="set_left_pane(false)"></i>
             </div>
             <div class="friends-found">
-                <div class="friends-found-user" ng-repeat="user in search_friends_result track by user.id">
+                <div class="friends-found-user" ng-repeat="user in search_friends_result track by $index">
                     <img class="friends-found-user-picture" src="public/DansePingvin.gif">
                     <div class="friends-found-user-collection">
                         <div class="friends-found-user-collection-username">{{user.username}}</div>
@@ -78,7 +78,7 @@
                 <div class="gc-friends-left-chat-messages-info" ng-if="get_messages([user.id, person_chat.friend]).messages.length === 0">
                     Ingen beskeder
                 </div>
-                <div class="gc-friends-left-chat-messages-message clearfix" ng-repeat="message in get_messages([user.id, person_chat.friend]).messages track by message._id">
+                <div class="gc-friends-left-chat-messages-message clearfix" ng-repeat="message in get_messages([user.id, person_chat.friend]).messages track by $index">
                     <div class="gc-friends-left-chat-messages-message-inner out" ng-if="message.user === user.id">
                         <div class="gc-friends-left-chat-messages-message-inner-user">
                             {{user.username}}
@@ -118,7 +118,7 @@
         </div>
         <!-- Friend requests made by user to others -->
         <div class="friend-request-out">
-            <div class="friend-request-out-user" ng-repeat="friend_request in friend_request_out track by friend_request._id">
+            <div class="friend-request-out-user" ng-repeat="friend_request in friend_request_out track by $index">
                 <img class="friend-request-out-user-picture" src="public/DansePingvin.gif">
                 <div class="friend-request-out-user-collection">
                     <div class="friend-request-out-user-collection-username">{{get_friend(friend_request.requester.friend).username}}</div>
@@ -131,7 +131,7 @@
         </div>
         <!-- Friend requests made by others to this user -->
         <div class="friend-request-in">
-            <div class="friend-request-in-user" ng-repeat="friend_request in friend_request_in track by friend_request._id">
+            <div class="friend-request-in-user" ng-repeat="friend_request in friend_request_in track by $index">
                 <img class="friend-request-in-user-picture" src="public/DansePingvin.gif">
                 <div class="friend-request-in-user-collection">
                     <div class="friend-request-in-user-collection-username">{{get_friend(friend_request.requestee.friend).username}}</div>
@@ -144,7 +144,7 @@
         </div>
         <!-- Actual friends -->
         <div class="friends">
-            <div class="friends-user" ng-repeat="friend in friends track by friend._id" ng-style="friend._id === person_chat.friend && {'background-color':'#D0D0D0'}">
+            <div class="friends-user" ng-repeat="friend in friends track by $index" ng-style="friend._id === person_chat.friend && {'background-color':'#D0D0D0'}">
                 <img class="friends-user-picture" src="public/DansePingvin.gif">
                 <div ng-click="select_friend(friend._id)" class="friends-user-collection">
                     <div class="friends-user-collection-username">{{get_friend(friend._id).username}}</div>
