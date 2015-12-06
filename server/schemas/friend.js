@@ -126,3 +126,50 @@ var friendSchema = new Schema({
     });
 
 module.exports = mongoose.model("friend", friendSchema);
+
+
+/**
+ *  Collects a list of a users friends and returns a promise
+ *  If the promise is successfull a list of IDs is returned
+ *  In case the promise fails nothing is returned
+ *
+ *  @user_id:   The ID of the user that needs to get a list of his/her
+ *              friends
+ *
+ *  Example:
+ *          require("friends.jd").get_id_list_of_fiends(user_id)
+ *              .then(function(friend_ids) {
+ *                  //Do something with the IDs
+ *              })
+ *              .catch(function() {
+ *                  //Handle the error if needed
+ *              });
+ */
+module.exports.get_id_list_of_fiends = function(user_id) {
+    return this.find({
+            $and: [{
+                $and: [{
+                    "requestee.accepted": true
+                }, {
+                    "requester.accepted": true
+                }],
+                $or: [{
+                    "requester.user": user_id
+                }, {
+                    "requestee.user": user_id
+                }]
+            }]
+        })
+        .then(function(friends) {
+            var list = [];
+            friends.forEach(function(friend) {
+                if (friend.requester.user.toString() === user_id.toString())
+                    list.push(friend.requester.friend);
+                else {
+                    list.push(friend.requestee.friend);
+                }
+            });
+            return list;
+        });
+
+};

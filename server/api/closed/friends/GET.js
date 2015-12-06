@@ -2,14 +2,19 @@ var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 module.exports = function(_request, _response) {
     var search = new RegExp(_request.params.query.replace(" ", "|"), "i")
     SCHEMA_USER.find({
-            $or: [{
-                username: search
-            }, {
-                first_name: search
-            }, {
-                last_name: search
-            }, {
-                email: search
+            $and: [{
+                $or: [{
+                    username: search
+                }, {
+                    first_name: search
+                }, {
+                    last_name: search
+                }, {
+                    email: search
+                }],
+                _id: {
+                    $ne: _request.user._id
+                }
             }]
         }, "first_name last_name username email updated_at created_at")
         .then(function(result) {

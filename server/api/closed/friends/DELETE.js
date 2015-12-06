@@ -1,4 +1,5 @@
-var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
+var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
+    SOCKET = require(process.env.APP_SOCKET);
 
 module.exports = function(_request, _response) {
     SCHEMA_FRIEND.findOne({
@@ -9,13 +10,7 @@ module.exports = function(_request, _response) {
             if (friend) {
                 if (friend.requester.user.toString() === _request.user._id.toString() ||
                     friend.requestee.user.toString() === _request.user._id.toString()) {
-                    if (friend.requester.user.toString() === _request.user._id.toString()) {
-                        friend.requestee.accepted = false;
-                        friend.requester.ignore = true;
-                    } else {
-                        friend.requester.accepted = false;
-                        friend.requestee.ignore = true;
-                    }
+                    var receiver = _request.user._id.toString() === friend.requester.user.toString() ? friend.requester.friend : friend.requester.user;
                     friend
                         .remove()
                         .then(function(result) {
@@ -23,6 +18,7 @@ module.exports = function(_request, _response) {
                                 ._R
                                 ._SUCCESS("Friend removed")
                                 ._SEND();
+                            SOCKET.friend_reject(receiver, friend._id);
                         })
                         .catch(function(err) {
                             _response
