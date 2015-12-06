@@ -133,5 +133,13 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactor
                 chat.messages.push(message.message);
             }
         });
+
+
+        //WHO IS ONLINE
+        socket.on("who_is_online", function(sender) {
+            socket.emit("i_am_online", sender, {
+                friend: _user._id
+            });
+        });
     });
 }]);

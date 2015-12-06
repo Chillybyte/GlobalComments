@@ -66,11 +66,15 @@ module.exports = function(app, sessionStore, cookieParser) {
                         friend_ids.forEach(function(friend_id) {
                             socket.to(friend_id);
                         });
+                        //Lav jeg spørge alle andre om de er online.
+                        //Brugere er i rum med deres bruger ID !
+                        socket.emit("who_is_online", {
+                            user: _user._id
+                        });
                         socket.emit("friend_online_status", {
                             friend: _user._id,
                             online: true
                         });
-
                     });
             } else
                 console.trace(err);
@@ -123,4 +127,11 @@ module.exports.new_chat = function(receivers, message) {
         io.sockets.to(receiver)
     });
     io.sockets.emit("new_chat", message);
+};
+
+module.exports.i_am_online = function(receiver, sender) {
+    socket.to(receiver.user).emit("friend_online_status", {
+        friend: sender.friend,
+        online: true
+    });
 };
