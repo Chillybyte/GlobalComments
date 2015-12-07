@@ -68,9 +68,9 @@ module.exports = function(app, sessionStore, cookieParser) {
                         });
                         //Lav jeg spørge alle andre om de er online.
                         //Brugere er i rum med deres bruger ID !
-                        socket.emit("who_is_online", {
+                        /*socket.emit("who_is_online", {
                             user: _user._id
-                        });
+                        });*/
                         socket.emit("friend_online_status", {
                             friend: _user._id,
                             online: true
@@ -121,10 +121,11 @@ module.exports.new_comment = function(receivers, comment) {
     io.sockets.emit("new_comment", comment);
 };
 
-module.exports.new_chat = function(receivers, message) {
+module.exports.new_chat = function(user, receivers, message) {
     console.log("new_chat");
     receivers.forEach(function(receiver) {
-        io.sockets.to(receiver)
+        if (receiver.toString() != user._id.toString())
+            io.sockets.to(receiver)
     });
     io.sockets.emit("new_chat", message);
 };

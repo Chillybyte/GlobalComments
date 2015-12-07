@@ -26,7 +26,7 @@ module.exports = function(_request, _response) {
                             ._SUCCESS("Message sent")
                             ._SEND();
 
-                        SOCKET.new_chat(thread.users, {
+                        SOCKET.new_chat(_request.user, thread.users, {
                             users: thread.users,
                             message: message
                         });
