@@ -57,14 +57,19 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                 $scope.current.type = type;
             };
 
-            $scope.delete_comment = function(comment_id) {
+            $scope.delete_comment = function(comment_id, $index, reference) {
                 var x = confirm("Are you sure you want to delete your comment?");
+                
+
+
 
                 if (x) {
-                    _comments.delete_a_comment(comment_id);
+                    _comments.delete_a_comment(comment_id, $index, reference);
+                    console.log(_comments.get_comments(reference).messages[$index]);
+                    _comments.get_comments(reference).messages.splice($index, 1);
                 } else {
                     return false;
-                }
+                };
             }
 
         }]
