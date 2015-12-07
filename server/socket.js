@@ -56,6 +56,7 @@ module.exports = function(app, sessionStore, cookieParser) {
      */
     io.on('connection', function(socket) {
         var _user = socket.conn.request.user;
+        var _online_users = [];
         console.log('Connection made by ' + _user.username);
         socket.join(_user._id, function(err) {
             console.log(_user.username + " joined room " + _user._id);
@@ -65,15 +66,18 @@ module.exports = function(app, sessionStore, cookieParser) {
                     .then(function(friend_ids) {
                         friend_ids.forEach(function(friend_id) {
                             socket.to(friend_id);
+                            if (io.sockets.adapter.rooms[friend_id]) {
+                                _online_users.push(friend_id);
+                            }
                         });
-                        //Lav jeg spørge alle andre om de er online.
-                        //Brugere er i rum med deres bruger ID !
-                        /*socket.emit("who_is_online", {
-                            user: _user._id
-                        });*/
+
                         socket.emit("friend_online_status", {
                             friend: _user._id,
                             online: true
+                        });
+
+                        socket.to(_user._id).emit("who_is_online", {
+                            users_online: _online_users
                         });
                     });
             } else
@@ -121,18 +125,10 @@ module.exports.new_comment = function(receivers, comment) {
     io.sockets.emit("new_comment", comment);
 };
 
-module.exports.new_chat = function(user, receivers, message) {
+module.exports.new_chat = function(receivers, message) {
     console.log("new_chat");
     receivers.forEach(function(receiver) {
-        if (receiver.toString() != user._id.toString())
-            io.sockets.to(receiver)
+        io.sockets.to(receiver)
     });
     io.sockets.emit("new_chat", message);
-};
-
-module.exports.i_am_online = function(receiver, sender) {
-    socket.to(receiver.user).emit("friend_online_status", {
-        friend: sender.friend,
-        online: true
-    });
 };

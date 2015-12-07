@@ -133,12 +133,16 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactor
                 chat.messages.push(message.message);
             }
         });
-
-
         //WHO IS ONLINE
-        socket.on("who_is_online", function(sender) {
-            socket.emit("i_am_online", sender, {
-                friend: _user._id
+        socket.on("who_is_online", function(list) {
+            var l = _user.friends.length;
+            list.forEach(function(friend_online) {
+                for (var i = 0; i < l; i++) {
+                    if (_user.friends[i]._id === friend_online) {
+                        _user.friends[i].online = true;
+                        break;
+                    }
+                };
             });
         });
     });
