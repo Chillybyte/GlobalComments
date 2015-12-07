@@ -22,7 +22,7 @@
                         <div class="gc-comments-list-left-chat-messages-message-inner-content">
                             {{message.content}}
                             <div style="float: right;">
-                                <p class="btn" ng-click="delete_comment(message._id)">x</p>
+                                <p class="btn" ng-click="delete_comment(message._id, $index, current.reference)">x</p>
                             </div>
                         </div>
                         <div class="gc-comments-list-left-chat-messages-message-inner-date">

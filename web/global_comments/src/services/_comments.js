@@ -33,14 +33,17 @@ GLOBAL_COMMENTS.service("_comments", ["_http", "_user", function(_http, _user) {
      * @variable: hvad bruges
      */
 
-    this.delete_a_comment = function(_id_to_delete, user_id) {
+    this.delete_a_comment = function(_id_to_delete, $index, reference) {
         var _this = this;
-        return _http.delete("/api/closed/comment/" + _id_to_delete + "/" + _user.user.id)
+        console.log($index + ' THE INDEX');
+        return _http.delete("/api/closed/comment/" + _id_to_delete)
             .then(function() {
-                var tmp = _this.thread.messages.splice(i, 1)[0];
+                var tmp = _this.thread_comments;
+                console.log(tmp + '   the temp');
+                console.log(reference + ' the reference');
             })
             .catch(function(err) {
-                _this.thread.messages.push(tmp);
+                // _this.thread.messages.push(tmp);
             })
     };
 
