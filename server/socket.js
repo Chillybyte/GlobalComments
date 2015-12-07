@@ -66,18 +66,11 @@ module.exports = function(app, sessionStore, cookieParser) {
                     .then(function(friend_ids) {
                         friend_ids.forEach(function(friend_id) {
                             socket.to(friend_id);
-                            if (io.sockets.adapter.rooms[friend_id]) {
-                                _online_users.push(friend_id);
-                            }
                         });
 
                         socket.emit("friend_online_status", {
                             friend: _user._id,
                             online: true
-                        });
-
-                        socket.to(_user._id).emit("who_is_online", {
-                            users_online: _online_users
                         });
                     });
             } else
@@ -99,6 +92,18 @@ module.exports = function(app, sessionStore, cookieParser) {
                         });
                     });
             }
+        });
+
+        socket.on("who_is_online", function() {
+            SCHEMA_FRIEND.get_id_list_of_fiends(_user._id)
+                .then(function(friend_ids) {
+                    var users = [];
+                    friend_ids.forEach(function(friend_id) {
+                        if (io.sockets.adapter.rooms[friend_id])
+                            users.push(friend_id);
+                    });
+                    socket.emit("users_online", users);
+                });
         });
     });
 };

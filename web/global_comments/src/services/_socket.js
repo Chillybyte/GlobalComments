@@ -134,7 +134,9 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactor
             }
         });
         //WHO IS ONLINE
-        socket.on("who_is_online", function(list) {
+        socket.emit("who_is_online");
+
+        socket.on("users_online", function(list) {
             var l = _user.friends.length;
             list.forEach(function(friend_online) {
                 for (var i = 0; i < l; i++) {
