@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var mongoose = require("mongoose"),
     SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     passport = require("passport");

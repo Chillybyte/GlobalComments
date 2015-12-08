@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 module.exports = function(_request, _response) {
     var search = new RegExp(_request.params.query.replace(" ", "|"), "i")

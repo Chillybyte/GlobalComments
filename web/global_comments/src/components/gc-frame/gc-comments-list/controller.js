@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
     return {
@@ -59,10 +60,7 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
 
             $scope.delete_comment = function(comment_id, $index, reference) {
                 var x = confirm("Are you sure you want to delete your comment?");
-                
-
-
-
+    
                 if (x) {
                     _comments.delete_a_comment(comment_id, $index, reference);
                     console.log(_comments.get_comments(reference).messages[$index]);

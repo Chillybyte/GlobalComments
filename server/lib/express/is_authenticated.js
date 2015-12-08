@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 module.exports = function(_request, _response, _next) {
     if (_request.isAuthenticated())
         return _next();

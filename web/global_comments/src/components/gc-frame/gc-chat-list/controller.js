@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcChatList", [function() {
     return {
@@ -33,7 +34,6 @@ GLOBAL_COMMENTS.directive("gcChatList", [function() {
                 $scope.current.user_ids = user_ids;
                 $scope.show_left_pane = value;
             };
-
         }]
     };
 }]);

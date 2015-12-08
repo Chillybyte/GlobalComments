@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var APP = angular.module('APP');
 APP.directive('compTopbar', [function() {
 

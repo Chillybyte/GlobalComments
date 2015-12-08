@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var path = require("path");
 
 // Global variables.

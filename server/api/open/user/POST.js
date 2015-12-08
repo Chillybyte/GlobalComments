@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var passport = require("passport");
 
 module.exports = function(_request, _response, _next) {

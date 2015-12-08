@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var uuid = require("uuid");
 module.exports = function(_request, _response, _next) {
     _response._R = new function() {

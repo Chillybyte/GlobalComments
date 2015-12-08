@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE),
     SOCKET = require(process.env.APP_SOCKET);

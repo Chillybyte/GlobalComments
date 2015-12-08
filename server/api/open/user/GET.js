@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var passport = require("passport"),
     SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
     SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),

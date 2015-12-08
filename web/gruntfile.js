@@ -1,3 +1,4 @@
+/*_ASSIGN_ DO; RE; ET; MSN*/
 (function() {
     "use strict";
 }());
@@ -199,7 +200,7 @@ var libraries = [
         },
         watch: {
             production: {
-                files: ["app/**/*", "node_modules/**/*", "public/**/*", "global_comments/src/**/*"],
+                files: ["app/**/*", "public/**/*", "global_comments/src/**/*"],
                 tasks: ["jshint:production", "clean", "uglify:production", "less:production", "copy"],
                 options: {
                     debounceDelay: 3000,
@@ -207,7 +208,7 @@ var libraries = [
                 }
             },
             development: {
-                files: ["app/**/*", "node_modules/**/*", "public/**/*", "global_comments/src/**/*"],
+                files: ["app/**/*", "public/**/*", "global_comments/src/**/*"],
                 tasks: ["jshint:development", "clean", "uglify:development", "less:development", "copy"],
                 options: {
                     debounceDelay: 3000,

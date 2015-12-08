@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 

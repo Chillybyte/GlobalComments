@@ -1,3 +1,4 @@
+/*_ASSIGN_ DO*/
 var APP = angular.module("APP");
 APP.directive("compNotification", [function() {
     return {

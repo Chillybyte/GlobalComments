@@ -1,0 +1,327 @@
+*   08965fe : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| *   c5937c8 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| * | 6f2a694 : final gc-comments-list all working
+* | | 23ae844 : Online friends working !!!!!!!!!!!!!!!!
+* | | fe45cde : Weird status, socket checking online friends logic working, but running is not working, seems to be something about socket not being able to emit to its own socket.
+| |/  
+|/|   
+* | ca0a36d : Small changes
+* | e217903 : Removed self user from socket response in new chat message
+|/  
+* 19cde3b : Fuck off ng-repeat errors
+* 6fee74b : Added dependencies to front end
+*   d19469b : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| *   41acea9 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| | * 3405457 : Added functionality to socket that asks friend list if anyone is online and logged ind before now.
+| * | 8038713 : Added first attempt on a simple frontpage
+* | | a39dd11 : handle catch and added tmp for errors
+| |/  
+|/|   
+* |   c423df7 : Merge branch 'socket_responses' into test
+|\ \  
+| * | 7d93d96 : new chat messages are now transported to sockets and then to the client
+| * | 80e719c : Fixed ng-repeat error
+| * | 010646f : Added socket support for creating new comments
+| * | 673bb21 : Removed ability to search and request friendship with yourself
+| * | f5e451a : Added support for socket messages regarding friend requests, accepts and rejects
+* | | 77bd112 : delete comment now actually deletes a comment
+* | | 727f773 : added username field in modal signup
+* | | 87b1c38 : so close
+* | | 7faf2ad : ruff version, but kind of working delete in mongodb
+* | | e333ed1 : all but the final mongo nested array deletion
+|/ /  
+* | e7c40a6 : favicon and gc-comment-list so close
+* | 82fcc61 : Added console log for debugging in disconnection
+* |   127ce8a : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\ \  
+| |/  
+| * 67b99c6 : styling
+* | 164798e : Fixed some errors
+* | 52d14e4 : Made use of the new function 'get_id_list_of_fiends' defined in 'friendSchema'
+* | 477bfe0 : Added method to get a list of friends IDs
+|/  
+* 304c418 : gruntfile edited
+* 6156940 : gruntfile edited
+* 094bbec : added connect-mongo to package file dependencies
+* 7912a46 : Added reference and removed referer
+* d13d739 : Removed referer from thread_comment
+*   3532053 : Merge conflict resolved
+|\  
+| * 68cc676 : slightly updated
+| * 0918813 : package.json added suck it io
+| * f4ffcb2 : Added most recent socket which works without authentication
+* | e982e2d : Moved _socket service to global_comments package
+* |   2ad437f : Merge branch 'test' into socket
+|\ \  
+| |/  
+| * 1e13731 : Fixed gc-raw
+| * 9fb6b23 : Fixed heights in gc-chat-list
+| * af9dc67 : Added close cross to gc-chat-list
+| * b1418d9 : Base for gc-chat-list is done
+| * 70db8e3 : Added list of chats in chats
+| * c56957f : Added chat for single users via gc-friends
+| * eaf7b20 : Fixed error when collecting friends
+| * 1942ca1 : Fixed error in gc-comments-list getting comments was not intact after merge
+| * 80da068 : Merge training completed
+| *   537fa8b : Merge test over
+| |\  
+| | * c01d16f : Another test for Daniel
+| * | 0239f14 : Test 2
+| |/  
+| *   d6dce29 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| | * b8e5687 : test for mergetool for Daniel
+| * | b65f9e4 : test merge conflict
+| |/  
+| *   fd8045a : Martin saves the day.. his own atleast
+| |\  
+| | * 843ebf2 : comments closer
+| * |   3366c80 : Merge branch 'socket' into thread_chat
+| |\ \  
+| * | | 57143fb : Moved global_comments out of app main project to make it exportable
+| * | | 86c72a8 : Added base service for chat
+| * | | 88c6249 : Reindexing
+| | |/  
+| |/|   
+* | | cf8b77c : Fixed base for sockets
+* | | 905cb10 : Socket virker på front og backend, uden authentication
+* | | 991804c : code is running but middleware passport.socketio is removing our socket try and run and see.
+* | | b3f11b3 : Added authentication, and its working for socket.io
+* | | 1d79fd4 : added middleware that aint working...
+* | | 3338c95 : Small WIP changes on socket before merge with test
+| |/  
+|/|   
+* | 532bc7c : socket skitse er lavet og virker med både front end og back end.
+|/  
+* afa83f3 : Fixed error with resetting message sent to back-end
+* c20dac5 : Fixed reference to uri, since the api takes uri as argument
+* 08e6d14 : Fixed error with too many updates if the object was already fetched by the server
+* 1ecf2d0 : Added thread_comments object to _user - these hold the comments related to the current user
+* 24bd324 : Added uri to thread_comment schema
+*   d945943 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\  
+| *   fe61c66 : resolved conflicts.. i hope
+| |\  
+| * | 63d2b17 : updated less file for gc-comments-list
+| * | 967e5a4 : functional comment track fetching with dummy data
+| * | 3b955f7 : added comment data to user service
+* | | 6f37ce4 : Added users PUT to closed API - Removed by mistake
+| |/  
+|/|   
+* | 9eae772 : Fixed gc-navbar
+* |   a979065 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\ \  
+| |/  
+| * d6c62d4 : removed camelcase to keep convention
+| *   d876900 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| * \   53c31dc : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\ \  
+| * \ \   17107d3 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\ \ \  
+| * | | | 2e1a71c : adding list dir
+* | | | | 93c1b0b : Implemented add, remove friend functionality - Still on trial
+| |_|_|/  
+|/| | |   
+* | | | 1f82060 : Moved user api to users
+| |_|/  
+|/| |   
+* | | 4e97b7c : Added functionality for hiding gc-frame when not signed in
+| |/  
+|/|   
+* |   1a94c8b : More conflicts resolved
+|\ \  
+| * | 86e46f4 : Integrated gc-profile into gc-frame. You can now toggle between friends and profile
+| * |   7ea6686 : merged edit_profile into gc-profile
+| |\ \  
+| | * | 9928303 : Added profile view of gc-frame, including functionality to edit a profile
+| | * | 0597e4a : Fixed error, edit profile, put.js now takes api/closed/user/put/:user_id
+| | * | f825bf4 : Added API for editing user
+* | | |   bee26c1 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\ \ \ \  
+| | |_|/  
+| |/| |   
+| * | | 9e79f26 : added list
+* | | |   7ee769d : Merge conflict resolved - All branches merged together
+|\ \ \ \  
+| |/ / /  
+|/| | |   
+| * | | 3f50fa4 : Added base for searching for friends
+| * | | 2867e58 : Added api to collect users to closed api
+| * | | 25260a8 : Added feature for finding friends
+| * | | 746c2e6 : Proposal for friends
+| * | |   e93c393 : Merge branch 'test' into gc-friends
+| |\ \ \  
+| * | | | 805583a : Made search for friends even more flexible
+| * | | | 4e0d436 : Base for searhing for friends is established
+* | | | |   0c19f41 : Merge branch 'kommunikationskomponenten' into test
+|\ \ \ \ \  
+| |_|/ / /  
+|/| | | |   
+| * | | | ccdcb65 : config gc-comments-list
+| * | | | 6f4a40e : exploring the death cult that is the navigation bar
+| * | | | 9cf3b88 : switch case
+| * | | | 91e4705 : trying out a solution
+| |/ / /  
+| * | | d1eecda : Added base for gc-friends
+| |/ /  
+* | | 7bc4cde : During user login, the users friend list also gets send in the response.
+|/ /  
+* |   94b484d : Merge conflict resolved
+|\ \  
+| * | 14533cc : Added chat schema, global path's and small missing part for friend list/request.
+| * |   6c9b743 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\ \  
+| * | | e30c9c8 : nav thingy updated
+* | | | 577664d : Added functionality for gc-frames
+| |/ /  
+|/| |   
+* | | d979562 : Extended user to collect thread comment references when signing in
+* | | f28cf26 : Friend list, and request schemas added.
+|/ /  
+* | 1ef52f3 : sort of a final layout
+* | 20fcb83 : updated gc-frame and gc-navbar
+* |   cd430a8 : Merge branch 'test' into kommunikationskomponenten
+|\ \  
+| |/  
+| * a36cec6 : Added true variable for thread_comment
+* |   3ffa40d : Merge branch 'test' into kommunikationskomponenten
+|\ \  
+| |/  
+| * a636784 : Added true variable for thread_comment
+| * 281c233 : Fixed error with not adding users to the generel thread of comments
+| * ba43133 : Added more dependencies to package.js
+| *   f648ba8 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+| |\  
+| * | 699be8a : Implemented feature to add comment and to automatically create a thread for comments if the server does not recognize the reference when trying to retreive it
+| * | d20df0a : Added dialogs to sign in - Can be used globally with a button, link or whatever as reference to open the dialog
+| * | 52ce703 : Fixed error message to success message when signing in with topbar
+| * | ce82a64 : Added possibility to use use promises with mongoose
+| * | 510af84 : Fixed error in is_authenticated - Used outdated code
+| * | 6d1a30a : Moved sign_out position to correct place and created interface to indicate invalid API path
+* | | b06a969 : changed to font-awesome from grunt svg
+* | | c9fd148 : updated the gc-frame
+* | | 2fa613d : added directory and files to the styles
+* | | c1ee7ac : added the gc component directory
+* | | 439f7d6 : updated content to fit the modular gc structure
+* | | 8778f12 : moved less content from tryme less to its own file
+* | | 22f3b25 : layout change
+* | | e1d2b18 : kommunikationskomponent navbar prototype
+| |/  
+|/|   
+* | 8e877d6 : gc-frame added
+|/  
+* 564f26b : Added support for collecting git commits to about page
+* 7b0e0ed : Fixed wrong controller with correct one for contentController
+* 753ce0c : comment schema corrected
+*   1456487 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| * 927fa96 : Fixed active links in topbar
+| *   c60028e : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+| |\  
+| | * 597adfe : Lidt fixes til css og try me har fået en placeholder.
+| * | 3d9c76b : Finished task with footer
+| * | 1379896 : Finished logout task
+* | | 2c278d2 : comment schema added
+| |/  
+|/|   
+* | 0e31446 : Index og about ser pæne ud og har placeholder tekst, VI KAN SE DEM !
+|/  
+*   734e5a3 : Merge branch 'undersider' into test
+|\  
+| * 9591c9f : Undersider index og about og deres styling er lavet i skitse mangler indhold og mulighed for at fremvises.
+* | 8bfefa4 : Added first route to index in router.js and made controller and fake template for the site
+* | 484d375 : Removed test _notification from controller
+* | d26434b : Added sign in feature and made users sign in automatically when they visit the site or refreshes their browser
+|/  
+* e93540d : Added functionality to handle when user signs in - It now removes section with sign in and create user and replaces it with a menu for the user
+* 755b81e : Made _user service use angular copy function to notify APP about changes to _user.user
+*   4c08899 : Merge branch 'sign_up' of github.com:Chillybyte/GlobalComments into sign_up
+|\  
+| *   516c541 : Merge branch 'sign_up' of https://github.com/Chillybyte/GlobalComments into sign_up
+| |\  
+| * | 0883bb4 : Fjernet admin property fra user schema
+* | | 950b9e9 : Fixed error with ng-if - ng-if creates a child-scope with the result of unknown bindings
+| |/  
+|/|   
+* |   8f69c46 : Merge branch 'sign_up' of github.com:Chillybyte/GlobalComments into sign_up
+|\ \  
+| |/  
+| * f50f81b : glemt fil til sign up næsten færdigt commit
+* |   08f3a4d : Added *.orig to .gitignore - No need to push original files
+|\ \  
+| |/  
+| * bfdd0f0 : Sign up næsten færdig har mulighed for at post vores user fra front end til back end.
+* | d788b3a : Made app/index.html use double quotes for html
+|/  
+* e3dc08a : WIP for at kunne oprette en person
+* ae6546b : Added dependency in _http
+* 332407b : Added generel notifications system
+* 3ac788d : Fixed dependency
+* e8e6370 : Added _http abstraction as a service
+*   284af32 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\  
+| * a195c58 : hot fixed topbar
+* | 9342407 : Made username unique for better user reference when needing to search for users
+|/  
+*   08a8f41 : Merge branch 'test' of github.com:Chillybyte/GlobalComments into test
+|\  
+| * c332786 : google fonts added
+* | afb27a3 : Made topbar focused in center of screen - Takes care of browser hints not visible when typing email, password etc
+|/  
+* df60894 : Fixed comp-topbar
+* ddc5f70 : nu med web
+* 862ad21 : added a test brand logo
+* ad620c8 : Added fedt billede til public så i får mappen.
+* e4b8a8a : Added ignore to dist folder
+* d35f87d : top navbar
+* 3085788 : Added base for angularjs
+* d4dae1c : Fixed pre.save in userSchema
+* 544f727 : Fixed authentication bugs
+* 28be2a7 : Updated routes
+* c0d6c78 : Fixed router bugs
+* b875fe7 : Added uuid for universal unique ID
+* d2c3d7c : c9 testing environment
+* 2e4b6c8 : Fix for login, we can now validate our password and username
+* 5102dcc : Fixed en tiny tiny ting i gitignore
+* 0022c6b : Deleted config from cache
+* 46408d0 : Added passport and mongoose + extra
+*   dfa3a1e : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| * c224777 : mongoose i package.json
+* | 1ee004c : Schema lavet og databse renamed til schemas
+|/  
+*   e894436 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| * 9e9ecf8 : Removed test.js and it's .orig file - Testing merge conflict done
+* | 10f377e : routing the api
+* | b3b36eb : basic server
+* | de1753d : basic routes
+|/  
+*   d3410c2 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+|\  
+| *   6178443 : Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| | * 259db16 : Endnu en test til Martin
+| * | d0cdf5a : jasldjasf
+| |/  
+| *   1ade09c : Mums Merge branch 'test' of https://github.com/Chillybyte/GlobalComments into test
+| |\  
+| * | 22cc08b : mumselade
+* | | 2b84373 : Node setup
+| |/  
+|/|   
+* |   edda90a : fjernet merge conflict
+|\ \  
+| * | 10006f0 : sucker - I beat you to it!
+| |/  
+* | 60aa1bb : Merge test conflict
+|/  
+* 826bc10 : Mappestruktur og basiske filer
+* 27104a3 : gitignore
+* 2f7b8f4 : Added .gitignore for web and server
+* a7f411e : Initial commit

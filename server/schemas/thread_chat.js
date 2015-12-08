@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE).schema;
