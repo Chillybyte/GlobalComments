@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE),
     SOCKET = require(process.env.APP_SOCKET);

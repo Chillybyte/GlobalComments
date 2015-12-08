@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
 
     passport = require("passport"),

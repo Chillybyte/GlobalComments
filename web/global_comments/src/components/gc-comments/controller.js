@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcComments", [function() {
     return {

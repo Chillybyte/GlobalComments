@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
 

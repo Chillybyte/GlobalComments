@@ -1,3 +1,4 @@
+/*ASSIGN_ RE; _ET; DO; MSN*/
 var APP = angular.module("APP");
 
 APP.config(["$locationProvider", "$stateProvider", "$urlRouterProvider", function($locationProvider, $stateProvider, $urlRouterProvider) {

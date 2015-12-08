@@ -1,3 +1,4 @@
+/* _ASSIGN_ ET */
 var APP = angular.module("APP");
 APP.controller("aboutController", ["$scope", "_http", function($scope, _http) {
     $scope.git_log = [];

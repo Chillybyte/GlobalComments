@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
     SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     SOCKET = require(process.env.APP_SOCKET);

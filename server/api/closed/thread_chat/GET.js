@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT);
 module.exports = function(_request, _response) {
     var try_count = 0;

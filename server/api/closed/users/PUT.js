@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
 module.exports = function(_request, _response) {
     if (_request.params.user_id.toString() !== _request.user._id.toString()) {

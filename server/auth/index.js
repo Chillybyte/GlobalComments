@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 /**
  *  The purpose of this module is to authenticate users via passport
  */

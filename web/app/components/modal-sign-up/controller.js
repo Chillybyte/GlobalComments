@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var APP = angular.module("APP");
 APP.directive("modalSignUp", [function() {
     return {

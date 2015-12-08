@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 

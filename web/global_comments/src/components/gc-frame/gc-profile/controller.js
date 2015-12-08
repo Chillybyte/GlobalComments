@@ -1,3 +1,4 @@
+/*_ASSIGN_ DO*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcProfile", [function() {
 	

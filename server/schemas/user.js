@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     sha3 = require("sha3"),

@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactory", function(_comments, _chat, _user, socketFactory) {
 

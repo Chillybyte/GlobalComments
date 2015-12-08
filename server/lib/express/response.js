@@ -1,3 +1,4 @@
+/*_ASSIGN_ ET*/
 var uuid = require("uuid");
 /**
  *  This module is middleware intended for Express.

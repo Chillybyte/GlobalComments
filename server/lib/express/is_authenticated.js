@@ -1,3 +1,4 @@
+/*_ASSIGN_ MSN*/
 /**
  *  This module is middleware intended for Express.
  *  The purpose of the middleware is to check if the requester is authenticated via passport module.

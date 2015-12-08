@@ -1,3 +1,4 @@
+/* _ASSIGN_ MSN */
 var APP = angular.module("APP");
 APP.directive("compNotifications", [function() {
     return {

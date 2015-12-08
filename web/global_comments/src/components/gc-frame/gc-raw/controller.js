@@ -1,3 +1,4 @@
+/*_ASSIGN_ RE*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcRaw", [function() {
     return {
