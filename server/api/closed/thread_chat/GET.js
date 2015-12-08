@@ -1,5 +1,22 @@
 /*_ASSIGN_ ET*/
 var SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT);
+
+/**
+ *  Collects all messages related to a thread
+ *
+ *  @_request: The actual request by the client
+ *      @_request.params.thread_id: <String>
+ *  @_response: The actual response to the client
+ *
+ *  Ex:
+ *      GET /api/closed/thread_chat/<thread_id>
+ *
+ *  Successful response:
+ *      thread: see schemas/thread_chat.js
+ *
+ *  Error response:
+ *      notifications: [See lib/express/response.js]
+ */
 module.exports = function(_request, _response) {
     var try_count = 0;
     var get_thread = function() {

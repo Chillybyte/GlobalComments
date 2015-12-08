@@ -1,5 +1,33 @@
 /*_ASSIGN_ RE*/
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
+/**
+ *  This API makes it possible to search for a friend based on username,
+ *  first_name, last_name and email.
+ *
+ *  @_request: The actual request by the client
+ *      @_request.params.query: <String>
+ *  @_response: The actual response to the client
+ *
+ *  Ex:
+ *      GET /api/closed/friends/<query>
+ *
+ *  Success response
+ *      [{
+ *          _id: <String> ID of the user
+ *          first_name: <String>
+ *          last_name: <String>
+ *          username: <String>
+ *          email: <String>
+ *          updated_at: <Date> When did the user last make a change in profile?
+ *          created_at: <Date> When did the user create her profile?
+ *      }]
+ *      notifications: [See lib/express/response.js]
+ *  
+ *
+ *  Error response
+ *      notifications: [See lib/express/response.js]
+ *
+ */
 module.exports = function(_request, _response) {
     var search = new RegExp(_request.params.query.replace(" ", "|"), "i")
     SCHEMA_USER.find({

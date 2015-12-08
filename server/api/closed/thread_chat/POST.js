@@ -3,6 +3,30 @@ var SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE),
     SOCKET = require(process.env.APP_SOCKET);
 
+/**
+ *  Adds a message to a thread_chat and sends the newly created message to
+ *  all related receivers via sockets.
+ *
+ *  @_request: The actual request by the client
+ *      @_request.params.thread_id: <String>
+ *      @_request.body.message: <String>
+ *  @_response: The actual response to the client
+ *
+ *  Ex:
+ *     POST /api/closed/thread_chat/<thread_id>
+ *          {
+ *              message: <String>
+ *          }
+ *
+ *  Successful response:
+ *      message: See schemas/message.js
+ *      updated_at: <Date>
+ *      notifications: [See lib/express/response.js]
+ *
+ *
+ *  Error response:
+ *      notifications: [See lib/express/response.js]
+ */
 module.exports = function(_request, _response) {
     SCHEMA_THREAD_CHAT.findOne({
             $and: [{

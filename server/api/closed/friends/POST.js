@@ -2,6 +2,54 @@
 var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
     SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     SOCKET = require(process.env.APP_SOCKET);
+
+
+/**
+ *  This API does multiple things and is rather complex
+ *  The primary function is to request for friendship between two users.
+ *  User A request for friendship with User B.
+ *  If User B has not already requested for friendship with User A then
+ *  a request for friendship from User A to User B is created.
+ *  This request is also sent to the client via sockets.
+ *
+ *  If User B has already made a friend request with User A then User A
+ *  and User B are friends since they both wish to befriend one another
+ *  This new friendship is also sent to the client via sockets
+ *
+ *  @_request: The actual request by the client
+ *      @_request.params.query: <String>
+ *  @_response: The actual response to the client
+ *
+ *  Ex:
+ *      POST /api/closed/friends/<query>
+ *
+ *  Success response if User B has not requested User A
+ *      friend_request_out: {
+ *                               _id: <String> friend request id,
+ *                              created_at: <Date> Date of friend request initialization,
+ *                              updated_at: <Date> Date if last event in this friend request,
+ *                              requestee:  {
+ *                                              user: <String> ID of the user requesting this API,
+ *                                              friend: <String> ID of the friend to befriend
+ *                                              accepted: <Boolean> Has the friend accepted the friendrequest
+ *                                              ignore: <Boolean> Has the user chosen to ignore the friend request (Not active)
+ *                                          }
+ *                          }
+ *      notifications: [See lib/express/response.js]
+ *
+ *
+ *  Success response if User B has already made a friend request for User A
+ *      friend: {
+ *                  friend_request_id: <string> friend request id,
+ *                  _id: <string> ID of friend,
+ *                  created_at: <Date> When was the friend request first made,
+ *                  updated_at: <Date> When was the friendship accepted
+ *              }
+ *      notifications: [See lib/express/response.js]
+ *
+ *  Error response:
+ *      notifications: [See lib/express/response.js]
+ */
 module.exports = function(_request, _response) {
     console.log(_request.params.query);
     console.log();

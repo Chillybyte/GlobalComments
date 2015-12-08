@@ -26,6 +26,7 @@ var passport = require("passport"),
  *                  created_at: result[i].created_at,
  *                  updated_at: result[i].updated_at
  *              }]
+ *      notifications: [See lib/express/response.js]
  *
  *  Error response:
  *      notifications: [See lib/express/response.js]

@@ -15,6 +15,7 @@ var passport = require("passport");
  *
  *  Success response:
  *      user: see schemas/user.js
+ *      notifications: [See lib/express/response.js]
  *
  *  Error response
  *      notifications: [See lib/express/response.js]
