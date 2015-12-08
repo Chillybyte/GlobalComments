@@ -1,12 +1,28 @@
 var passport = require("passport");
 
+/**
+ *  Creates a new user in the database
+ * 
+ *  @_request: The actual request from client
+ *      @_request.body: See schemas/user.js
+ *  @_response: the actual response to client - Expanded while method progresses
+ *  @_next: An express callback to tell any method to continue with the next process in line if any
+ *
+ *  Ex:
+ *      POST /api/open/user
+ *          { first_name: <String>, last_name: <String>, Username: <String>, email: <String>, password: <String>, repeat_password: <String> }
+ *
+ *  Success response:
+ *      user: see schemas/user.js
+ *
+ *  Error response
+ *      notifications: [See lib/express/response.js]
+ */
 module.exports = function(_request, _response, _next) {
-    console.log(_request.body);
     passport.authenticate("local-signup", function(err, user, info) {
         if (!err) {
             _request.logIn(user, function(err) {
                 if (!err) {
-                    //Alt er gået godt
                     _response
                         ._R
                         ._DATA("user", user.toJSON())

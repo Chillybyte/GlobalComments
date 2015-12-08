@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
 
 router.use(require(process.env.APP_LIB_EXPRESS_RESPONSE));
 

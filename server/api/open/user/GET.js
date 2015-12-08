@@ -3,6 +3,32 @@ var passport = require("passport"),
     SCHEMA_THREAD_CHAT = require(process.env.APP_SCHEMA_THREAD_CHAT),
     SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND);
 
+/**
+ *  Authenticates a user based on an e-mail address and a password
+ *  
+ *  If the user is authenticated all of the users information is returned in the response
+ *
+ *  @_request: The actual request by the user
+ *  @_response: The response to send the user - This is expanded as this mmethod progresses
+ *  @_next: An express callback to tell any method to continue with the next process in line if any
+ *
+ *  Ex:
+ *      GET /api/open/user?email=<email>&password=<password>
+ *  Successful response:
+ *      user: see schemas/user.js
+ *      thread_comments: [see schemas/thread_comment.js]
+ *      thread_chats: [see schemas/thread_chat.js]
+ *      friend_request_out: [{_id: <id>, requester: <Object - see schemas/friend.js>, created_at: <Date>, updated_at: <Date>}] ,
+ *      friend_request_in: [{_id: <id>, requestee: <Object - see schemas/friend.js>, created_at: <Date>, updated_at: <Date>}]
+ *      friends: [{ friend_request_id: result[i]._id,
+ *                  _id: result[i].requestee.user, || _id: result[i].requester.user
+ *                  created_at: result[i].created_at,
+ *                  updated_at: result[i].updated_at
+ *              }]
+ *
+ *  Error response:
+ *      notifications: [See lib/express/response.js]
+ */
 module.exports = function(_request, _response, _next) {
 
     /**
@@ -24,7 +50,6 @@ module.exports = function(_request, _response, _next) {
                 users: user.id
             }, "updated_at created_at users uri referer reference is_thread_comment")
             .then(function(result) {
-                //console.log(result);
                 _response
                     ._R
                     ._DATA("thread_comments", result);
@@ -52,7 +77,6 @@ module.exports = function(_request, _response, _next) {
                 }, "requester created_at updated_at");
             })
             .then(function(result) {
-                //console.log(result);
                 _response
                     ._R
                     ._DATA("friend_request_out", result);

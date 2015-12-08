@@ -3,6 +3,13 @@ var SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
     passport = require("passport"),
     LocalStrategy = require('passport-local').Strategy;
 
+/**
+ *  tries to create a new user based on e-mail, username and password.
+ *  In case of duplicates in mongodb an error message is sent.
+ *  In case of an IO fail, the error message is returned.
+ *  
+ *  Otherwise the newly created user is created
+ */
 module.exports = function() {
     passport.use('local-signup', new LocalStrategy({
             usernameField: 'email',
