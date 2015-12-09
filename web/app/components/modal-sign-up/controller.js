@@ -7,15 +7,26 @@ APP.directive("modalSignUp", [function() {
         templateUrl: "components/modal-sign-up/template.html",
         controller: ["$scope", "_user", "_notifications", function($scope, _user, _notifications) {
 
+            /**
+             *  Values for creating a new profile
+             *  These should be reset when a successful creation of a user
+             *  is made
+             */
             $scope.new_user = {
-                username: "a",
-                first_name: "b",
-                last_name: "c",
-                email: "d",
-                password: "ee",
-                repeat_password: "fff"
+                username: "",
+                first_name: "",
+                last_name: "",
+                email: "",
+                password: "",
+                repeat_password: ""
             };
 
+            /**
+             *  Signs the user up based on $scope.new_user object which is fetched by ng-models
+             *  in web/app/componenets/model-sign-up/template.html
+             *
+             *  This uses _user (service) to handle the request for backend
+             */
             $scope.sign_up = function() {
                 if (!$scope.new_user.username) {
                     _notifications.ERROR("Username is empty");

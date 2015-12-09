@@ -9,6 +9,11 @@ APP.directive('compTopbar', [function() {
         controller: ['$scope', '_user', '_notifications', function($scope, _user, _notifications) {
             $scope.user = _user.user;
 
+            /**
+             *  Values for creating a new profile
+             *  These should be reset when a successful creation of a user
+             *  is made
+             */
             $scope.new_user = {
                 username: "",
                 first_name: "",
@@ -18,12 +23,22 @@ APP.directive('compTopbar', [function() {
                 repeat_password: ""
             };
 
+            /**
+             *  These are the credentials for signing in
+             *  These should be reset when a successful sign in was made
+             */
             $scope.credentials = {
-                email: "hansi.boesgaard@gmail.com",
-                password: "123123",
-                remember_me: true
+                email: "",
+                password: "",
+                remember_me: false
             };
 
+            /**
+             *  Signs the user up based on $scope.new_user object which is fetched by ng-models
+             *  in web/app/componenets/comp-topbar/template.html
+             *
+             *  This uses _user (service) to handle the request for backend
+             */
             $scope.sign_up = function() {
                 if (!$scope.new_user.username) {
                     _notifications.ERROR("Username is empty");
@@ -48,6 +63,12 @@ APP.directive('compTopbar', [function() {
                 }
             };
 
+            /**
+             *  Signs the user in based on $scope.credentials which is fetched by ng-models
+             *  in web/app/componenets/comp-topbar/template.html
+             *
+             *  This uses _user (service) to handle the request for backend
+             */
             $scope.sign_in = function() {
                 if (!$scope.credentials.email || !_user.is_email_valid($scope.credentials.email)) {
                     _notifications.ERROR("'" + $scope.credentials.email + "' is an invalid email");
@@ -65,6 +86,9 @@ APP.directive('compTopbar', [function() {
                 }
             };
 
+            /**
+             *  Signs the user out
+             */
             $scope.sign_out = function() {
                 _user.sign_out()
                     .then(function() {
