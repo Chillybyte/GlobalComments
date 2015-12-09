@@ -1,7 +1,8 @@
 /*_ASSIGN_ DO; ET; RE; MSN;*/
 
 /*
- *  
+ *  The user service allows us to get and use our users from the back end
+ *  in our front end.
  */
 
 var GLOBAL_COMMENTS = angular.module('GLOBAL_COMMENTS');
@@ -274,8 +275,7 @@ GLOBAL_COMMENTS.service('_user', ['_http', function(_http) {
 
     /**
      *
-     * Gives front-end opportunity to make requests from backend.
-     * Also handles notifications from backend unless specified not to
+     * Updated the user in the backend with data from the user.
      * 
      * @url     - server/api/closed/users + user id
      * @method  - PUT
