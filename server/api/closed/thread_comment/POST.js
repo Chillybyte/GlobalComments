@@ -3,6 +3,26 @@ var SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
     SCHEMA_MESSAGE = require(process.env.APP_SCHEMA_MESSAGE),
     SOCKET = require(process.env.APP_SOCKET);
 
+/**
+ *
+ * The API posts a new comment on the reference / content being commented on
+ * 
+ * @url     - /api/closed/thread_comment/"query_data"
+ *          - as prescribed in the thread_comments.js schema
+ * @method  - POST
+ * 
+ *      First we query the database for the reference aka the content that is being commented on,
+ *      then pushes the comment content along with the user that authors the comment to the database.
+ *      
+ *
+ *      notifications: [See lib/express/response.js]
+ *  
+ *
+ *  Error response
+ *      notifications: [See lib/express/response.js]
+ */
+
+
 module.exports = function(_request, _response) {
     if (!_request.params.reference) {
         _response

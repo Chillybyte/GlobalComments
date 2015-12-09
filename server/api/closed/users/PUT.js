@@ -1,5 +1,26 @@
 /*_ASSIGN_ ET*/
 var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
+
+/**
+ *
+ * The API edits the user details
+ * 
+ * @url     - /api/closed/users/"query_data"
+ *          - as prescribed in the user.js schema
+ * @method  - PUT
+ * 
+ *      compares requesting user ID with the user ID requesting to alter,
+ *      finds the user details from the user ID, then saves the edited details
+ *      as the new user object. 
+ *      
+ *
+ *      notifications: [See lib/express/response.js]
+ *  
+ *
+ *  Error response
+ *      notifications: [See lib/express/response.js]
+ */
+
 module.exports = function(_request, _response) {
     if (_request.params.user_id.toString() !== _request.user._id.toString()) {
         _response

@@ -1,4 +1,11 @@
 /*_ASSIGN_ MSN*/
+
+/*
+In this controller we are using two of our Angular services found in
+web/global_comments/src/services. 
+*/
+
+
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcFriends", [function() {
     return {
@@ -20,6 +27,14 @@ GLOBAL_COMMENTS.directive("gcFriends", [function() {
                 friend: undefined,
                 message: ""
             };
+
+/*
+To connect two users as friends we are structuring a logic of a "requester" and a 
+"requestee". This logic is needed to define the very process of linking two user accounts 
+together. When a user reuests a friendship with another user object, the link between them 
+takes on a pending status, as the requestee, needs to approve the conncetion before the 
+user objects can be linked together.
+*/
 
             $scope.open_friend_request_in = function(requestee) {
                 $scope.selected = requestee;

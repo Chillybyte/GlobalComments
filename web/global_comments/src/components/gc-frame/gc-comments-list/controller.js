@@ -1,4 +1,11 @@
 /*_ASSIGN_ MSN*/
+
+/*
+In this controller we are using three of our Angular services found in
+web/global_comments/src/services. These services acts as a layer between our 
+view in our frontend and the backend that holds their data.
+*/
+
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
     return {
@@ -51,12 +58,23 @@ GLOBAL_COMMENTS.directive("gcCommentsList", [function() {
                     });
             };
 
+            /*
+            Since we are using a master / detail structure for displaying first the 
+            comment tracks and then the list of comments themselves, our left "detail"
+            pane is handled according to the chosen context in the "master" right pane
+            */
+
             $scope.set_left_pane = function(value, user_ids, reference, type) {
                 $scope.show_left_pane = value;
                 $scope.current.user_ids = user_ids;
                 $scope.current.reference = reference;
                 $scope.current.type = type;
             };
+
+            /*
+            Here we place our function inside a javascript confirm alert box, that handles
+            the actual user choice before either continuing deleting a comment or doing nothing
+            */
 
             $scope.delete_comment = function(comment_id, $index, reference) {
                 var x = confirm("Are you sure you want to delete your comment?");

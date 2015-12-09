@@ -1,6 +1,13 @@
-/*_ASSIGN_ ET*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactory", function(_comments, _chat, _user, socketFactory) {
+
+    /*
+     *
+     * The service _socket.js is our front end part of
+     * our socket to our backend and it is here we listen
+     * and or emit. 
+     * 
+     */
 
     var application = {
         $scope: undefined
@@ -54,7 +61,10 @@ GLOBAL_COMMENTS.service("_socket", ["_comments", "_chat", "_user", "socketFactor
 
 
         /**
-         *  Event is called when a friend is signing on
+         *  Events are executed when they are received with their keyword.
+         *  socket.on("keyword", callback) is listening on the keyword "keyword"
+         *  and executes the callback when its received, it might have objects
+         *  sent from the back end.
          */
         socket.on("friend_online_status", function(data) {
             var l = _user.friends.length;

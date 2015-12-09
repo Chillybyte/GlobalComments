@@ -3,14 +3,15 @@ var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_http", ["$http", "$q", "_notifications", function($http, $q, _notifications) {
 
     /**
-     * @url     - Path to backend API
-     * @method  - What method should be applied? (POST, GET, DELETE, PUT, PATCH)
-     * @data    - JavaScript Object with data to send to backend
-     * @options - JavaScript Object with options
-     *              {
-     *                  silent: true/false - Should _http show notifications from backend?
-     *              }
-     */
+     * This is the overall service to handle the connections that points to the API
+     * in our backend. The CRUD functions themselves are generic in the sense that 
+     * no matter if it is a comment or a user that is being create it uses the same 
+     * functions to get to the backend API by having the relevant URL defining the 
+     * type of object being created. the data whether it is the demanded data structure 
+     * of a user with a username, email, first and last name and a password, or a comment 
+     * with it's data structure. Last in the call is the possibility to send any options 
+     * along with the call, that is to be used in CRUD function further down the line
+     **/
 
     this.request = function(url, method, data, options) {
         var _this = this;

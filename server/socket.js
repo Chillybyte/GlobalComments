@@ -9,6 +9,22 @@ var express = require('express'),
     SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
     io = undefined;
 
+/*
+ *
+ * Scoket.js allows the creation of a socket to send
+ * in real time between frontend and backend.
+ * when initialized and a connection is created
+ * it will with use of passportSocketIo check if the cookie
+ * that the user is using is issued by the server backend
+ * if it is, socket.on("Connection") is run.
+ * and the socket will listen for events like new_chat or
+ * disconnect.
+ *
+ * The frontend socket is in the angular _socket.js
+ * which handles our front end.
+ *
+ */
+
 module.exports = function(app, sessionStore, cookieParser) {
 
     //Creates the server object for the socket to listen on.
@@ -77,7 +93,7 @@ module.exports = function(app, sessionStore, cookieParser) {
             } else
                 console.trace(err);
         });
-
+        //Tells that the socket is closing and the front end user left.
         socket.on('disconnect', function() {
             console.log(_user.username + " disconnected");
             var room = io.sockets.adapter.rooms[_user._id];
@@ -94,7 +110,8 @@ module.exports = function(app, sessionStore, cookieParser) {
                     });
             }
         });
-
+        //Checks friends id's match any socket rooms to know if they are online
+        //So we can tell our front end who is online once we log in.
         socket.on("who_is_online", function() {
             SCHEMA_FRIEND.get_id_list_of_fiends(_user._id)
                 .then(function(friend_ids) {
