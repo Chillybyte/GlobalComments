@@ -2,6 +2,24 @@
 var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
     SOCKET = require(process.env.APP_SOCKET);
 
+/**
+ *
+ * The API deletes the registered connection between two users that makes up a "friendship"
+ * 
+ * @url     - /api/closed/friends/"query_data"
+ * @method  - DELETE
+ * 
+ *      Finds user by ID, checks if the user found and the user deleting the connection,
+ *      actually is connected, and then deletes the connection if that is the case
+ *
+ *      notifications: [See lib/express/response.js]
+ *  
+ *
+ *  Error response
+ *      notifications: [See lib/express/response.js]
+ */
+
+
 module.exports = function(_request, _response) {
     SCHEMA_FRIEND.findOne({
             _id: _request.params.query

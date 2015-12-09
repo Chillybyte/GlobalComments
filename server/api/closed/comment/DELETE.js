@@ -5,20 +5,16 @@ var APP_SCHEMA_USER = require(process.env.APP_SCHEMA_USER),
 
 module.exports = function(_request, _response) {
 
- /**
+    /**
      *
-     * Gives front-end opportunity to make requests from backend.
-     * Also handles notifications from backend unless specified not to
+     * The API finds a reference that allows us to delete a specific comment.
      * 
      * @url     - /api/closed/comment/:delete
      * @method  - DELETE
      * @data    - Receives a comment ID as a parameter
-     * @options - JavaScript Object with options
-     *              {
-     *                  silent: true/false - Should _http show notifications from backend?
-     *              }
+     * 
      *
-     * Returns: Beskrivelse af hvad den returnere
+     *  notifications: [See lib/express/response.js]
      */
 
     SCHEMA_THREAD_COMMENT.findOne({
@@ -34,12 +30,12 @@ module.exports = function(_request, _response) {
             }
         }).then(function(thread) {
             _response
-           		 ._R
-           		 ._SUCCESS("comment deleted")
-          		 ._SEND();
+                ._R
+                ._SUCCESS("comment deleted")
+                ._SEND();
         })
         .catch(function(err) {
-        	_response
+            _response
                 ._R
                 ._ERROR("Failed to delete comment")
                 ._STATUS(500)
