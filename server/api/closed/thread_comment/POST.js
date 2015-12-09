@@ -7,7 +7,7 @@ var SCHEMA_THREAD_COMMENT = require(process.env.APP_SCHEMA_THREAD_COMMENT),
  *
  * The API posts a new comment on the reference / content being commented on
  * 
- * @url     - /api/closed/thread_comment/"query_data"
+ * @url     - /api/closed/thread_comment/:reference
  *          - as prescribed in the thread_comments.js schema
  * @method  - POST
  * 

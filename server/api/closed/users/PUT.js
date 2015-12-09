@@ -5,7 +5,7 @@ var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
  *
  * The API edits the user details
  * 
- * @url     - /api/closed/users/"query_data"
+ * @url     - /api/closed/users/:user_id
  *          - as prescribed in the user.js schema
  * @method  - PUT
  * 

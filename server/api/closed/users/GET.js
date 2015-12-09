@@ -5,7 +5,7 @@ var SCHEMA_USER = require(process.env.APP_SCHEMA_USER);
  *
  * The API deletes the registered connection between two users that makes up a "friendship"
  * 
- * @url     - /api/closed/users/"query_data"
+ * @url     - /api/closed/users/user_id
  *          - as prescribed in the _thread_comments.js schema
  * @method  - GET
  * 
