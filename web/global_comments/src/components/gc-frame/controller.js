@@ -1,4 +1,6 @@
 /*_ASSIGN_ DO*/
+
+//This controller is our chat frame controller that assigns functionality and name space.
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcFrame", [function() {
     return {

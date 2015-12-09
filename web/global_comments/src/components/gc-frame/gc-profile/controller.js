@@ -1,4 +1,7 @@
 /*_ASSIGN_ DO*/
+
+//This controller allows us to use services and assign namespace to certain components in our gc profile html
+//We use 2 services and our angular scope
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcProfile", [function() {
 	
