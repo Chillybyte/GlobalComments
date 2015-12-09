@@ -28,7 +28,8 @@ module.exports = function(_request, _response) {
                     return thread.save();
                 }
             }
-        }).then(function(thread) {
+        })
+        .then(function(thread) {
             _response
                 ._R
                 ._SUCCESS("comment deleted")

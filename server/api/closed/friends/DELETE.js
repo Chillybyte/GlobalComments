@@ -6,7 +6,7 @@ var SCHEMA_FRIEND = require(process.env.APP_SCHEMA_FRIEND),
  *
  * The API deletes the registered connection between two users that makes up a "friendship"
  * 
- * @url     - /api/closed/friends/"query_data"
+ * @url     - /api/closed/friends/:query
  * @method  - DELETE
  * 
  *      Finds user by ID, checks if the user found and the user deleting the connection,
