@@ -1,4 +1,9 @@
 /*_ASSIGN_ DO*/
+
+/* 
+ * _chat is our service that allows us to get chat messages from our
+ * back end and update our front with them.
+*/
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.service("_chat", ["_http", "_user", function(_http, _user) {
 

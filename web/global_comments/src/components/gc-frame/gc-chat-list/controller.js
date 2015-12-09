@@ -1,4 +1,7 @@
 /*_ASSIGN_ RE*/
+
+//This controller allows us to use services and assign namespace to certain components in our gc profile html
+//We are using serviecs _user and _chat and our global scope
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcChatList", [function() {
     return {

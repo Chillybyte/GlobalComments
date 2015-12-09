@@ -1,4 +1,7 @@
 /*_ASSIGN_ ET*/
+
+//This controller allows us to use services and assign namespace to certain components in our gc navbar html
+//We are using no services but a lot of functionality as this is uniquely used here only
 var GLOBAL_COMMENTS = angular.module("GLOBAL_COMMENTS");
 GLOBAL_COMMENTS.directive("gcNavbar", [function() {
     return {
