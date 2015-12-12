@@ -3,22 +3,22 @@
     "use strict";
 }());
 module.exports = function(grunt) {
-var libraries = [
-    "node_modules/angular/angular.js",
-    "node_modules/angular-ui-router/release/angular-ui-router.js",
-    "node_modules/angular-resource/angular-resource.js",
-    "node_modules/socket.io-client/socket.io.js",
-    "node_modules/angular-socket-io/socket.js",
-    "global_comments/dist/min/gc-templates.min.js",
-    "node_modules/jquery/dist/jquery.js",
-    "node_modules/bootstrap/dist/js/bootstrap.js",
-    "node_modules/js-base64/base64.js",
-    "app/app.js",
-    "app/router.js",
-    "app/application/**/*.js",
-    "app/components/**/*.js",
-    "app/services/**/*.js"
-];
+    var libraries = [
+        "node_modules/angular/angular.js",
+        "node_modules/angular-ui-router/release/angular-ui-router.js",
+        "node_modules/angular-resource/angular-resource.js",
+        "node_modules/socket.io-client/socket.io.js",
+        "node_modules/angular-socket-io/socket.js",
+        "global_comments/dist/min/gc-templates.min.js",
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/bootstrap/dist/js/bootstrap.js",
+        "node_modules/js-base64/base64.js",
+        "app/app.js",
+        "app/router.js",
+        "app/application/**/*.js",
+        "app/components/**/*.js",
+        "app/services/**/*.js"
+    ];
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
@@ -201,7 +201,7 @@ var libraries = [
         watch: {
             production: {
                 files: ["app/**/*", "public/**/*", "global_comments/src/**/*"],
-                tasks: ["jshint:production", "clean", "uglify:production", "less:production", "copy"],
+                tasks: ["clean:components", "copy:components", "jshint:components", "html2js:components", "uglify:components", "less:components", "jshint:production", "clean:main", "html2js:main", "uglify:production", "less:production", "copy"],
                 options: {
                     debounceDelay: 3000,
                     spawn: true
@@ -209,7 +209,7 @@ var libraries = [
             },
             development: {
                 files: ["app/**/*", "public/**/*", "global_comments/src/**/*"],
-                tasks: ["jshint:development", "clean", "uglify:development", "less:development", "copy"],
+                tasks: ["clean:components", "copy:components", "jshint:components", "html2js:components", "uglify:components", "less:components", "jshint:development", "clean:main", "html2js:main", "uglify:development", "less:development", "copy"],
                 options: {
                     debounceDelay: 3000,
                     spawn: true
