@@ -1,4 +1,6 @@
 /*_ASSIGN_ RE*/
+require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
+require('./settings.js');
 var express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
@@ -11,10 +13,7 @@ var express = require('express'),
     mongoStore = require('connect-mongo')(session);
 
 
-require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
-require('./settings.js');
 require('./auth/index.js');
-require('./socket.js');
 
 var mongo_url = process.env.APP_MONGOOSE_DRIVER +
     process.env.APP_MONGOOSE_HOST + ":" +

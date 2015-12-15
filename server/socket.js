@@ -1,7 +1,4 @@
 /*_ASSIGN_  ET MSN*/
-require('./config.js'); //SECRET HUSH HUSH FILE DO NOT SHARE
-require('./settings.js');
-
 var express = require('express'),
     http = require('http'),
     IO = require('socket.io'),
